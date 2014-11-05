@@ -9,7 +9,7 @@
     "height": 600
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha-phantomjs test/SpecRunner.html"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,10 @@
   "homepage": "https://github.com/decisive-wizard/SheetSync",
   "dependencies": {},
   "devDependencies": {
+    "chai": "^1.9.2",
     "gulp": "^3.8.10",
-    "gulp-stylus": "^1.3.4"
+    "gulp-stylus": "^1.3.4",
+    "mocha": "^2.0.1",
+    "mocha-phantomjs": "^3.5.1"
   }
 }
