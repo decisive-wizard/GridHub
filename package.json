@@ -33,7 +33,9 @@
     "url": "https://github.com/decisive-wizard/SheetSync/issues"
   },
   "homepage": "https://github.com/decisive-wizard/SheetSync",
-  "dependencies": {},
+  "dependencies": {
+    "fs": "0.0.2"
+  },
   "devDependencies": {
     "chai": "^1.9.2",
     "gulp": "^3.8.10",

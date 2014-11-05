@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>SheetSync</title>
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="bower_components/handsontable/dist/jquery.handsontable.full.css"></link>
   <link rel="stylesheet" href="css/main.css"></link>
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -25,7 +26,24 @@
 
 </head>
 <body>
-  <div class="table-container"></div>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        SheetSync
+      </a>
+      <button type="button" class="btn btn-success navbar-btn pull-right" id="commit-button">Commit</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-container"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
 </body>
 </html>

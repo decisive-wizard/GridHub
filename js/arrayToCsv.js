@@ -1,6 +1,6 @@
 (function(){
   
-  // var fs = require('fs');
+  var fs = require('fs');
 
   module.exports = {
     arrayToCsv: arrayToCsv
@@ -8,7 +8,7 @@
   
   ////////////
 
-  function arrayToCsv(twoDimensionalArray, fileName) {
+  function arrayToCsv(twoDimensionalArray, fileName, callback) {
 
     var csv = "";
 
@@ -25,8 +25,8 @@
       if (err){
         console.log(err);
       }
-
       console.log('writeFile: ', fileName, 'successful');
+      callback();
     });
 
   }
