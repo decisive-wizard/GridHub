@@ -1,2 +1,7 @@
+# libraries
 node_modules
 bower_components
+
+# compiled or built files
+css/*.css
+dist
