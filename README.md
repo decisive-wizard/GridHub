@@ -13,6 +13,7 @@
 ```
 git clone https://github.com/decisive-wizard/SheetSync.git
 cd SheetSync
+bower install
 npm install
 nw .
 ```
