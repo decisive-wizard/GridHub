@@ -7,8 +7,10 @@ gulp.task('stylus', function(){
     .pipe(gulp.dest('./css/'));
 });
 
+gulp.task('build', ['stylus']);
+
 gulp.task('watch', function(){
   gulp.watch('./css/**/*.styl', ['stylus']);
 });
 
-gulp.task('default', ['stylus','watch']);
+gulp.task('default', ['build', 'watch']);
