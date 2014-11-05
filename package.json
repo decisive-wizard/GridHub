@@ -1,0 +1,39 @@
+{
+  "name": "SheetSync",
+  "version": "0.0.1",
+  "description": "Collaborative distributed spreadsheet editing",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "width": 800,
+    "height": 600
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/decisive-wizard/SheetSync.git"
+  },
+  "keywords": [
+    "Excel",
+    "Spreadsheets",
+    "Data",
+    "Git",
+    "Node-Webkit"
+  ],
+  "authors": [
+    "John Heroy <johnheroy@gmail.com> (http://johnheroy.com/)",
+    "Greg Fedirko <gjfedirko@gmail.com> (http://gregfedirko.io)",
+    "Nick Stefan <nickstefan12@gmail.com> (http://nickstefan.net)",
+    "Felipe Batista <fsbatista1@gmail.com> (https://github.com/fsbatista)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/decisive-wizard/SheetSync/issues"
+  },
+  "homepage": "https://github.com/decisive-wizard/SheetSync",
+  "dependencies": {
+    "jquery": "^2.1.1"
+  }
+}
