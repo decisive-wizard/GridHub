@@ -8,9 +8,17 @@ var data = [
   [2012, '=SUM(A2:A5)', '=SUM(B5,E3)', '=A2/B2', 12, 4151]
 ];
 
+function generateBlankSheet(height, width) {
+  var newSheet = [];  
+  for (var i = 0; i < height; i++) {
+    newSheet.push(new Array(width));
+  }
+  return newSheet;
+}
+
 $(function(){
   $('.table-container').handsontable({
-    data: data,
+    data: generateBlankSheet(10,10),
     minSpareRows: 1,
     colHeaders: true,
     rowHeaders:true,
