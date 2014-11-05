@@ -1,4 +1,4 @@
-# SheetSync
+# SheetSync [![Build Status](https://travis-ci.org/decisive-wizard/SheetSync.svg?branch=master)](https://travis-ci.org/decisive-wizard/SheetSync)
 
 > Collaborative spreadsheet editing tool for the desktop.
 

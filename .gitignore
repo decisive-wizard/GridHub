@@ -5,3 +5,6 @@ bower_components
 # compiled or built files
 css/*.css
 dist
+
+# logs
+npm-debug.log
