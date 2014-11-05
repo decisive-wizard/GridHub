@@ -1,0 +1,28 @@
+{
+  "name": "SheetSync",
+  "version": "0.0.1",
+  "homepage": "https://github.com/decisive-wizard/SheetSync",
+  "authors": [
+    "DECISIVE WIZARD (https://github.com/decisive-wizard)"
+  ],
+  "description": "Collaborative spreadsheet editing",
+  "main": "index.html",
+  "keywords": [
+    "Excel",
+    "Node-Webkit",
+    "Git"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handsontable": "~0.11.4",
+    "jquery": "~2.1.1"
+  }
+}
