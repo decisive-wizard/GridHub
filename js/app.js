@@ -11,7 +11,11 @@ var data = [
 function generateBlankSheet(height, width) {
   var newSheet = [];  
   for (var i = 0; i < height; i++) {
-    newSheet.push(new Array(width));
+    var row = [];
+    for (var j = 0; j < width; j++) {
+      row.push("");
+    }
+    newSheet.push(row);
   }
   return newSheet;
 }
@@ -25,6 +29,27 @@ $(function(){
     contextMenu: true,
     formulas:true
   });
+
+  $("#create-sheet-form").submit(function(event){
+    event.preventDefault();
+
+    var height = 10;
+    var width = 10;
+
+    height = $('.height').val();
+    width = $('.width').val();
+    console.log(width);
+
+      $('.table-container').handsontable({
+        data: generateBlankSheet(height, width),
+        minSpareRows: 1,
+        colHeaders: true,
+        rowHeaders:true,
+        contextMenu: true,
+        formulas:true
+      });
+
+  })
 
   $("#commit-button").click(function() {
     var currentDir = process.env.PWD;
