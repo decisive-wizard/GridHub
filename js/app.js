@@ -11,6 +11,7 @@ $(function(){
     data: data,
     minSpareRows: 1,
     colHeaders: true,
+    rowHeaders:true,
     contextMenu: true
   });
 });
