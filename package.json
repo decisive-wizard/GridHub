@@ -4,9 +4,9 @@
   "description": "Collaborative distributed spreadsheet editing",
   "main": "index.html",
   "window": {
-    "toolbar": false,
-    "width": 800,
-    "height": 600
+    "toolbar": true,
+    "width": 1000,
+    "height": 700
   },
   "scripts": {
     "test": "mocha-phantomjs test/SpecRunner.html"
