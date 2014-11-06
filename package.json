@@ -6,7 +6,7 @@
   "window": {
     "toolbar": true,
     "width": 1000,
-    "height": 700
+    "height": 650
   },
   "scripts": {
     "test": "mocha-phantomjs test/SpecRunner.html"
