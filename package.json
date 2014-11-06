@@ -34,7 +34,8 @@
   },
   "homepage": "https://github.com/decisive-wizard/SheetSync",
   "dependencies": {
-    "fs": "0.0.2"
+    "fs": "0.0.2",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "chai": "^1.9.2",
