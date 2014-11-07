@@ -57,14 +57,14 @@
             <ul class="sidebar-nav nav">
                 <li class="sidebar-brand">
                     <a href="#home"><span class="fa fa-home solo">SheetSync</span></a>
-                    
+
                 </li>
                 <li>
                     <button type="button" class="btn btn-primary " >
-                        Import... 
+                        Import...
                     </button>
                     <button type="button" class="btn btn-primary " >
-                        Export... 
+                        Export...
                     </button>
                 </li>
                 <li>
@@ -81,11 +81,23 @@
              </ul>
         </nav>
     </div>
-          <!-- </div> -->
     <div id='page-content-wrapper'>
       <div class='row'>
-        <div class="col-md-12 well">
-            <div class="table-container"></div>
+        <div class="col-md-12">
+          <ul class="nav nav-tabs tab-menu" role="tablist">
+            <li role="presentation" class="active"><a href="#">Sync</a></li>
+            <li role="presentation"><a href="#">Excel Home</a></li>
+            <li role="presentation"><a href="#">Formatting</a></li>
+            <li role="presentation"><a href="#">Other</a></li>
+          </ul>
+          <div class="ribbon sync-ribbon">
+            <button class="btn btn-primary"><i class="fa fa-cloud-upload"></i> Commit</button>
+            <button class="btn btn-primary"><i class="fa fa-download"></i> Pull</button>
+            <button class="btn btn-primary"><i class="fa fa-code-fork"></i> Fork</button>
+            <button class="btn btn-primary"><i class="fa fa-home"></i> Home</button>
+          </div>
+
+          <div class="table-container"></div>
         </div>
       </div>
     </div>
