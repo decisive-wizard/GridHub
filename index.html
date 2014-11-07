@@ -85,23 +85,36 @@
       <div class='row'>
         <div class="col-md-12">
           <ul class="nav nav-tabs tab-menu" role="tablist">
-            <li role="presentation" class="active"><a href="#">Sync</a></li>
-            <li role="presentation"><a href="#">Excel Home</a></li>
-            <li role="presentation"><a href="#">Formatting</a></li>
-            <li role="presentation"><a href="#">Other</a></li>
+            <li data-ribbon="sync" role="presentation" class="active"><a href="#">Sync</a></li>
+            <li data-ribbon="excel-home" role="presentation"><a href="#">Excel Home</a></li>
+            <li data-ribbon="formatting" role="presentation"><a href="#">Formatting</a></li>
+            <li data-ribbon="other" role="presentation"><a href="#">Other</a></li>
           </ul>
+          <!-- SYNC RIBBON -->
           <div class="ribbon sync-ribbon">
             <button class="btn btn-primary"><i class="fa fa-cloud-upload"></i> Commit</button>
             <button class="btn btn-primary"><i class="fa fa-download"></i> Pull</button>
             <button class="btn btn-primary"><i class="fa fa-code-fork"></i> Fork</button>
             <button class="btn btn-primary"><i class="fa fa-home"></i> Home</button>
           </div>
-
+          <!-- EXCEL HOME RIBBON -->
+          <div class="ribbon excel-home-ribbon" style="display: none">
+            <button class="btn btn-primary">Yo Swami!</button>
+          </div>
+          <!-- FORMATTING RIBBON -->
+          <div class="ribbon formatting-ribbon" style="display: none">
+            <button class="btn btn-primary">highlight all of the things</button>
+          </div>
+          <!-- OTHER RIBBON -->
+          <div class="ribbon other-ribbon" style="display: none">
+            <button class="btn btn-primary">other actions</button>
+          </div>
           <div class="table-container"></div>
         </div>
       </div>
     </div>
   </div>
+  <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
