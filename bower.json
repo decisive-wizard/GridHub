@@ -24,6 +24,7 @@
   "dependencies": {
     "handsontable": "~0.11.4",
     "jquery": "~2.1.1",
-    "bootstrap": "~3.3.0"
+    "bootstrap": "~3.3.0",
+    "fontawesome": "~4.2.0"
   }
 }
