@@ -1,13 +1,7 @@
-var converter = require('./js/arrayToCsv.js');
+// See below for event API interface to handstontable
+// https://github.com/handsontable/jquery-handsontable/wiki/Events
 
-// Dummy Data:
-// var data = [
-//   ['=$B$2', "Maserati", "Mazda", "Mercedes", "Mini", "=A$1"],
-//   [2009, 0, 2941, 4303, 354, 5814],
-//   [2010, 5, 2905, 2867, '=SUM(A4,2,3)', '=$B1'],
-//   [2011, 4, 2517, 4822, 552, 6127],
-//   [2012, '=SUM(A2:A5)', '=SUM(B5,E3)', '=A2/B2', 12, 4151]
-// ];
+var converter = require('./js/arrayToCsv.js');
 
 $(function(){
 
@@ -21,7 +15,26 @@ $(function(){
     stretchH: 'last',
     minSpareRows: 1,
     contextMenu: true,
-    formulas: true
+    outsideClickDeselects : false,
+    formulas: true,
+
+    afterChange: function(changes, source){
+      // cell value has changed
+    },
+
+    afterSelection: function(r, c, r2, c2){
+      // r = selection start row
+      // c = selection start column
+      // r2 = selection end row
+      // c2 = selection end column
+      // note: only show function or value for a single cell
+      if (r === r2 && c === c2){
+        $('.formula-input').val(this.getDataAtCell(r, c));
+      } else {
+        $('.formula-input').val('');
+      }
+    }
+
   });
 
   // Create a custom sized table
