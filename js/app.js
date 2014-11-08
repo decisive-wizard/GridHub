@@ -1,6 +1,6 @@
 var converter = require('./js/arrayToCsv.js');
 
-// Dummy Data: 
+// Dummy Data:
 // var data = [
 //   ['=$B$2', "Maserati", "Mazda", "Mercedes", "Mini", "=A$1"],
 //   [2009, 0, 2941, 4303, 354, 5814],
@@ -14,33 +14,34 @@ $(function(){
   var writeFileCallback,
       generateBlankSheet;
 
-  // Initially fill with a 10x10 table
-  $('.table-container').handsontable({
-    data: generateBlankSheet(10,10),
-    minSpareRows: 1,
+  $('#spreadsheet').handsontable({
+    data: generateBlankSheet(30,30),
+    rowHeaders: true,
     colHeaders: true,
-    rowHeaders:true,
+    stretchH: 'last',
+    minSpareRows: 1,
     contextMenu: true,
-    formulas:true
+    formulas: true
   });
 
   // Create a custom sized table
-  $(".create-sheet-form").submit(function(event){
-    event.preventDefault();
-
-    var height = $('.height').val();
-    var width = $('.width').val();
-
-      $('.table-container').handsontable({
-        data: generateBlankSheet(height, width),
-        minSpareRows: 1,
-        colHeaders: true,
-        rowHeaders:true,
-        contextMenu: true,
-        formulas:true
-      });
-
-  })
+  // $(".create-sheet-form").submit(function(event){
+  //   event.preventDefault();
+  //
+  //   var height = $('.height').val();
+  //   var width = $('.width').val();
+  //
+  //     $('#spreadsheet').handsontable({
+  //       data: generateBlankSheet(height, width),
+  //       minSpareRows: 1,
+  //       colHeaders: true,
+  //       rowHeaders:true,
+  //       contextMenu: true,
+  //       formulas:true,
+  //       stretchH: 'last'
+  //     });
+  //
+  // })
 
   $(".save-button").click(function() {
     var currentDir = process.env.PWD;
@@ -58,7 +59,7 @@ $(function(){
   }
 
   function generateBlankSheet(height, width) {
-    var newSheet = [];  
+    var newSheet = [];
     for (var i = 0; i < height; i++) {
       var row = [];
       for (var j = 0; j < width; j++) {
@@ -69,6 +70,20 @@ $(function(){
     return newSheet;
   }
 
+  function createBigData() {
+    var rows = []
+      , i
+      , j;
 
+    for (i = 0; i < 1000; i++) {
+      var row = [];
+      for (j = 0; j < 6; j++) {
+        row.push(Handsontable.helper.spreadsheetColumnLabel(j) + (i + 1));
+      }
+      rows.push(row);
+    }
+
+    return rows;
+  }
 
 });

@@ -1,19 +1,54 @@
+a
+  color bright-blue
+
+.btn-primary
+  background-color soft-blue
+  border 1px solid bright-blue
+
 .tab-menu
   padding-top 10px
   padding-left 10px
+  border none
+  position fixed
+  top 0px
+  left 250px
+  font-family Quicksand-Bold
+  font-size 16px
+  li
+    font-weight bold
+    a:hover
+      color black
   li.active
+    border-bottom 1px solid light-green
     a
-      background-color green
+      border none
+      color black
+      background-color light-green
+    a:hover
+      border none
+      background-color light-green
+      color black
 
 .ribbon
   height 50px
   width 100%
   padding-top 8px
   padding-left 10px
-  background-color green
+  background-color light-green
+  position fixed
+  top 50px
+  left 250px
+  .btn-primary
+    -webkit-box-shadow 2px 2px 2px 0px rgba(0,0,0,0.75)
+    font-family Quicksand-Bold
 
 .formula-entry
-  span
+  position fixed
+  top 100px
+  left 250px
+  span.input-group-addon
     border-radius 0
+    padding-left 14px
+    padding-right 15px
   input
     border-radius 0
