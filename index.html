@@ -29,29 +29,31 @@
     <div class="sidebar-wrapper">
         <nav class="spy">
             <ul class="sidebar-nav nav">
-                <li class="sidebar-brand">
-                    <a href="#home"><span class="fa solo">SheetSync</span></a>
-
-                </li>
-                <li>
-                    <div class = 'share'>
-                      <button type="button" class="btn btn-primary btn-outline " >
-                          <i class="fa fa-file-excel-o"></i> Import...
-                      </button>
-                      <button type="button" class="btn btn-primary btn-outline " >
-                          <i class="fa fa-save"></i> Export...
-                      </button>
+              <li class="sidebar-brand">
+                <a href="#home"><span class="fa solo">SheetSync</span></a>
+              </li>
+              <li>
+                  <div class="share">
+                    <button type="button" class="btn btn-success btn-outline new-project-btn" >
+                        New
+                    </button>
+                    <button type="button" class="btn btn-primary btn-outline open-project-btn" >
+                        Open
+                    </button>
+                    <button type="button" class="btn btn-primary btn-outline import-excel-btn" >
+                      <i class="fa fa-file-excel-o"></i> Import
+                    </button>
+                  </div>
+              </li>
+              <li>
+                  <a href="#anch1" data-scroll>
+                    <div class='sectionHeader'>
+                      <i class='fa fa-list-ul'></i>
+                      <span class="fa solo">Projects</span>
                     </div>
-                </li>
-                <li>
-                    <a href="#anch1" data-scroll>
-                      <div class='sectionHeader'>
-                        <i class='fa fa-list-ul'></i>
-                        <span class="fa solo">Projects</span>
-                      </div>
-                    </a>
+                  </a>
 
-                </li>
+              </li>
                   <li>
                     <!-- Wrapper for the Project feed - Yes, a Ul inside a Li, with its own happy li`s -->
                     <ul class = 'projectWrapper'>
@@ -70,7 +72,7 @@
                               <i class="fa fa-save"></i> Share
                           </button>
                         </a>
-                        
+
                       </li >
                       <li class='project'>
                         <a href="#anch2" data-scroll>
@@ -194,6 +196,8 @@
       </div>
     </div>
   </div>
+  <input style="display:none;" id="fileDialog" type="file" />
+  <script src="js/importFiles.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/formulaBar.js"></script>
   <script src="js/app.js"></script>
