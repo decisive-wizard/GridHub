@@ -20,6 +20,11 @@ $(function(){
 
     afterChange: function(changes, source){
       // cell value has changed
+      // continually save files
+      var currentDir = process.env.PWD;
+      var fileName = 'test';
+      var data = this.getData();
+      converter.arrayToCsv(data, currentDir + '/' + fileName, writeFileCallback);
     },
 
     afterSelection: function(r, c, r2, c2){
@@ -56,19 +61,10 @@ $(function(){
   //
   // })
 
-  $(".save-button").click(function() {
-    var currentDir = process.env.PWD;
-    var fileName = "test"
-    var data = $('.table-container').handsontable('getData');
-
-    converter.arrayToCsv(data, currentDir + '/' + fileName, writeFileCallback);
-
-  });
-
   //////////// Helper functions: ////////////
 
   function writeFileCallback() {
-    alert('file successfully saved');
+    console.log('file successfully saved');
   }
 
   function generateBlankSheet(height, width) {
