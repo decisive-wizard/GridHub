@@ -5,6 +5,7 @@
     padding-left 0
 
 .sidebar-wrapper
+  font-family Quicksand
   margin-left -250px
   left 250px
   width 250px
@@ -14,6 +15,7 @@
   overflow-y auto
   z-index 1000
   transition all 0.4s ease 0s
+  
 
 .page-content-wrapper
   width 100%
@@ -57,6 +59,17 @@
   color #fff
   background rgba(255,255,255,0.2)
   text-decoration none
+  
+.sidebar-nav li a:hover.sectionHeader,
+  color inherit
+  background inherit
+  text-decoration none
+  
+.sidebar-nav li a:hover.sectionFooter,
+  color inherit
+  background inherit
+  text-decoration none
+
 
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus
@@ -111,15 +124,35 @@
 
   .sectionHeader
     border-bottom 1px solid gray
-    box-shadow 0px 5px 6px -1px rgba(10, 10, 10, 0.95);
+    box-shadow 0px 5px 6px -1px rgba(10, 10, 10, 0.95)
    a div
       padding-left 80px
       color white
       padding-bottom 5px
+   
+     
     
    .sectionFooter
-     border-bottom 1px solid gray   
+     // border-bottom 1px solid gray   
+     box-shadow  0px -4px 6px -1px rgba(10, 10, 10, 0.95)
+     box-shadow 0px 5px 6px -1px rgba(10, 10, 10, 0.95)
 
+.sectionHeader.feed
+  box-shadow  0px -4px 6px -1px rgba(10, 10, 10, 0.95)
+  box-shadow 0px 5px 6px -1px rgba(10, 10, 10, 0.95)
+
+.sectionFooter.feed
+  box-shadow  0px -4px 6px -1px rgba(10, 10, 10, 0.95)  
+  color white
+  padding-left 40px
+  font-size 14px
+  border-top 1px solid gray
+  a:hover
+    color inherit
+    background inherit
+    text-decoration none
+
+    
    
 .messsage
     float left
@@ -128,7 +161,10 @@
     border-bottom 1px solid #ccc
     p
       font-size 300px
-    a
+    a:hover
+      color #fff
+      background rgba(255,255,255,0.2)
+      text-decoration none
       p
         font-size 50px
         width 90%
@@ -167,13 +203,15 @@ h2
 
 
 .feedWrapper
+  border-bottom 1px solid gray
   padding-left 0px
-  height 250px
+  height 290px
   overflow-y auto
   
 .projectWrapper
   // line-height 20px
   // text-indent 10px
+  border-bottom 1px solid gray  
   padding-left 0px
   height 100px
   overflow-y auto
