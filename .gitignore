@@ -8,3 +8,6 @@ dist
 
 # logs
 npm-debug.log
+
+# test spreadsheets
+**/*.csv

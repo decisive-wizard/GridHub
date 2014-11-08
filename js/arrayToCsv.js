@@ -1,24 +1,25 @@
 (function(){
-  
+
   var fs = require('fs');
 
   module.exports = {
     arrayToCsv: arrayToCsv
   };
-  
+
   ////////////
 
   function arrayToCsv(twoDimensionalArray, fileName, callback) {
 
-    var csv = "";
+    var csv = '';
 
     for (var i = 0; i < twoDimensionalArray.length; i++) {
-      csv += twoDimensionalArray[i].join(",");
-      csv += "\n";
+      csv += twoDimensionalArray[i].join(',');
+      csv += '\n';
     }
 
-    console.log(csv);
-    fileName = fileName + '.csv';
+    if (fileName.indexOf('.csv') !== fileName.length - 4){
+      fileName = fileName + '.csv';
+    }
 
     fs.writeFile(fileName, csv, function(err) {
 
@@ -28,6 +29,10 @@
       console.log('writeFile: ', fileName, 'successful');
       callback();
     });
+
+  }
+
+  function csvToArray(filePath, callback){
 
   }
 

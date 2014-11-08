@@ -1,12 +1,18 @@
 // See below for event API interface to handstontable
 // https://github.com/handsontable/jquery-handsontable/wiki/Events
 
-var converter = require('./js/arrayToCsv.js');
+// store current working file directory here
+var metaData, gui, win;
 
 $(function(){
 
+  var converter = require('./js/arrayToCsv.js');
   var writeFileCallback,
       generateBlankSheet;
+
+  metaData = {};
+  gui = require('nw.gui');
+  win = gui.Window.get();
 
   $('#spreadsheet').handsontable({
     data: generateBlankSheet(30,30),
@@ -20,6 +26,12 @@ $(function(){
 
     afterChange: function(changes, source){
       // cell value has changed
+      // continually save files
+      var currentDir = process.env.PWD;
+      var data = this.getData();
+      if (metaData.filePath !== undefined){
+        converter.arrayToCsv(data, metaData.filePath, writeFileCallback);
+      }
     },
 
     afterSelection: function(r, c, r2, c2){
@@ -37,38 +49,10 @@ $(function(){
 
   });
 
-  // Create a custom sized table
-  // $(".create-sheet-form").submit(function(event){
-  //   event.preventDefault();
-  //
-  //   var height = $('.height').val();
-  //   var width = $('.width').val();
-  //
-  //     $('#spreadsheet').handsontable({
-  //       data: generateBlankSheet(height, width),
-  //       minSpareRows: 1,
-  //       colHeaders: true,
-  //       rowHeaders:true,
-  //       contextMenu: true,
-  //       formulas:true,
-  //       stretchH: 'last'
-  //     });
-  //
-  // })
-
-  $(".save-button").click(function() {
-    var currentDir = process.env.PWD;
-    var fileName = "test"
-    var data = $('.table-container').handsontable('getData');
-
-    converter.arrayToCsv(data, currentDir + '/' + fileName, writeFileCallback);
-
-  });
-
   //////////// Helper functions: ////////////
 
   function writeFileCallback() {
-    alert('file successfully saved');
+    console.log('file successfully saved');
   }
 
   function generateBlankSheet(height, width) {
