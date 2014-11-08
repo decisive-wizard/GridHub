@@ -8,7 +8,11 @@
   margin-left -250px
   left 250px
   width 250px
-  background #05E5E8
+  // background #121B32
+  background: -webkit-linear-gradient(left, #121B32 , #1A2E50); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #121B32, #1A2E50); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #121B32, #1A2E50); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #121B32 , #1A2E50); /* Standard syntax */
   position fixed
   height 100%
   overflow-y auto
@@ -93,7 +97,13 @@
     padding-left 10px  
     border 1px solid white
 
-  
+ .update
+   img
+    border-radius 100%
+    float left
+    margin 10px 0
+    transform: scale(0.6, 0.6)
+    
 
 
 
