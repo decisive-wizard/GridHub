@@ -10,12 +10,20 @@ $(function(){
   //   });
   // });
 
+  var converter = require('./js/arrayToCsv.js');
+
   $('.open-project-btn').on('click', function(){
     chooseFile('#fileDialog', function(filePath){
+
       // change title at top of node webkit window to show file path
       win.title = 'Sheet Sync - ' + filePath;
       metaData.filePath = filePath;
-      // actually open the file...TODO
+
+      // actually open the file and seed the data into the spreadsheet
+      converter.csvToArray(filePath, function(array){
+        console.log('loaded csv', array);
+      });
+
     });
   });
 

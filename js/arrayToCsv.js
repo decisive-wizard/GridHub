@@ -3,7 +3,8 @@
   var fs = require('fs');
 
   module.exports = {
-    arrayToCsv: arrayToCsv
+    arrayToCsv: arrayToCsv,
+    csvToArray: csvToArray
   };
 
   ////////////
@@ -33,6 +34,18 @@
   }
 
   function csvToArray(filePath, callback){
+
+    fs.readFile(filePath, function(err, data){
+      if (err) throw err;
+
+      var rows = data.toString().split('\n');
+      for (var i = 0; i < rows.length; i++){
+        rows[i] = rows[i].split(',');
+      }
+
+      callback(rows);
+
+    });
 
   }
 

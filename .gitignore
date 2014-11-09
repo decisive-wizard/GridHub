@@ -11,3 +11,6 @@ npm-debug.log
 
 # test spreadsheets
 **/*.csv
+
+# other
+.DS_Store
