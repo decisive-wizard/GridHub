@@ -1,19 +1,10 @@
 // See below for event API interface to handstontable
 // https://github.com/handsontable/jquery-handsontable/wiki/Events
-
 // store current working file directory here
-var metaData, gui, win, workbooks;
 
 $(function(){
 
   var converter = require('./js/arrayToCsv.js');
-  var Workbook = require('./js/workbook.js');
-  var Worksheet = require('./js/worksheet.js')
-
-  metaData = {};
-  workbooks = {};
-  gui = require('nw.gui');
-  win = gui.Window.get();
   
   workbooks.noname = new Workbook();
 

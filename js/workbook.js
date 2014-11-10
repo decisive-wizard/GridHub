@@ -1,6 +1,4 @@
 
-var Worksheet = require('./worksheet.js');
-
 var Workbook = function(dataObj,options){
   if (arguments.length === 0){
     // blank workbook with blank worksheet
@@ -15,4 +13,3 @@ var Workbook = function(dataObj,options){
   }
 };
 
-module.exports = Workbook;
