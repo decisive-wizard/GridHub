@@ -17,9 +17,7 @@ $(function(){
   
   workbooks.noname = new Workbook();
 
-  var currentSheet = _.extend(JSON.parse(JSON.stringify(workbooks.noname.sheet1)), Worksheet.prototype);
-  $('#spreadsheet').handsontable(currentSheet);
-  //$('#spreadsheet').handsontable(workbooks.noname.sheet1);
+  $('#spreadsheet').handsontable(workbooks.noname.sheet1);
 
   //Feed Simulator
 
