@@ -47,13 +47,12 @@ $(function(){
   };  
 
 
-  // setInterval(function(){
-  //   console.log('1');
-  //   $(generateNewRandomFeed()).hide().prependTo(".feedWrapper").slideDown("slow", function() {
-  //     //when complete
-  //     console.log("swami");
-  //   });
-  // },1000);
+  setInterval(function(){
+    $(generateNewRandomFeed()).hide().prependTo(".feedWrapper").slideDown("slow", function() {
+      //when complete
+      // console.log("swami");
+    });
+  },1000);
 
 //End of Feed Simulator
 
