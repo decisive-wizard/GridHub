@@ -1,4 +1,4 @@
-/* globals metaData, gui, win */
+/* globals metaData, gui, win, workbooks */
 
 $(function(){
 
@@ -21,20 +21,31 @@ $(function(){
 
       // actually open the file and seed the data into the spreadsheet
       converter.csvToArray(filePath, function(array){
-        console.log('loaded csv', array);
+
       });
 
     });
   });
 
-  // import .xlsx
-  $('.import-excel-btn').on('click', function(){
+  // import .xlsx, .csv etc
+  $('.import-file-btn').on('click', function(){
     chooseFile('#fileDialog', function(filePath){
+    
+      win.title = 'Sheet Sync - ' + filePath;
+      metaData.filePath = filePath;
 
+      if (/(.)+\.csv$/.test(filePath)){
+        // actually open the file and seed the data into the spreadsheet
+        converter.csvToArray(filePath, function(array){
+          var workbookname = fileNameValidator(filePath,'csv');
+          workbooks[workbookname] = new Workbook(array,{csv:true});
+          $('#spreadsheet').handsontable(workbooks[workbookname].sheet1);
+        });
+      } else {
+        alert("This file extension is not supported.")
+      }
     });
   });
-
-
 
   function chooseFile(name, cb) {
     var chooser = $(name);
@@ -43,6 +54,17 @@ $(function(){
     });
 
     chooser.trigger('click');
+  }
+
+  function fileNameValidator(filepath, extension){
+    var noSlashes = filepath.split('/').length > 0 ?
+      filepath.split('/')[filepath.split('/').length - 1] :
+      filepath;
+    var reString = '(.+)\\.' + extension + '$';
+    var re = new RegExp(reString);
+    var filename = noSlashes.match(re)[1];
+    var safeFileName = filename.replace(/[\\\/\<\>\"\*\?\|]/gi,"");
+    return safeFileName.length > 0 ? safeFileName : "workbook";
   }
 
 });

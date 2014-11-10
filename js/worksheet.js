@@ -1,5 +1,4 @@
-
-var converter = require('./arrayToCsv.js');
+var converter = require('./js/arrayToCsv.js');
 
 function generateBlankSheet(height, width) {
   var newSheet = [];
@@ -18,7 +17,7 @@ var Worksheet = function(dataObj,options){
     // blank worksheet
     this.data = generateBlankSheet(30,30);
   } else if (options.csv) {
-    this.data = converter.csvToArray(dataObj);
+    this.data = dataObj;
   } else if (options.xlsx) {
     this.data = dataObj.data
       .map(function(row,k,c){
@@ -45,7 +44,7 @@ var Worksheet = function(dataObj,options){
 };
 
 function writeFileCallback() {
-  console.log('file successfully saved');
+  //console.log('file successfully saved');
 };
 
 Worksheet.prototype.afterChange = function afterChange (changes, source){
@@ -70,5 +69,3 @@ Worksheet.prototype.afterSelection = function afterSelection (r, c, r2, c2){
     $('.formula-input').val('');
   }
 }
-
-module.exports = Worksheet;
