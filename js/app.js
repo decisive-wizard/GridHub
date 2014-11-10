@@ -52,7 +52,7 @@ $(function(){
       //when complete
       // console.log("swami");
     });
-  },1000);
+  },20000);
 
 //End of Feed Simulator
 
