@@ -1,6 +1,14 @@
 (function(){
 
   var fs = require('fs');
+  var csv = require('csv');
+
+  // promisify all of the things!
+  var Promise = require('bluebird');
+  var readFile = Promise.promisify(fs.readFile);
+  var writeFile = Promise.promisify(fs.writeFile);
+  var stringifyCsv = Promise.promisify(csv.stringify);
+  var parseCsv = Promise.promisify(csv.parse);
 
   module.exports = {
     arrayToCsv: arrayToCsv,
@@ -10,43 +18,23 @@
   ////////////
 
   function arrayToCsv(twoDimensionalArray, fileName, callback) {
-
-    var csv = '';
-
-    for (var i = 0; i < twoDimensionalArray.length; i++) {
-      csv += twoDimensionalArray[i].join(',');
-      csv += '\n';
-    }
-
-    if (fileName.indexOf('.csv') !== fileName.length - 4){
-      fileName = fileName + '.csv';
-    }
-
-    fs.writeFile(fileName, csv, function(err) {
-
-      if (err){
-        console.log(err);
-      }
-      console.log('writeFile: ', fileName, 'successful');
-      callback();
-    });
-
+    stringifyCsv(twoDimensionalArray).then(function(output){
+        return writeFile(fileName, output);
+      }).then(function(){
+        return callback();
+      }).catch(function(e){
+        console.log('there was an error', e);
+      });
   }
 
   function csvToArray(filePath, callback){
-
-    fs.readFile(filePath, function(err, data){
-      if (err) throw err;
-
-      var rows = data.toString().split('\n');
-      for (var i = 0; i < rows.length; i++){
-        rows[i] = rows[i].split(',');
-      }
-
-      callback(rows);
-
+    readFile(filePath).then(function(data){
+      return parseCsv(data.toString());
+    }).then(function(output){
+      return callback(output);
+    }).catch(function(e){
+      console.log('there was an error', e);
     });
-
   }
 
 })();
