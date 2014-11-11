@@ -25,3 +25,22 @@ First try downloading the binary executable for your operating system [here](htt
 ```
 alias nw='/Applications/node-webkit.app/Contents/MacOS/node-webkit'
 ```
+
+## SheetSync File Format (`.shync`)
+
+Each `.shync` file is essentially a zipped folder with the following contents and structure (the below assumed a file called `sheet.shync` which has been renamed `sheet.zip` and unzipped):
+
+```
+├── sheet/
+│   ├── csv/
+│   │   ├── values.csv
+│   │   ├── formulas.csv
+│   │   ├── styles.csv
+│   ├── .git/
+```
+
+In this case `.git` would just be the normal git directory structure as you would see in the repository for a code base using git for version control.
+
+## Programmatic Git Workflow
+
+SheetSync uses a single-branch git versioning strategy applied to the `csv` folder. TODO: breakdown of user buttons as they relate to specific git commands.
