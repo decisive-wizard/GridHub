@@ -24,7 +24,7 @@ var Worksheet = function(dataObj,options){
         // map each row of cells to the correct cell property
         return row.map(function(cell,subKey,subRow){
           if (typeof cell !== 'string'){
-            return cell.formula ? cell.formula : cell.value;
+            return cell.formula ? '='+cell.formula : cell.value;
           } else {
             return cell;
           }

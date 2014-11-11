@@ -8,7 +8,7 @@ var Workbook = function(dataObj,options){
   } else if (options.xlsx){
     // loop through sheets
     for (var key in dataObj){
-      this[dataObj[key].sheetName] = new Worksheet(dataObj[key],{xlsx:true});
+      this[key] = new Worksheet(dataObj[key],{xlsx:true});
     }
   }
 };
