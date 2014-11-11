@@ -44,7 +44,7 @@ var Worksheet = function(dataObj,options){
 };
 
 function writeFileCallback() {
-  //console.log('file successfully saved');
+  // console.log('file successfully saved');
 };
 
 Worksheet.prototype.afterChange = function afterChange (changes, source){
