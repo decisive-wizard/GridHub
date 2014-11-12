@@ -13,7 +13,7 @@ $(function(){
   //Feed Simulator
 
   var Feed = $('.feedWrapper');
-  var newFeedItem =function(user,message){
+  var newFeedItem = function(user,message){
     var item = '<li class="project update"><div class="message">'+
                           '<a class ="innerUpdate">'+
                               '<img src=' + user.image + '/>'+
