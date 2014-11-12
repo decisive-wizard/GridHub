@@ -11,7 +11,7 @@ module.exports = function(rootFilePath, callback) {
     if (err) {
       console.log(err);
     }
-    console.log(commits);
+    // console.log(commits);
     if (callback) {
       callback(commits);
     }

@@ -28,6 +28,8 @@ $(function(){
 
       });
 
+      gitSessionController.activateSession();
+
     });
   });
 

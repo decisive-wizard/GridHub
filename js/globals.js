@@ -1,6 +1,6 @@
 // store current working file directory here
 
-var metaData, gui, win, workbooks;
+var metaData, gui, win, workbooks, gitSessionController;
 gui = require('nw.gui');
 win = gui.Window.get();
 
