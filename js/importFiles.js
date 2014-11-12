@@ -12,6 +12,7 @@ $(function(){
 
   var converter = require('./js/arrayToCsv.js');
   var parsexcel = require('parsexcel.js');
+  var fs = require('fs');
 
   $('.open-project-btn').on('click', function(){
     chooseFile('#fileDialog', function(filePath){
@@ -35,7 +36,9 @@ $(function(){
     chooseFile('#fileDialog', function(filePath){
 
       win.title = 'Sheet Sync - ' + filePath;
-      metaData.filePath = filePath;
+      // this filepath MUST be different than the imported, or 
+      // it will corrupt the imported file
+      // metaData.filePath = filePath + '.shync';
 
       if (/(.)+\.csv$/.test(filePath)){
         // actually open the file and seed the data into the spreadsheet
@@ -44,6 +47,7 @@ $(function(){
           workbooks[workbookname] = new Workbook(array,{csv:true});
           $('#spreadsheet').handsontable(workbooks[workbookname].sheet1);
         });
+
       } else if (/(.)+\.xlsx$/.test(filePath)){
         parsexcel(filePath,function(err,array){
           if (err) console.log(err);
@@ -51,6 +55,7 @@ $(function(){
           workbooks[workbookname] = new Workbook(array,{xlsx:true});
           $('#spreadsheet').handsontable(workbooks[workbookname][1]);
         });
+
       } else {
         alert("This file extension is not supported.")
       }

@@ -50,11 +50,11 @@ function writeFileCallback() {
 Worksheet.prototype.afterChange = function afterChange (changes, source){
   // cell value has changed
   // continually save files
-  var currentDir = process.env.PWD;
-  var data = this.getData();
-  if (metaData.filePath !== undefined){
-    converter.arrayToCsv(data, metaData.filePath, writeFileCallback);
-  }
+  // var currentDir = process.env.PWD;
+  // var data = this.getData();
+  // if (metaData.filePath !== undefined){
+  //   converter.arrayToCsv(data, metaData.filePath, writeFileCallback);
+  // }
 }
 
 Worksheet.prototype.afterSelection = function afterSelection (r, c, r2, c2){
