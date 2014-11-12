@@ -8,7 +8,7 @@ $(function(){
   
   workbooks.noname = new Workbook();
 
-  $('#spreadsheet').handsontable(workbooks.noname.sheet1);
+  renderSheet(workbooks.noname,1);
 
   //Feed Simulator
 

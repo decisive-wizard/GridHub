@@ -13,11 +13,13 @@ function generateBlankSheet(height, width) {
 }
 
 var Worksheet = function(dataObj,options){
-  if (arguments.length === 0){
+  if (arguments[0] === null){
     // blank worksheet
     this.data = generateBlankSheet(30,30);
+    this.sheetName = options.sheetName;
   } else if (options.csv) {
     this.data = dataObj;
+    this.sheetName = options.sheetName;
   } else if (options.xlsx) {
     this.data = dataObj.data
       .map(function(row,k,c){
@@ -30,6 +32,7 @@ var Worksheet = function(dataObj,options){
           }
         });
       });
+    this.sheetName = dataObj.sheetName;
   }
 
   // all worksheets will have these properties
@@ -47,7 +50,7 @@ function writeFileCallback() {
   // console.log('file successfully saved');
 };
 
-Worksheet.prototype.afterChange = function afterChange (changes, source){
+Worksheet.prototype.afterChange = function(changes, source){
   // cell value has changed
   // continually save files
   // var currentDir = process.env.PWD;
@@ -55,9 +58,9 @@ Worksheet.prototype.afterChange = function afterChange (changes, source){
   // if (metaData.filePath !== undefined){
   //   converter.arrayToCsv(data, metaData.filePath, writeFileCallback);
   // }
-}
+};
 
-Worksheet.prototype.afterSelection = function afterSelection (r, c, r2, c2){
+Worksheet.prototype.afterSelection = function(r, c, r2, c2){
   // r = selection start row
   // c = selection start column
   // r2 = selection end row
@@ -68,4 +71,4 @@ Worksheet.prototype.afterSelection = function afterSelection (r, c, r2, c2){
   } else {
     $('.formula-input').val('');
   }
-}
+};
