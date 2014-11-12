@@ -15,6 +15,8 @@ $(function(){
 
   $('.open-project-btn').on('click', function(){
     chooseFile('#fileDialog', function(filePath){
+      // should validate the file extension is .shync unless then throw error
+      // use fileNameValidator?
 
       // change title at top of node webkit window to show file path
       win.title = 'Sheet Sync - ' + filePath;
@@ -31,7 +33,7 @@ $(function(){
   // import .xlsx, .csv etc
   $('.import-file-btn').on('click', function(){
     chooseFile('#fileDialog', function(filePath){
-    
+
       win.title = 'Sheet Sync - ' + filePath;
       metaData.filePath = filePath;
 
