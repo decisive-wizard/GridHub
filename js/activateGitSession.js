@@ -28,6 +28,10 @@ gitSessionController = (function() {
 
     // console.log(folderPath);
     git.getHistory(folderPath, function(commits) {
+      // empty the list before appending
+      $(".feedWrapper").empty();
+
+      // add a new li to the list for each commit
       _.forEach(commits, function(commit) {
         // console.log(commit.author.name);
         var author = commit.author.name;
