@@ -45,7 +45,7 @@ $(function(){
         converter.csvToArray(filePath, function(array){
           var workbookname = fileNameValidator(filePath,'csv');
           workbooks[workbookname] = new Workbook(array,{csv:true});
-          $('#spreadsheet').handsontable(workbooks[workbookname].sheet1);
+          renderSheet(workbooks[workbookname],1);
         });
 
       } else if (/(.)+\.xlsx$/.test(filePath)){
@@ -53,11 +53,11 @@ $(function(){
           if (err) console.log(err);
           var workbookname = fileNameValidator(filePath,'xlsx');
           workbooks[workbookname] = new Workbook(array,{xlsx:true});
-          $('#spreadsheet').handsontable(workbooks[workbookname][1]);
+          renderSheet(workbooks[workbookname],1);
         });
-
+        
       } else {
-        alert("This file extension is not supported.")
+        alert("This file extension is not supported.");
       }
     });
   });
