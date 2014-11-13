@@ -4,7 +4,7 @@
 
 $(function(){
 
-  var converter = require('./js/arrayToCsv.js');
+  var converter = require('./app/arrayToCsv.js');
   
   workbooks.noname = new Workbook();
 

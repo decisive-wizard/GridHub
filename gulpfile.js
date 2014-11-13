@@ -2,15 +2,15 @@ var gulp = require('gulp');
 var stylus = require('gulp-stylus');
 
 gulp.task('stylus', function(){
-  gulp.src('./css/main.styl')
+  gulp.src('./assets/css/main.styl')
     .pipe(stylus())
-    .pipe(gulp.dest('./css/'));
+    .pipe(gulp.dest('./assets/css/'));
 });
 
 gulp.task('build', ['stylus']);
 
 gulp.task('watch', function(){
-  gulp.watch('./css/**/*.styl', ['stylus']);
+  gulp.watch('./assets/css/**/*.styl', ['stylus']);
 });
 
 gulp.task('default', ['build', 'watch']);
