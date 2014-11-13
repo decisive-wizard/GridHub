@@ -50,7 +50,7 @@ var Worksheet = function(dataObj,options){
     if(invalid){
       //Aborts the importing process and Resets and the generated spreadsheet              
       this.data = generateBlankSheet(30,30);
-      alert('The Spreadsheet you are trying to import is not compatible to SheetSync');
+      alert('The Spreadsheet you are trying to import is not compatible to GridHub');
     }  
     this.sheetName = dataObj.sheetName;
   }

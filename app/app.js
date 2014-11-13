@@ -25,7 +25,7 @@ $(function(){
       return item;                                   
     };
 
-  // var messages = ['Made a pull request to "SheetSync"','Asked Santa for a new shiny Dildo','Pushed an awesome Commit','Went to Kenya, for some reason'];
+  // var messages = ['Made a pull request to "GridHub"','Asked Santa for a new shiny Dildo','Pushed an awesome Commit','Went to Kenya, for some reason'];
   // var users = [{name:'Greg Fedirko', image:'"assets/greg.jpeg"'},
   //                 {name:'Felipe Batista', image:'"assets/felipe.jpeg"'},
   //                 {name:'John Heroy', image:'"assets/john.png"'},
