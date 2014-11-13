@@ -235,7 +235,6 @@ Worksheet.prototype.afterSelection = function(r, c, r2, c2){
 
 
 function formulaJsCompatibilityCheck (formula){
-  console.log(formula);
   var formularRegex = /\b[A-Za-z2]+(?=\()(?![^']*'!)/g;
   var formularArr = formula.match(formularRegex);
   if(formularArr !== null){
