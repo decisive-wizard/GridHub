@@ -44,6 +44,7 @@ var Worksheet = function(dataObj,options){
   this.outsideClickDeselects = false;
   this.formulas = true;
   this.comments = true;
+  this.renderer = cellRenderer;
 };
 
 function writeFileCallback() {
