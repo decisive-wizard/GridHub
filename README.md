@@ -1,4 +1,4 @@
-# SheetSync [![Build Status](https://travis-ci.org/decisive-wizard/SheetSync.svg?branch=master)](https://travis-ci.org/decisive-wizard/SheetSync)
+# GridHub [![Build Status](https://travis-ci.org/decisive-wizard/GridHub.svg?branch=master)](https://travis-ci.org/decisive-wizard/GridHub)
 
 > Collaborative spreadsheet editing tool for the desktop.
 
@@ -11,8 +11,8 @@
 ## Installation
 
 ```
-git clone https://github.com/decisive-wizard/SheetSync.git
-cd SheetSync
+git clone https://github.com/decisive-wizard/GridHub.git
+cd GridHub
 bower install
 npm install
 nw .
@@ -26,7 +26,7 @@ First try downloading the binary executable for your operating system [here](htt
 alias nw='/Applications/node-webkit.app/Contents/MacOS/node-webkit'
 ```
 
-## SheetSync File Format (`.shync`)
+## GridHub File Format (`.shync`)
 
 Each `.shync` file is essentially a zipped folder with the following contents and structure (the below assumed a file called `sheet.shync` which has been renamed `sheet.zip` and unzipped):
 
@@ -43,4 +43,4 @@ In this case `.git` would just be the normal git directory structure as you woul
 
 ## Programmatic Git Workflow
 
-SheetSync uses a single-branch git versioning strategy applied to the `csv` folder. TODO: breakdown of user buttons as they relate to specific git commands.
+GridHub uses a single-branch git versioning strategy applied to the `csv` folder. TODO: breakdown of user buttons as they relate to specific git commands.

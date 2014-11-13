@@ -1,7 +1,7 @@
 {
-  "name": "SheetSync",
+  "name": "GridHub",
   "version": "0.0.1",
-  "homepage": "https://github.com/decisive-wizard/SheetSync",
+  "homepage": "https://github.com/decisive-wizard/GridHub",
   "authors": [
     "DECISIVE WIZARD (https://github.com/decisive-wizard)"
   ],
@@ -25,6 +25,8 @@
     "handsontable": "https://github.com/decisive-wizard/jquery-handsontable/tarball/d978bc03791b81e08e0b71ba935b58c35ea8edab",
     "jquery": "~2.1.1",
     "bootstrap": "~3.3.0",
-    "fontawesome": "~4.2.0"
+    "fontawesome": "~4.2.0",
+    "jquery-leanmodal": "*",
+    "spin.js": "~2.0.1"
   }
 }
