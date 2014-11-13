@@ -2,7 +2,7 @@
 // whitch is declared in globals.js
 
 gitSessionController = (function() {
-  var git = require('./js/git/git.js');
+  var git = require('./app/git/git.js');
 
   return {
     activateSession: activateSession

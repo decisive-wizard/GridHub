@@ -1,4 +1,4 @@
-var converter = require('./js/arrayToCsv.js');
+var converter = require('./app/arrayToCsv.js');
 
 function generateBlankSheet(height, width) {
   var newSheet = [];

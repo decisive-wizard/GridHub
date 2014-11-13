@@ -10,7 +10,7 @@ $(function(){
   //   });
   // });
 
-  var converter = require('./js/arrayToCsv.js');
+  var converter = require('./app/arrayToCsv.js');
   var parsexcel = require('parsexcel.js');
   var fs = require('fs');
 
