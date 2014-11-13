@@ -2,6 +2,9 @@
   'use strict';
   angular
     .module('app', [
-      'app.layout'
-    ]);
+      'app.layout',
+      'ui.router'
+    ]).run(function($state) {
+      $state.go('main');
+    });
 })();
