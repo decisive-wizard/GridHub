@@ -1,4 +1,4 @@
-var converter = require('./app/arrayToCsv.js');
+var converter = require('./js/arrayToCsv.js');
 
 function generateBlankSheet(height, width) {
   var newSheet = [];
@@ -11,7 +11,6 @@ function generateBlankSheet(height, width) {
   }
   return newSheet;
 }
-
 
 var Worksheet = function(dataObj,options){
   //Private variable to keep track of Formula JS comp.
@@ -64,7 +63,6 @@ var Worksheet = function(dataObj,options){
   this.outsideClickDeselects = false;
   this.formulas = true;
   this.comments = true;
-  this.renderer = cellRenderer;
 };
 
 function writeFileCallback() {
@@ -247,6 +245,5 @@ function formulaJsCompatibilityCheck (formula){
   }
   return true;
 }
-
 
 
