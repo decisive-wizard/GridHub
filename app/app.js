@@ -6,9 +6,9 @@ $(function(){
 
   var converter = require('./app/arrayToCsv.js');
   
-  workbooks.noname = new Workbook();
+  workbooks.default = new Workbook();
 
-  renderSheet(workbooks.noname,1);
+  renderSheet(workbooks.default,1);
 
   //Feed Simulator
 

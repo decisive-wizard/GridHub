@@ -48,3 +48,42 @@ In this case `.git` would just be the normal git directory structure as you woul
 ## Programmatic Git Workflow
 
 GridHub uses a single-branch git versioning strategy applied to the `csv` folder. TODO: breakdown of user buttons as they relate to specific git commands.
+
+## Workbook Class API
+`new Workbook(<dataObj>,<options>);`
+
+```
+workbook API, takes two or no inputs. If passing inputs adhere to:
+  if csv: 
+    options = {csv: true}
+    dataObj = [array of arrays of simple values]
+    
+  if xlsx:
+    options = {xslx: true}
+    dataObj = {  1: {
+                     sheetName: "<sheetName>",
+                     data: [array of arrays of objects]
+                    },
+                 2: {
+                      sheetName: "<sheetName",
+                      data: [array of arrays of objects]
+                     }
+                }
+  if .grid:
+    options = {grid:true}
+    dataObj = {  1: {
+                      values: [array of arrays of simple values],
+                      formulas: [array of arrays of formula strings],
+                      styles: [array of arrays of objects]
+                    },
+                 2: {
+                      values: [array of arrays of simple values],
+                      formulas: [array of arrays of formula strings],
+                      styles: [array of arrays of objects]
+                    },
+                 meta: {
+                         1: <sheetName>,
+                         2: <sheetName>
+                        }
+               }
+```
