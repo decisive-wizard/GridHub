@@ -10,6 +10,7 @@
   <script src="bower_components/jquery-leanmodal/jquery.leanModal.js"></script>
   <script src="bower_components/spin.js/spin.js"></script>
   <script src="bower_components/handsontable/dist/jquery.handsontable.full.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
   <!-- Rule Js Implementation  -->
   <script>var _ = require('lodash');</script>
@@ -26,115 +27,37 @@
   <link rel="stylesheet" media="screen" href="lib/RuleJS/CSS/handsontable.formula.css">
 
 </head>
-<body>
-  <div class='wrapper'>
-    <div class="sidebar-wrapper">
-        <nav class="spy">
-            <ul class="sidebar-nav nav">
-              <li class="sidebar-brand">
+<body ng-app="app">
 
-                <h1 class="title">GridHub</h1>
-
-                <!-- <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle" style = 'width:30%;display:inline;margin-left:70px'> -->
-                </a>  
-
-              </li>
-              <li>
-                  <div class="share">
-                    <button type="button" class="btn btn-success btn-outline new-project-btn" >
-                        New
-                    </button>
-                    <button type="button" class="btn btn-primary btn-outline open-project-btn" >
-                        Open
-                    </button>
-                    <button type="button" class="btn btn-primary btn-outline import-file-btn" >
-                      <i class="fa fa-file-excel-o"></i> Import
-                    </button>
-                  </div>
-              </li>
-
-                  <!-- End of the Project Wrapper -->
-                    <li>
-                      <a href="#anch1" data-scroll class='sectionHeader feed'>
-                        <div>
-                          <i class="fa fa-camera"></i>
-                          <span class="fa solo">Snapshot History</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li >
-                <!-- Wrapper for the update feed - Yes, a Ul inside a Li, with its own happy li`s -->
-
-                    <ul class='feedWrapper'>
-
-                    </ul>
-                      <!-- End of the Feed Wrapper -->
-                  </li>
-                  <li >
-                    <a class='sectionFooter feed'>
-                      Powered by D. Wizards
-                    </a>
-                  </li>
-             </ul>
-        </nav>
-    </div>
-    <div class='page-content-wrapper'>
-      <div class='row'>
-        <div class="col-md-12">
-          <ul class="nav nav-tabs tab-menu" role="tablist">
-            <li data-ribbon="sync" role="presentation" class="active"><a href="#">Sync</a></li>
-            <li data-ribbon="formatting" role="presentation"><a href="#">Formatting</a></li>
-            <li data-ribbon="excel-home" role="presentation"><a href="#">Excel Home</a></li>
-            <li data-ribbon="other" role="presentation"><a href="#">Other</a></li>
-          </ul>
-          <!-- SYNC RIBBON -->
-          <div class="ribbon sync-ribbon">
-            <button class="btn btn-tabs"><i class="fa fa-camera"></i> Take a Snapshot</button>
-            <button class="btn btn-tabs"><i class="fa fa-upload"></i> Upload</button>
-            <button class="btn btn-tabs"><i class="fa fa-download"></i> Download</button>
-          </div>
-          <!-- FORMATTING RIBBON -->
-          <div class="ribbon formatting-ribbon" style="display: none">
-            <button class="btn btn-tabs">highlight all of the things</button>
-          </div>
-          <!-- EXCEL HOME RIBBON -->
-          <div class="ribbon excel-home-ribbon" style="display: none">
-            <button class="btn btn-tabs">Yo Swami!</button>
-          </div>
-          <!-- OTHER RIBBON -->
-          <div class="ribbon other-ribbon" style="display: none">
-            <button class="btn btn-tabs">other actions</button>
-          </div>
-
-          <div class="input-group formula-entry">
-            <span class="input-group-addon"><i class="fa fa-calculator"></i></span>
-            <input type="text" class="form-control formula-input" placeholder="enter a formula or value for the selected cell">
-          </div>
-
-          <div class="table-container">
-            <div id="spreadsheet" style="overflow: auto" class="handsontable"></div>
-            <ul class="nav nav-tabs sheet-select">
-          <!--<li class="active"><a href="#">Sheet 1</a></li>
-              <li><a href="#">Sheet 2</a></li>
-              <li><a href="#">Sheet 3</a></li>-->
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div ui-view></div>
 
   <input style="display:none;" id="fileDialog" type="file" />
 
-  <script src="app/globals.js"></script>
-  <script src="app/sheetRender.js"></script>
-  <script src="app/activateGitSession.js"></script>
-  <script src="app/workbook/cellRenderer.js"></script>
-  <script src="app/workbook/worksheet.js"></script>
-  <script src="app/workbook/workbook.js"></script>
-  <script src="app/workbook/formulaBar.js"></script>
-  <script src="app/importFiles.js"></script>
-  <script src="app/navigation.js"></script>
-  <script src="app/app.js"></script>
+<!--   // <script src="app/globals.js"></script>
+  // <script src="app/activateGitSession.js"></script>
+  // <script src="app/sheetRender.js"></script>
+  // <script src="app/workbook/cellRenderer.js"></script>
+  // <script src="app/workbook/worksheet.js"></script>
+  // <script src="app/workbook/workbook.js"></script>
+  // <script src="app/workbook/formulaBar.js"></script>
+  // <script src="app/importFiles.js"></script>
+  // <script src="app/navigation.js"></script>
+  // <script src="app/app.js"></script> -->
+
+  <!-- Angular -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+  <!-- Custom Angular Files -->
+  <script src="app/app.module.js"></script>
+  <script src="app/layout/layout.module.js"></script>
+  <script src="app/layout/shell.js"></script>
+  <script src="app/widgets/widgets.module.js"></script>
+  <script src="app/utils/utils.module.js"></script>
+  <script src="app/widgets/WidgetTabs.js"></script>
+  <script src="app/route.config.js"></script>
+
+
+
 </body>
 </html>
