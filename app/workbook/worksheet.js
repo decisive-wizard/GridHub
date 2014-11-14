@@ -49,6 +49,7 @@ var Worksheet = function(dataObj,options){
   this.comments = true;
   this.wordWrap = false;
   this.renderer = cellRenderer;
+  this.editor = cellEditor;
 };
 
 
