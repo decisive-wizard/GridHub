@@ -26,17 +26,21 @@ First try downloading the binary executable for your operating system [here](htt
 alias nw='/Applications/node-webkit.app/Contents/MacOS/node-webkit'
 ```
 
-## GridHub File Format (`.shync`)
+## GridHub File Format (`.grid`)
 
-Each `.shync` file is essentially a zipped folder with the following contents and structure (the below assumed a file called `sheet.shync` which has been renamed `sheet.zip` and unzipped):
+Each `.shync` file is essentially a zipped folder with the following contents and structure (the below assumed a file called `workbook.grid` which has been renamed `workbook.zip` and unzipped and then held temporary as a hidden folder in the file system called `.workbook`):
 
 ```
-├── sheet/
+├── .workbook/
 │   ├── csv/
-│   │   ├── values.csv
-│   │   ├── formulas.csv
-│   │   ├── styles.csv
-│   ├── .git/
+|   │   ├── sheet1/
+|   │   │   ├── formulas.csv # stores all formulas
+│   |   │   ├── values.csv   # stores all values (but not calculated values of formulas)
+│   |   │   ├── styles.json  # stores the styling of each cell as an object in an array
+|   │   ├── sheet2/
+|   |   |   ├── ...
+│   │   ├── config.json      # holds the name of sheets, i.e. maps "Income Statement" to "sheet1"
+│   ├── .git/                # git version control history
 ```
 
 In this case `.git` would just be the normal git directory structure as you would see in the repository for a code base using git for version control.
