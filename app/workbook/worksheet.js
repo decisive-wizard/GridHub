@@ -5,7 +5,7 @@ function generateBlankSheet(height, width) {
   for (var i = 0; i < height; i++) {
     var row = [];
     for (var j = 0; j < width; j++) {
-      row.push(" ");
+      row.push('');
     }
     newSheet.push(row);
   }
@@ -38,7 +38,7 @@ var Worksheet = function(dataObj,options){
                 //Sets invalid to true, making this a Invalid Import
                 invalid = true;
 
-              } 
+              }
             }else{
               return cell.value;
             }
@@ -48,10 +48,10 @@ var Worksheet = function(dataObj,options){
         });
       });
     if(invalid){
-      //Aborts the importing process and Resets and the generated spreadsheet              
+      //Aborts the importing process and Resets and the generated spreadsheet
       this.data = generateBlankSheet(30,30);
       alert('The Spreadsheet you are trying to import is not compatible to GridHub');
-    }  
+    }
     this.sheetName = dataObj.sheetName;
   }
 
@@ -95,7 +95,7 @@ Worksheet.prototype.afterSelection = function(r, c, r2, c2){
 };
 
 
- var supportedFormulas = { 
+ var supportedFormulas = {
   ABS: true,
   ACCRINT: true,
   ACOS: true,
@@ -246,6 +246,3 @@ function formulaJsCompatibilityCheck (formula){
   }
   return true;
 }
-
-
-

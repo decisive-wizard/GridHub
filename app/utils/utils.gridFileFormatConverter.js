@@ -5,9 +5,9 @@
     .module('app.utils')
     .factory('gridFileFormatConverter', gridFileFormatConverter);
 
-  gridFileFormatConverter.$inject = ['fs'];
+  var fs = require('fs');
 
-  function gridFileFormatConverter(fs){
+  function gridFileFormatConverter(){
     var service = {
       parseGrid : parseGrid,
       gridify   : gridify
