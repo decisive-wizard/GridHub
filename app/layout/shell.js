@@ -9,6 +9,14 @@
 
     function ShellController ($scope) {
 
+
+      $scope.openRepository = openRepository;
+
+
+      function openRepository() {
+        console.log('Opened Repository');
+      }
+
     }
 
 })();

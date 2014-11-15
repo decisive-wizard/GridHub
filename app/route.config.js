@@ -9,8 +9,7 @@
       $stateProvider
         .state('main', {
           url: '/main',
-          templateUrl: 'app/layout/shell.html',
-          conroller: 'ShellController'
+          templateUrl: 'app/layout/shell.html'
         });
     });
 
