@@ -10,14 +10,16 @@
 var cellRenderer = function (instance, TD, row, col, prop, valueObj, cellProperties) {
   Handsontable.renderers.cellDecorator.apply(this, arguments);
 
-  if (!valueObj && cellProperties.placeholder) {
-    valueObj = cellProperties.placeholder;
+  if (!valueObj) {
+    // if cell is null, create a new empty cell object
+    valueObj = new BlankCell();
+    instance.setDataAtCell(row,col,valueObj);
   }
   if (typeof valueObj !== 'string' && valueObj !== null){
     TD = addStyles(TD,valueObj.style);
   }
   var cellText = viewSelectProperty(valueObj);
-  if (cellText === 'green centered and wrapped') console.dir(TD)
+
   // escape and select the property value to be displayed in the cell view to be displayed
   var escaped = Handsontable.helper.stringify(cellText);
 
@@ -35,9 +37,6 @@ function addStyles(TD,style){
 
 // select what string to render in the cell
 function viewSelectProperty(valueObj){
-  if (typeof valueObj === 'string' || valueObj === null){
-    return valueObj;
-  }
 
   if (valueObj.formula){
     if (!formulaJsCompatibilityCheck(valueObj.formula)){

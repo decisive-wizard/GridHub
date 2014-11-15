@@ -5,9 +5,11 @@ cellEditor.prototype.setValue = function(cellObj){
   this.cellObj = cellObj;
   this.TEXTAREA.value = cellObj.value;
 };
+
 // retrieve what the user has entered
 cellEditor.prototype.getValue = function(){
-  this.cellObj.value = this.TEXTAREA.value;
+  // .trim() is extended onto String inside Handsontable
+  this.cellObj.value = String.prototype.trim.call(this.TEXTAREA.value);
   return this.cellObj;
 };
 
