@@ -1,20 +1,24 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.utils')
-        .controller('spreadSheetController',['excel',Ctrl]);
+  angular
+    .module('app.utils')
+    .controller('spreadSheetController',[
+      'excel',
+      'gridFileFormatConverter',
+      Ctrl
+    ]);
 
-    /* @ngInject */
-    function Ctrl(excel) {
-        /*jshint validthis: true */
-        var vm = this;
-        vm.title = 'Ctrl';
-        activate();
+  /* @ngInject */
+  function Ctrl(excel) {
+    /*jshint validthis: true */
+    var vm = this;
+    vm.title = 'Ctrl';
+    activate();
 
-        function activate() {
-        	var initialSpreadSheet = new excel.generateWorkbook();
-        	excel.renderSheet(initialSpreadSheet,1);
-        }
+    function activate() {
+    	var initialSpreadSheet = new excel.generateWorkbook();
+    	excel.renderSheet(initialSpreadSheet,1);
     }
+  }
 })();
