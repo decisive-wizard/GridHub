@@ -19,7 +19,7 @@ var Worksheet = function(dataObj,options){
   if (arguments[0] === null){
     this.sheetName = options.sheetName;
     this.data = simpleValuesToGridFormat(generateBlankSheet(3,3));
-  
+
   // convert csv file to the .grid data structure
   // this.data is the matrix that goes to .grid eventually
   } else if (options.csv) {
@@ -42,13 +42,14 @@ var Worksheet = function(dataObj,options){
   this.rowHeaders = true;
   this.colHeaders = true;
   this.stretchH = 'last';
-  this.minSpareRows = 1;
+  this.minSpareRows = 0;
   this.contextMenu = true;
   this.outsideClickDeselects = false;
   this.formulas = true;
   this.comments = true;
   this.wordWrap = false;
   this.renderer = cellRenderer;
+  this.editor = cellEditor;
 };
 
 
@@ -58,11 +59,7 @@ function simpleValuesToGridFormat(dataArrOfArr){
     // map each row of simple values to our grid 
     // representation of the cell
     return row.map(function(value,subKey,subRow){
-      return {
-        value : value,
-        formula : "",
-        style : new BaseStyle()
-      };
+      return new BlankCell();
     });
   });
 }
