@@ -22,7 +22,7 @@
     "tests"
   ],
   "dependencies": {
-    "handsontable": "https://github.com/decisive-wizard/jquery-handsontable/tarball/d978bc03791b81e08e0b71ba935b58c35ea8edab",
+    "handsontable": "https://github.com/decisive-wizard/jquery-handsontable/tarball/master",
     "jquery": "~2.1.1",
     "bootstrap": "~3.3.0",
     "fontawesome": "~4.2.0",
