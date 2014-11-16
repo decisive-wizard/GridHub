@@ -9,7 +9,8 @@
       $stateProvider
         .state('main', {
           url: '/main',
-          templateUrl: 'app/layout/shell.html'
+          templateUrl: 'app/layout/shell.html',
+          controller: 'ShellController'
         });
     });
 
