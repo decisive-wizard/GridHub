@@ -3,13 +3,14 @@
 
   angular
     .module('app.utils')
-    .factory('currentSpreadSheet', currentSpreadSheet);
+    .factory('currentWorkbook', currentWorkbook);
 
-  function currentSpreadSheet(){
+  function currentWorkbook(){
     var service = {
       data: {
         filePath: '',
-        commitHash: ''
+        commitHash: '',
+        currentSheet: ''
       }
     };
 
