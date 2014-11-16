@@ -5,7 +5,7 @@ function generateBlankSheet(height, width) {
   for (var i = 0; i < height; i++) {
     var row = [];
     for (var j = 0; j < width; j++) {
-      row.push("");
+      row.push('');
     }
     newSheet.push(row);
   }
@@ -134,7 +134,3 @@ Worksheet.prototype.afterSelection = function(r, c, r2, c2){
     $('.formula-input').val('');
   }
 };
-
-
-
-
