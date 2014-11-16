@@ -34,20 +34,20 @@
             // so we have to unzip the .grid file first
             // and then navigate to that place
             var zipFilePath = filePath.replace('.grid', '.zip');
-            var unzippedFolderPath = filePath.replace('.grid', '/');
-            console.log('zip file path', zipFilePath);
-            console.log('unzziped folder path', unzippedFolderPath);
+            var splitFilePath = filePath.split('/');
+            var unzippedFolderPath = '/' +
+              splitFilePath.slice(0, splitFilePath.length - 1).join('/');
 
             var rs = fs.createReadStream(filePath);
             var ws = fs.createWriteStream(zipFilePath);
             ws.on('close', function(){
               var zip = new AdmZip(zipFilePath);
-              zip.extractAllTo('/Users/johnheroy/Desktop');
+              zip.extractAllTo(unzippedFolderPath);
               console.log(filePath.replace('.grid', '/.git'))
               gift.getHistory(filePath.replace('.grid', '/.git'), function(commits){
                 $scope.currentWorkbook.data.gitCommits = commits;
-                console.log('added git commit history');
-                console.log($scope.currentWorkbook.data);
+                // console.log('added git commit history');
+                // console.log($scope.currentWorkbook.data);
               });
             });
             rs.pipe(ws);
