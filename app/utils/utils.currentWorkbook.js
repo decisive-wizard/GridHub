@@ -8,7 +8,8 @@
   function currentWorkbook(){
     var service = {
       data: {
-        filePath: '',
+        gridFilePath: '',
+        tempFolderPath: '',
         currentSheet: '',
         gitCommits: []
       }

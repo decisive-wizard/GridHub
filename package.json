@@ -37,9 +37,12 @@
     "adm-zip": "^0.4.4",
     "bluebird": "^2.3.11",
     "csv": "^0.4.1",
+    "extract-zip": "^1.0.3",
     "gift": "^0.4.3-1",
     "lodash": "^2.4.1",
-    "parsexcel.js": "https://github.com/decisive-wizard/parsexcel.js/tarball/master"
+    "ncp": "^1.0.1",
+    "parsexcel.js": "https://github.com/decisive-wizard/parsexcel.js/tarball/master",
+    "rimraf": "^2.2.8"
   },
   "devDependencies": {
     "chai": "^1.9.2",
