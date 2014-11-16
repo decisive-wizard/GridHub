@@ -5,13 +5,21 @@
     .module('app.layout')
     .controller('ShellController', ShellController);
 
-    ShellController.$inject = ['$scope', 'currentWorkbook'];
+    ShellController.$inject = [
+      '$scope',
+      'currentWorkbook',
+      'gridFileFormatConverter'
+    ];
 
-    function ShellController ($scope, currentWorkbook) {
+    var gift = require('./app/git/git');
+    var fs = require('fs');
+    var path = require('path');
+    var AdmZip = require('adm-zip');
+
+    function ShellController ($scope, currentWorkbook, gridFileFormatConverter){
 
       $scope.currentWorkbook = currentWorkbook;
       $scope.openRepository = openRepository;
-
 
       function openRepository() {
         // console.log('Opened Repository');
@@ -21,7 +29,28 @@
           if (filePath.match(gridRegex)) {
             $scope.currentWorkbook.data.filePath = filePath;
             $scope.currentWorkbook.data.currentSheet = '1';
-            //TODO: set initial commit hash
+            // this is not going to work right now, need to give gift a path to
+            // the .git directory
+            // so we have to unzip the .grid file first
+            // and then navigate to that place
+            var zipFilePath = filePath.replace('.grid', '.zip');
+            var unzippedFolderPath = filePath.replace('.grid', '/');
+            console.log('zip file path', zipFilePath);
+            console.log('unzziped folder path', unzippedFolderPath);
+
+            var rs = fs.createReadStream(filePath);
+            var ws = fs.createWriteStream(zipFilePath);
+            ws.on('close', function(){
+              var zip = new AdmZip(zipFilePath);
+              zip.extractAllTo('/Users/johnheroy/Desktop');
+              console.log(filePath.replace('.grid', '/.git'))
+              gift.getHistory(filePath.replace('.grid', '/.git'), function(commits){
+                $scope.currentWorkbook.data.gitCommits = commits;
+                console.log('added git commit history');
+                console.log($scope.currentWorkbook.data);
+              });
+            });
+            rs.pipe(ws);
           } else {
             console.log('is not a .grid file');
           }
