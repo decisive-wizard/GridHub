@@ -38,12 +38,12 @@ function addStyles(TD,style){
 // select what string to render in the cell
 function viewSelectProperty(valueObj){
 
-  if (valueObj.formula){
-    if (!formulaJsCompatibilityCheck(valueObj.formula)){
-      return valueObj.formula + 'NOT SUPPORTED';
-    }
-  return '=' + valueObj.formula;
-  }
+  // if (valueObj.formula){
+  //   if (!formulaJsCompatibilityCheck(valueObj.formula)){
+  //     return valueObj.formula + 'NOT SUPPORTED';
+  //   }
+  // return '=' + valueObj.formula;
+  // }
 
   if (valueObj.value){
    return valueObj.value;

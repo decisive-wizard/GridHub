@@ -48,8 +48,6 @@ var Worksheet = function(dataObj,options){
   this.formulas = true;
   this.comments = true;
   this.wordWrap = false;
-  this.renderer = cellRenderer;
-  this.editor = cellEditor;
 };
 
 
@@ -74,7 +72,7 @@ function xlsxToGridFormat(dataArrOfArrOfObj){
         if (typeof cell !== 'string' && cell !== null){
           gridCell.style = new XlsxStyleImport(cell.style);
           gridCell.value = (cell.formula === "") ? cell.value : "";
-          gridCell.formula = cell.formula;
+          gridCell.formula = '=' + cell.formula;
         } else {
           gridCell.style = new BaseStyle();
           gridCell.value = "";
