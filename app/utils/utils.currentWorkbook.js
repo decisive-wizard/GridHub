@@ -9,8 +9,8 @@
     var service = {
       data: {
         filePath: '',
-        commitHash: '',
-        currentSheet: ''
+        currentSheet: '',
+        gitCommits: []
       }
     };
 
