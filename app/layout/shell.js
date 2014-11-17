@@ -25,8 +25,6 @@
         } else {
           console.error('is not a .grid file');
         }
-
-        console.log($scope.currentWorkbook);
       });
     }
 

@@ -28,18 +28,18 @@ alias nw='/Applications/node-webkit.app/Contents/MacOS/node-webkit'
 
 ## GridHub File Format (`.grid`)
 
-Each `.shync` file is essentially a zipped folder with the following contents and structure (the below assumed a file called `workbook.grid` which has been renamed `workbook.zip` and unzipped and then held temporary as a hidden folder in the file system called `.workbook`):
+Each `.grid` file is essentially a zipped folder with the following contents and structure (the below assumed a file called `workbook.grid` which has been renamed `workbook.zip` and unzipped and then held temporary as a hidden folder in the file system called `.workbook`):
 
 ```
 ├── .workbook/
 │   ├── csv/
-|   │   ├── sheet1/
+|   │   ├── 1/               # folder for data in sheet
 |   │   │   ├── formulas.csv # stores all formulas
 │   |   │   ├── values.csv   # stores all values (but not calculated values of formulas)
 │   |   │   ├── styles.json  # stores the styling of each cell as an object in an array
-|   │   ├── sheet2/
+|   │   ├── 2/
 |   |   |   ├── ...
-│   │   ├── config.json      # holds the name of sheets, i.e. maps "Income Statement" to "sheet1"
+│   │   ├── config.json      # holds the name of sheets, i.e. maps "Income Statement" to "1"
 │   ├── .git/                # git version control history
 ```
 
@@ -54,10 +54,10 @@ GridHub uses a single-branch git versioning strategy applied to the `csv` folder
 
 ```
 workbook API, takes two or no inputs. If passing inputs adhere to:
-  if csv: 
+  if csv:
     options = {csv: true}
     dataObj = [array of arrays of simple values]
-    
+
   if xlsx:
     options = {xslx: true}
     dataObj = {  1: {
@@ -68,22 +68,22 @@ workbook API, takes two or no inputs. If passing inputs adhere to:
                       sheetName: "<sheetName",
                       data: [array of arrays of objects]
                      }
-                }
+              }
   if .grid:
     options = {grid:true}
-    dataObj = {  1: {
-                      values: [array of arrays of simple values],
-                      formulas: [array of arrays of formula strings],
-                      styles: [array of arrays of objects]
-                    },
-                 2: {
-                      values: [array of arrays of simple values],
-                      formulas: [array of arrays of formula strings],
-                      styles: [array of arrays of objects]
-                    },
+    dataObj = {  1:    {
+                         values: [array of arrays of simple values],
+                         formulas: [array of arrays of formula strings],
+                         styles: [array of arrays of objects]
+                       },
+                 2:    {
+                         values: [array of arrays of simple values],
+                         formulas: [array of arrays of formula strings],
+                         styles: [array of arrays of objects]
+                       },
                  meta: {
                          1: <sheetName>,
                          2: <sheetName>
-                        }
-               }
+                       }
+              }
 ```
