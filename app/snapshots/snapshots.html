@@ -1,0 +1,12 @@
+<ul class='feedWrapper' ng-controller='snapshotsController'>
+	<li class="project update" ng-repeat='snap in commits' >
+			<div class="message">
+        '<a class ="innerUpdate" style='padding-left:10px'>
+            <h2>{{snap.name}}  <span style='padding-left:60px;'>{{snap.hash}}</span></h2>
+            <p>{{snap.message}}</p>
+            <!-- <p>  </p> -->
+            <span style='margin-left:160px;padding-bottom:20px;'> {{snap.date}} </span>
+        </a>
+      </div>
+    </li> 
+</ul>
