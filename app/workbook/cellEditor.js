@@ -14,6 +14,7 @@ cellEditor.prototype.getValue = function(){
     this.cellObj.formula = str;
   } else {
     this.cellObj.value = str;
+    this.cellObj.formula = '';
   }
   return this.cellObj;
 };
