@@ -18,7 +18,7 @@ var Worksheet = function(dataObj,options){
   // load a blank worksheet when invoked with no arguments
   if (arguments[0] === null){
     this.sheetName = options.sheetName;
-    this.data = simpleValuesToGridFormat(generateBlankSheet(3,3));
+    this.data = simpleValuesToGridFormat(generateBlankSheet(30,30));
 
   // convert csv file to the .grid data structure
   // this.data is the matrix that goes to .grid eventually
