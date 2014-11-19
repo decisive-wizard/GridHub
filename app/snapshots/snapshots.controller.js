@@ -15,9 +15,7 @@
 
     //Tied with each li item being rendered by the ng-repeat on snapshots.html
     $scope.changeCommit = function(commitIndex){
-      console.log('current hash was',currentWorkbook.currentHash);
       currentWorkbook.currentHash = $scope.commits[commitIndex];
-      console.log('Now it is ',currentWorkbook.currentHash);
     };
 
     $scope.$watchCollection(function(){
