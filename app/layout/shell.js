@@ -21,6 +21,7 @@
     function openRepository() {
       chooseFile('#fileDialog', function(filePath){
         if (filePath.match(gridRegex)) {
+          currentWorkbook.data.win.title = 'GridHub - ' + filePath;
           gridFileFormatConverter.openGridFile(filePath);
         } else {
           console.error('is not a .grid file');
