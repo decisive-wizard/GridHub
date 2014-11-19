@@ -15,6 +15,8 @@
   var extract = require('extract-zip');
   var ncp = require('ncp').ncp;
   var rimraf = require('rimraf');
+  var converter = require('./app/arrayToCsv');
+  var async = require('async');
 
   function gridFileFormatConverter(currentWorkbook){
     var service = {
@@ -27,7 +29,7 @@
 
     ///////////////////////////////////
 
-    function openGridFile(scope, filePath) {
+    function openGridFile(scope, filePath, cb) {
       console.log('opening grid file from the converter', filePath);
       console.log(currentWorkbook.data);
 
@@ -64,6 +66,7 @@
 
             // delete the visible unzipped folder
             rimraf(unzippedFolderPath, function(err){
+              cb();
               if (err) throw err;
             });
           });
@@ -72,12 +75,58 @@
       });
     }
 
-    function parseGrid(filePath) {
+    function parseGrid(folderPath, cb) {
+      var dataObj = {};
+      // first get all of sheets in the csv folder
+      fs.readdir(path.join(folderPath, '/csv'), function(err, files){
+        if (err) throw err;
+
+        // iterate through each folder, ignore hidden stuff
+        async.each(files, function(folderOrFileName, eachCallback){
+          if (folderOrFileName[0] === '.'){
+            eachCallback('not a valid folder');
+            return;
+          }
+
+          var sheetFolderPath = path.join(folderPath, 'csv/' + folderOrFileName);
+          dataObj[folderOrFileName] = {};
+
+          // process contents of each sheet folder in parallel
+          async.parallel([
+            // values
+            function(cb){
+              converter.csvToArray(path.join(sheetFolderPath, 'values.csv'), function(values){
+                dataObj[folderOrFileName]['values'] = values;
+                cb();
+              });
+            },
+            // formulas
+            function(cb){
+              converter.csvToArray(path.join(sheetFolderPath, 'formulas.csv'), function(formulas){
+                dataObj[folderOrFileName]['formulas'] = formulas;
+                cb();
+              });
+            }
+          ], function(){
+            // will execute when all the other functions finished
+            eachCallback('all folders have been processed');
+          });
+
+        }, function(err){
+          // process metadata before invoking callback
+          fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
+            dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
+            cb(dataObj);
+          })
+        });
+
+      });
+
 
     }
 
     function gridify(gridArray) {
-
+      // use pluck
     }
   }
 })();

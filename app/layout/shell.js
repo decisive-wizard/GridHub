@@ -22,7 +22,12 @@
       chooseFile('#fileDialog', function(filePath){
         if (filePath.match(gridRegex)) {
           currentWorkbook.data.win.title = 'GridHub - ' + filePath;
-          gridFileFormatConverter.openGridFile($scope, filePath);
+          gridFileFormatConverter.openGridFile($scope, filePath, function(){
+            // now let's parse the grid
+            gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
+              console.log('successfully in the parseGrid callback', dataObj);
+            });
+          });
         } else {
           console.error('is not a .grid file');
         }
