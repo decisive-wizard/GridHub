@@ -17,12 +17,13 @@ var Workbook = function(dataObj,options){
   } else if (options.grid){
     // loop through sheets
     for (var sheet in dataObj){
-      var sheetOptions = {
-        grid: true, 
-        sheetName: dataObj.meta[sheet]
-      };
-      this[sheet] = new Worksheet(dataObj[sheet],sheetOptions);
+      if (sheet !== 'meta'){
+        var sheetOptions = {
+          grid: true,
+          sheetName: dataObj.meta[sheet]
+        };
+        this[sheet] = new Worksheet(dataObj[sheet],sheetOptions);
+      }
     }
   }
 };
-

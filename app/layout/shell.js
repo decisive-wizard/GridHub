@@ -26,6 +26,8 @@
             // now let's parse the grid
             gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
               console.log('successfully in the parseGrid callback', dataObj);
+              var workbook = new Workbook(dataObj, {grid: true});
+              renderSheet(workbook, 1);
             });
           });
         } else {
