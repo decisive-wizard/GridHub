@@ -13,6 +13,11 @@
 
     $scope.commits = currentWorkbook.data.gitCommits;
 
+    //Tied with each li item being rendered by the ng-repeat on snapshots.html
+    $scope.changeCommit = function(commitIndex){
+      currentWorkbook.currentHash = $scope.commits[commitIndex];
+    };
+
     $scope.$watchCollection(function(){
       return currentWorkbook.data;
     }, function(newVal, oldVal, scope){
@@ -24,7 +29,7 @@
 
     $scope.$on('git-commits-change', function(){
       $scope.$digest();
-    })
+    });
 
   }
 })();
