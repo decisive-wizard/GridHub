@@ -11,7 +11,7 @@ module.exports = function(rootFilePath, message) {
     if (err) {
       console.log(err);
     }
-  })
+  });
 
 
 };

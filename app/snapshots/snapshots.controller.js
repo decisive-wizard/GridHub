@@ -30,6 +30,7 @@
     });
 
     $scope.$on('git-commits-change', function(){
+      console.log('WTF');
       $scope.$digest();
     });
 
