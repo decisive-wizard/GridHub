@@ -49,6 +49,8 @@
       extract(filePath, { dir: parentDirectory }, function(err){
         gift.getHistory(gitFolderPath, function(commits){
           currentWorkbook.data.gitCommits = commits;
+          //Setting the current Hash to be the first item in the commits array
+          currentWorkbook.currentHash = commits[0];
           scope.$broadcast('git-commits-change');
           console.log(currentWorkbook.data);
 

@@ -1,5 +1,5 @@
 <ul class='feedWrapper' ng-controller='snapshotsController'>
-	<li class="project update" ng-repeat='snap in commits' >
+	<li class="project update" ng-repeat='snap in commits' ng-click='changeCommit($index)' >
 			<div class="message">
         '<a class ="innerUpdate" style='padding-left:10px'>
             <h2>{{snap.author.name}}  <span style='padding-left:60px;'>{{snap.id | limitTo: 7}}</span></h2>

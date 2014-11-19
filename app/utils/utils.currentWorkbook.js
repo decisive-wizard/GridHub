@@ -15,6 +15,7 @@
         tempFolderPath: '',
         currentSheet: '',
         gitCommits: [],
+        currentHash:'',
         win: win
       }
     };
