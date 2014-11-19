@@ -17,6 +17,7 @@
 
     $scope.currentWorkbook = currentWorkbook;
     $scope.openRepository = openRepository;
+    $scope.importXLSX = importXLSX;
 
     function openRepository() {
       chooseFile('#fileDialog', function(filePath){
@@ -49,6 +50,10 @@
       });
 
       chooser.trigger('click');
+    }
+
+    function importXLSX() {
+      console.log('importing xlsx');
     }
 
   }
