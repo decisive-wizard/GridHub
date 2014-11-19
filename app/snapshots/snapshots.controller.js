@@ -5,10 +5,10 @@
     .module('app.layout')
     .controller('snapshotsController', Ctrl);
 
-  Ctrl.$inject = ['$scope', 'currentWorkbook'];
+  Ctrl.$inject = ['$scope', 'currentWorkbook','gridFileFormatConverter'];
 
   /* @ngInject */
-  function Ctrl($scope, currentWorkbook) {
+  function Ctrl($scope, currentWorkbook,gridFileFormatConverter) {
     /*jshint validthis: true */
 
     $scope.commits = currentWorkbook.data.gitCommits;
@@ -16,6 +16,9 @@
     //Tied with each li item being rendered by the ng-repeat on snapshots.html
     $scope.changeCommit = function(commitIndex){
       currentWorkbook.currentHash = $scope.commits[commitIndex];
+      //Does Git Checkout to the current workbook file detaching from the head to the clicked commit
+      console.log('a;oweigha;oiwhgr;oiahgrv;oiahbiovaoi;hbv',currentWorkbook.currentHash);
+      gridFileFormatConverter.changeToCommit(currentWorkbook.data.tempFolderPath,currentWorkbook.currentHash.id);
     };
 
     $scope.$watchCollection(function(){
