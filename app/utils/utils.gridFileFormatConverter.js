@@ -22,7 +22,8 @@
     var service = {
       parseGrid : parseGrid,
       gridify   : gridify,
-      openGridFile: openGridFile
+      openGridFile: openGridFile,
+      changeToCommit:changeToCommit
     };
 
     return service;
@@ -31,7 +32,7 @@
 
     function openGridFile(scope, filePath, cb) {
       console.log('opening grid file from the converter', filePath);
-      console.log(currentWorkbook.data);
+      // console.log(currentWorkbook.data);
 
       currentWorkbook.data.gridFilePath = filePath;
       currentWorkbook.data.currentSheet = '1';
@@ -127,6 +128,21 @@
 
     function gridify(gridArray) {
       // use pluck
+    }
+
+    function changeToCommit(filePath,targetHash){
+      
+        gift.checkout(filePath,targetHash, function(commits){
+          //Setting the current Hash to be the first item in the commits array
+          console.log('error checking out',err);
+          currentWorkbook.currentHash = targetHash;
+          scope.$broadcast('git-commits-change');
+          console.log(commits);
+
+        });
+      
+
+
     }
   }
 })();
