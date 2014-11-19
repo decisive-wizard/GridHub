@@ -25,8 +25,13 @@
       parseGrid : parseGrid,
       gridify   : gridify,
       openGridFile: openGridFile,
+<<<<<<< HEAD
       xlsxToGrid: xlsxToGrid,
       changeToCommit:changeToCommit
+=======
+      changeToCommit:changeToCommit,
+      takeSnapshot:takeSnapshot
+>>>>>>> Implementation of the takeSnapshot function
     };
 
     return service;
@@ -239,7 +244,7 @@
           currentWorkbook.currentHash = targetHash;
           scope.$broadcast('git-commits-change');
         });
-<<<<<<< HEAD
+
 
     }
 
@@ -250,8 +255,28 @@
       });
 
       chooser.trigger('click');
-=======
->>>>>>> Removed some logs
+
+
     }
+
+    function takeSnapshot(filePath,message){
+      console.log('Taking Snapshot');
+      //Make a commit with the current state of the files
+      gift.commit(filePath,message); 
+      //Update the Commit Story being shown
+      gift.getHistory(filePath, function(commits){
+        //Changes the commits stored in the currentWorkbook factory
+        currentWorkbook.data.gitCommits = commits;
+        //Setting the current Hash to be the first item in the commits array
+        currentWorkbook.currentHash = commits[0];
+        scope.$broadcast('git-commits-change');
+        console.log(currentWorkbook.data);
+
+      });
+
+    }
+
+
+
   }
 })();
