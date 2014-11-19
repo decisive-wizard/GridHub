@@ -51,7 +51,13 @@
       chooseFile('#fileDialog', function(filePath) {
 
         if (filePath.match(xlsxRegex)) {
+
           console.log(filePath);
+          
+          gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
+
+          });
+
         } else {
           console.log('this is not a .xlsx file');
         }
