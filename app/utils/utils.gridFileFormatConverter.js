@@ -90,6 +90,9 @@
 
           var sheetFolderPath = path.join(folderPath, 'csv/' + folderOrFileName);
           dataObj[folderOrFileName] = {};
+          dataObj[folderOrFileName]['values'] = [];
+          dataObj[folderOrFileName]['formulas'] = [];
+          dataObj[folderOrFileName]['styles'] = [];
 
           // process contents of each sheet folder in parallel
           async.parallel([
