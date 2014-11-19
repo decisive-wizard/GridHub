@@ -259,7 +259,7 @@
 
     }
 
-    function takeSnapshot(filePath,message){
+    function takeSnapshot(scope,filePath,message){
       console.log('Taking Snapshot');
       //Make a commit with the current state of the files
       gift.commit(filePath,message); 
