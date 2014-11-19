@@ -238,9 +238,8 @@
           console.log('error checking out',err);
           currentWorkbook.currentHash = targetHash;
           scope.$broadcast('git-commits-change');
-          console.log(commits);
-
         });
+<<<<<<< HEAD
 
     }
 
@@ -251,6 +250,8 @@
       });
 
       chooser.trigger('click');
+=======
+>>>>>>> Removed some logs
     }
   }
 })();
