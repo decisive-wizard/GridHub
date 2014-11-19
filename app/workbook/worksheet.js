@@ -55,7 +55,7 @@ var Worksheet = function(dataObj,options){
 function simpleValuesToGridFormat(dataArrOfArr){
   return dataArrOfArr
     .map(function(row,k,c){
-    // map each row of simple values to our grid 
+    // map each row of simple values to our grid
     // representation of the cell
     return row.map(function(value,subKey,subRow){
       return new BlankCell();
@@ -88,7 +88,8 @@ function gridToGridFormat(dataObj){
   // zip up three "array of arrays" into ONE "array of arrays of objects"
   var values = dataObj.values; // array of arrays
   var formulas = dataObj.formulas; // array of arrays
-  var styles = dataObj.styles; // array of arrays
+  // var styles = dataObj.styles; // array of arrays
+  var styles = values.slice();
   // iterate the value rows and map to a new array of rows
   return values
     .map(function(row,rowIndex){
@@ -101,7 +102,7 @@ function gridToGridFormat(dataObj){
             formula: cell[1],
             value: cell[0]
           };
-        }); 
+        });
     });
 }
 

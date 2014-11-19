@@ -24,7 +24,6 @@
     $scope.$watchCollection(function(){
       return currentWorkbook.data;
     }, function(newVal, oldVal, scope){
-      console.log('im updating in $watchCollection', scope.commits);
       if (typeof newVal !== 'undefined'){
         scope.commits = newVal.gitCommits;
       }

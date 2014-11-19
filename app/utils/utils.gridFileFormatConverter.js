@@ -31,7 +31,7 @@
     ///////////////////////////////////
 
     function openGridFile(scope, filePath, cb) {
-      console.log('opening grid file from the converter', filePath);
+      // console.log('opening grid file from the converter', filePath);
       // console.log(currentWorkbook.data);
 
       currentWorkbook.data.gridFilePath = filePath;
@@ -98,17 +98,17 @@
           // process contents of each sheet folder in parallel
           async.parallel([
             // values
-            function(cb){
+            function(parallelCallback){
               converter.csvToArray(path.join(sheetFolderPath, 'values.csv'), function(values){
                 dataObj[folderOrFileName]['values'] = values;
-                cb();
+                parallelCallback();
               });
             },
             // formulas
-            function(cb){
+            function(parallelCallback){
               converter.csvToArray(path.join(sheetFolderPath, 'formulas.csv'), function(formulas){
                 dataObj[folderOrFileName]['formulas'] = formulas;
-                cb();
+                parallelCallback();
               });
             }
           ], function(){
@@ -134,7 +134,7 @@
     }
 
     function changeToCommit(filePath,targetHash){
-      
+
         gift.checkout(filePath,targetHash, function(commits){
           //Setting the current Hash to be the first item in the commits array
           console.log('error checking out',err);
@@ -143,7 +143,7 @@
           console.log(commits);
 
         });
-      
+
 
 
     }
