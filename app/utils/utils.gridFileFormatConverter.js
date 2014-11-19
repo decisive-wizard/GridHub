@@ -27,7 +27,7 @@
 
     ///////////////////////////////////
 
-    function openGridFile(filePath) {
+    function openGridFile(scope, filePath) {
       console.log('opening grid file from the converter', filePath);
       console.log(currentWorkbook.data);
 
@@ -49,6 +49,7 @@
       extract(filePath, { dir: parentDirectory }, function(err){
         gift.getHistory(gitFolderPath, function(commits){
           currentWorkbook.data.gitCommits = commits;
+          scope.$broadcast('git-commits-change');
           console.log(currentWorkbook.data);
 
           // cleanup

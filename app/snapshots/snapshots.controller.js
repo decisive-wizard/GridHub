@@ -1,20 +1,30 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.layout')
-        .controller('snapshotsController', Ctrl);
+  angular
+    .module('app.layout')
+    .controller('snapshotsController', Ctrl);
 
-    /* @ngInject */
-    function Ctrl($scope) {
-        /*jshint validthis: true */
-        var vm = this;
-        vm.title = 'Ctrl';
-        $scope.commits = [{message:'Hey ho Lets go everyone',name:'Felipe Batista', hash:"192949293", date:'11/14/2014'},{name:'Felipe Batista', hash:"9192939123",message:'Hey ho, Lets go Everyone, Lets get this party started',date:'11/14/2014'}];
-        activate();
+  Ctrl.$inject = ['$scope', 'currentWorkbook'];
 
-        function activate() {
-        }
-    }
+  /* @ngInject */
+  function Ctrl($scope, currentWorkbook) {
+    /*jshint validthis: true */
+
+    $scope.commits = currentWorkbook.data.gitCommits;
+
+    $scope.$watchCollection(function(){
+      return currentWorkbook.data;
+    }, function(newVal, oldVal, scope){
+      console.log('im updating in $watchCollection', scope.commits);
+      if (typeof newVal !== 'undefined'){
+        scope.commits = newVal.gitCommits;
+      }
+    });
+
+    $scope.$on('git-commits-change', function(){
+      $scope.$digest();
+    })
+
+  }
 })();
-
