@@ -165,7 +165,7 @@
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
             dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
             cb(dataObj);
-          })
+          }); 
         });
 
       });
