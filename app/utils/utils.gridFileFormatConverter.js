@@ -82,13 +82,35 @@
     function xlsxToGrid(scope, filePath, cb) {
 
       console.log('xlsxToGrid');
-      parsexcel(filePath, function(err, data) {
+      parsexcel(filePath, function(err, parsexcelOutput) {
         if (err) {console.log(err); };
-        // console.log(data);
-        chooseFile('#folderDialog', function(directoryPath) {
-          console.log('chooseFile:', directoryPath);
+        console.log(parsexcelOutput);
 
-        });
+        setTimeout(function() {
+          chooseFile('#folderDialog', function(directoryPath) {
+            // console.log('chooseFile:', directoryPath);
+
+            var importedWorkbook = new Workbook(parsexcelOutput, {xlsx: true});
+
+
+            // get filepath for hidden folder
+            var hiddenFolderName = filePath.split('/').pop().replace('.xlsx', '');
+            var hiddenFolderPath = path.join(directoryPath, '.' + hiddenFolderName);
+
+            gridify(hiddenFolderPath, importedWorkbook, function() {
+            // initialize git repo
+            // add all files
+            // commit -m "initial commit"
+            // scope.$broadcast('git-commits-change');
+            // and render spreadsheet
+      
+              console.log('complete');
+            })
+
+
+
+          });
+        }, 1000);
 
       })
     }
@@ -146,8 +168,15 @@
 
     }
 
-    function gridify(gridArray) {
-      // use pluck
+    // run callback after gridify had created the file structure
+    function gridify(folderPath, workbookInstance, callback) {
+      console.log('folderPath:', folderPath);
+      console.log('workbookInstance:', workbookInstance);
+
+
+
+
+      callback();
     }
 
     function changeToCommit(filePath,targetHash){
