@@ -279,9 +279,11 @@
             currentWorkbook.data.gitCommits = commits;
             //Setting the current Hash to be the first item in the commits array
             currentWorkbook.currentHash = commits[0];
-            scope.$broadcast('git-commits-change');
-            //A hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
-            scope.$apply(scope.dummy);
+            //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+            scope.$apply(function(){
+              scope.$broadcast('git-commits-change');
+            })
+
           });          
         }).catch(function(e){
           console.log('error on hist',e);

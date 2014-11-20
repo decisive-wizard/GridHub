@@ -16,12 +16,9 @@
         	console.log('this is the temp path',currentWorkbook.data.tempFolderPath);
         	gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
         }
-        function dummy(){
-          
-        }
+        
         $scope.$on('git-commits-change', function(){
           console.log('WTF');
-          $scope.dummy();
           $scope.$digest();
         });
 
