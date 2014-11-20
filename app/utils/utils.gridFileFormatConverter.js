@@ -263,17 +263,18 @@
       console.log('Taking Snapshot');
       //Make a commit with the current state of the files
       gift.add(filePath,'.');
+      console.log('This is the file path being used in the commit',filePath);
       gift.commit(filePath,message); 
       //Update the Commit Story being shown
       gift.getHistory(filePath, function(commits){
-        console.log('This is what I got back from get HIstory',commits);
+        console.log('This is what I got back from get History',commits);
         //Changes the commits stored in the currentWorkbook factory
 
         currentWorkbook.data.gitCommits = commits;
         console.log('These are your commits now',currentWorkbook.data.gitCommits);
         //Setting the current Hash to be the first item in the commits array
         currentWorkbook.currentHash = commits[0];
-        scope.$emit('git-commits-change');
+        scope.$broadcast('git-commits-change');
         console.log(currentWorkbook.data);
 
       });

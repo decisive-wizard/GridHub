@@ -29,6 +29,10 @@
       }
     });
 
+    // $rootScope.$on('commit',function(data){
+    //   console.log('Blah');
+    // });
+
     $scope.$on('git-commits-change', function(){
       console.log('WTF');
       $scope.$digest();
