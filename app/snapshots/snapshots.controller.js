@@ -27,7 +27,7 @@
       if (typeof newVal !== 'undefined'){
         scope.commits = newVal.gitCommits;
       }
-    });
+    },true);
 
     // $rootScope.$on('commit',function(data){
     //   console.log('Blah');

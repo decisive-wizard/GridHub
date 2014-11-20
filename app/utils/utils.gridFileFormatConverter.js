@@ -258,44 +258,37 @@
 
     }
 
+    //Make a commit with the current state of the files
     function takeSnapshot(scope,filePath){
-      console.log('Taking Snapshot');
-      //Make a commit with the current state of the files
+      // console.log('Taking Snapshot');
       gitStatus(filePath).then(function(status,blag){
+        // This checks if there is anything to be committed
         if(status.clean){
-          console.log('Nothing to be committed');
           alert('Nothing to be committed');
         }else{
+        //Prompts the user for a commit message   
         var message = prompt('Short Description of the Snapshot you are taking:');
+        //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
         gift.add(filePath,'.');
-        console.log('This is the file path being used in the commit',filePath);
+        // Promisified version of Gift.commit()
         commit(filePath,message).then(function(commitStatus){
-          console.log('This is what I get back from commmit',commitStatus);
           gift.getHistory(filePath,function(commits,err){
-            console.log('This is what I got back from get History',commits,err);
             //Changes the commits stored in the currentWorkbook factory
             currentWorkbook.data.gitCommits = commits;
-            console.log('These are your commits now',currentWorkbook.data.gitCommits);
             //Setting the current Hash to be the first item in the commits array
             currentWorkbook.currentHash = commits[0];
             scope.$broadcast('git-commits-change');
-            console.log(currentWorkbook.data);
-            scope.digest();
+            //A hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+            scope.$apply(scope.dummy);
           });          
         }).catch(function(e){
           console.log('error on hist',e);
         });
           // console.log('Promise Returned');
-
         }
       }).catch(function(e){
         console.log('Inside Catch',e);
       });
-
-      
     }
-
-
-
   }
 })();
