@@ -280,7 +280,7 @@
             currentWorkbook.currentHash = commits[0];
             scope.$broadcast('git-commits-change');
             console.log(currentWorkbook.data);
-
+            scope.digest();
           });          
         }).catch(function(e){
           console.log('error on hist',e);
