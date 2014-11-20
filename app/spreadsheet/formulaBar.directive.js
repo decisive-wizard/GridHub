@@ -32,6 +32,7 @@
               cellObj.formula = '';
             }
             $('#spreadsheet').handsontable('setDataAtCell', cell[0], cell[1], cellObj);
+            $('#spreadsheet').handsontable('render');
           }
         }
       });

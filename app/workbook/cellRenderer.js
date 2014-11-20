@@ -15,7 +15,7 @@ var cellRenderer = function (instance, TD, row, col, prop, valueObj, cellPropert
     valueObj = new BlankCell();
     instance.setDataAtCell(row,col,valueObj);
   }
-  if (typeof valueObj !== 'string' && valueObj !== null){
+  if (typeof valueObj !== 'string' && valueObj !== null && valueObj.style){
     TD = addStyles(TD,valueObj.style);
   }
   var cellText = viewSelectProperty(valueObj);
