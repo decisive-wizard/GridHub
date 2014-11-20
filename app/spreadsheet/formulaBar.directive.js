@@ -22,7 +22,16 @@
           var cell = $('#spreadsheet').handsontable('getSelected');
           // check if its a single cell
           if (cell[0] === cell[2] && cell[1] === cell[3]){
-            $('#spreadsheet').handsontable('setDataAtCell', cell[0], cell[1], $('.formula-input').val());
+            var cellObj = $('#spreadsheet').handsontable('getDataAtCell', cell[0], cell[1]);
+            var inputVal = $('.formula-input').val();
+            if (inputVal.length && inputVal[0] === '='){
+              cellObj.formula = inputVal;
+              cellObj.value = '';
+            } else {
+              cellObj.value = inputVal;
+              cellObj.formula = '';
+            }
+            $('#spreadsheet').handsontable('setDataAtCell', cell[0], cell[1], cellObj);
           }
         }
       });

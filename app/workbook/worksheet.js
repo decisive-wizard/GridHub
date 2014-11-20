@@ -1,5 +1,3 @@
-var converter = require('./app/arrayToCsv.js');
-
 function generateBlankSheet(height, width) {
   var newSheet = [];
   for (var i = 0; i < height; i++) {
@@ -129,8 +127,8 @@ Worksheet.prototype.afterSelection = function(r, c, r2, c2){
   // c2 = selection end column
   // note: only show function or value for a single cell
   if (r === r2 && c === c2){
-    $('.formula-input').val(this.getDataAtCell(r, c));
-  } else {
-    $('.formula-input').val('');
+    var cellObj = $('#spreadsheet').handsontable('getDataAtCell',r,c);
+    var formulaDisplay = cellObj.formula ? cellObj.formula : cellObj.value;
+    $('.formula-input').val(formulaDisplay);
   }
 };
