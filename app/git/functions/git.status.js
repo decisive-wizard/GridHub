@@ -2,16 +2,11 @@ var gift = require('gift');
 var path = require('path');
 var fs = require('fs');
 
-module.exports = function(rootFilePath) {
+module.exports = function(rootFilePath,callback) {
 
 	var repo = gift(rootFilePath);
 
-	return repo.status(function(err, status) {
-	 	if (err) {console.log(err);};
-	 	console.log(status);
-	 	return status;
+ 	repo.status(function(err, status) {
+	 	callback(err,status) ;
 	});
-
-
-
 };

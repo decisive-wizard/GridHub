@@ -19,7 +19,10 @@
   var async = require('async');
   var parsexcel = require('parsexcel.js');
   var Promise = require('bluebird');
-  var gitStatus = Promise.promisify(gift.status);
+  var gitStatus = Promise.promisify(gift.status,gift);
+  var commit = Promise.promisify(gift.commit,gift);
+
+
   function gridFileFormatConverter(currentWorkbook){
     var service = {
       parseGrid : parseGrid,
@@ -255,32 +258,38 @@
 
     }
 
-    function takeSnapshot(scope,filePath,message){
+    function takeSnapshot(scope,filePath){
       console.log('Taking Snapshot');
       //Make a commit with the current state of the files
-      gitStatus(filePath).then(function(status){
-        console.log('Back from promise');
-        console.log('Status inside the promise',status);
+      gitStatus(filePath).then(function(status,blag){
+        if(status.clean){
+          console.log('Nothing to be committed');
+          alert('Nothing to be committed');
+        }else{
+        var message = prompt('Short Description of the Snapshot you are taking:');
+        gift.add(filePath,'.');
+        console.log('This is the file path being used in the commit',filePath);
+        gift.commit(filePath,message);
+          // console.log('Promise Returned');
+        gift.getHistory(filePath, function(commits){
+          console.log('This is what I got back from get History',commits);
+          //Changes the commits stored in the currentWorkbook factory
+          currentWorkbook.data.gitCommits = commits;
+          console.log('These are your commits now',currentWorkbook.data.gitCommits);
+          //Setting the current Hash to be the first item in the commits array
+          currentWorkbook.currentHash = commits[0];
+          scope.$broadcast('git-commits-change');
+          console.log(currentWorkbook.data);
+
+        });
+
+
+        }
+      }).catch(function(e){
+        console.log('Inside Catch',e);
       });
 
       
-
-      gift.add(filePath,'.');
-      console.log('This is the file path being used in the commit',filePath);
-      gift.commit(filePath,message); 
-      //Update the Commit Story being shown
-      gift.getHistory(filePath, function(commits){
-        console.log('This is what I got back from get History',commits);
-        //Changes the commits stored in the currentWorkbook factory
-        currentWorkbook.data.gitCommits = commits;
-        console.log('These are your commits now',currentWorkbook.data.gitCommits);
-        //Setting the current Hash to be the first item in the commits array
-        currentWorkbook.currentHash = commits[0];
-        scope.$broadcast('git-commits-change');
-        console.log(currentWorkbook.data);
-
-      });
-
     }
 
 
