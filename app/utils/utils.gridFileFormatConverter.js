@@ -18,7 +18,10 @@
   var converter = require('./app/arrayToCsv');
   var async = require('async');
   var parsexcel = require('parsexcel.js');
-
+  var Promise = require('bluebird');
+  var gitStatus = Promise.promisify(gift.status,gift);
+  var commit = Promise.promisify(gift.commit,gift);
+  var commitHistory = Promise.promisify(gift.getHistory,gift);
 
   function gridFileFormatConverter(currentWorkbook){
     var service = {
@@ -26,7 +29,8 @@
       gridify   : gridify,
       openGridFile: openGridFile,
       xlsxToGrid: xlsxToGrid,
-      changeToCommit:changeToCommit
+      changeToCommit:changeToCommit,
+      takeSnapshot:takeSnapshot
     };
 
     return service;
@@ -160,7 +164,7 @@
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
             dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
             cb(dataObj);
-          })
+          }); 
         });
 
       });
@@ -238,9 +242,8 @@
           console.log('error checking out',err);
           currentWorkbook.currentHash = targetHash;
           scope.$broadcast('git-commits-change');
-          console.log(commits);
-
         });
+
 
     }
 
@@ -251,6 +254,43 @@
       });
 
       chooser.trigger('click');
+
+
+    }
+
+    //Make a commit with the current state of the files
+    function takeSnapshot(scope,filePath){
+      console.log('Taking Snapshot');
+      gitStatus(filePath).then(function(status,blag){
+        console.log('Inside the status promise');
+        console.log(status,blag);
+        // This checks if there is anything to be committed
+        if(status.clean){
+          alert('Nothing to be committed');
+        }else{
+        //Prompts the user for a commit message   
+        var message = prompt('Short Description of the Snapshot you are taking:');
+        //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
+        gift.add(filePath,'.');
+        // Promisified version of Gift.commit()
+        commit(filePath,message).then(function(commitStatus){
+          gift.getHistory(filePath,function(commits,err){
+            //Changes the commits stored in the currentWorkbook factory
+            currentWorkbook.data.gitCommits = commits;
+            //Setting the current Hash to be the first item in the commits array
+            currentWorkbook.currentHash = commits[0];
+            scope.$broadcast('git-commits-change');
+            //A hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+            scope.$apply(scope.dummy);
+          });          
+        }).catch(function(e){
+          console.log('error on hist',e);
+        });
+          // console.log('Promise Returned');
+        }
+      }).catch(function(e){
+        console.log('Inside Catch',e);
+      });
     }
   }
 })();

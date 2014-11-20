@@ -35,17 +35,18 @@ function _checkout(rootFilePath, targetHash, callback) {
 
 }
 
-function _commit(rootFilePath, message) {
-  var resolvedPath = path.resolve(rootFilePath);
+function _commit(rootFilePath, message,callback) {
+ var resolvedPath = path.resolve(rootFilePath);
 
-  var repo = gift(resolvedPath);
+ console.log('This is the resolved path',resolvedPath);
 
-  repo.commit(message, {all: true, amend: false, author: 'greg fedirko'}, function(err) {
-    if (err) {
-      console.log(err);
-    }
-  })
+ var repo = gift(resolvedPath);
 
+ console.log('this is the repo',repo);
+
+ repo.commit(message, {all: true, amend: false, author: 'John Heroy'}, function(err) {
+   callback(err,'OK');
+ });
 };
 
 function _hist(rootFilePath, callback) {
@@ -80,17 +81,16 @@ function _init(rootFilePath, callback) {
   });
 }
 
-function _status(rootFilePath) {
+function _status(rootFilePath,callback) {
 
   var repo = gift(rootFilePath);
 
   repo.status(function(err, status) {
-    if (err) {console.log(err);};
-    console.log(status);
-    return status;
+    callback(err,status) ;
   });
-
 }
+
+
 
 
 
