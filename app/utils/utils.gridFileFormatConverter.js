@@ -82,13 +82,35 @@
     function xlsxToGrid(scope, filePath, cb) {
 
       console.log('xlsxToGrid');
-      parsexcel(filePath, function(err, data) {
+      parsexcel(filePath, function(err, parsexcelOutput) {
         if (err) {console.log(err); };
-        // console.log(data);
-        chooseFile('#folderDialog', function(directoryPath) {
-          console.log('chooseFile:', directoryPath);
+        console.log(parsexcelOutput);
 
-        });
+        setTimeout(function() {
+          chooseFile('#folderDialog', function(directoryPath) {
+            // console.log('chooseFile:', directoryPath);
+
+            var importedWorkbook = new Workbook(parsexcelOutput, {xlsx: true});
+
+
+            // get filepath for hidden folder
+            var hiddenFolderName = filePath.split('/').pop().replace('.xlsx', '');
+            var hiddenFolderPath = path.join(directoryPath, '.' + hiddenFolderName);
+
+            gridify(hiddenFolderPath, importedWorkbook, function() {
+            // initialize git repo
+            // add all files
+            // commit -m "initial commit"
+            // scope.$broadcast('git-commits-change');
+            // and render spreadsheet
+      
+              console.log('complete');
+            })
+
+
+
+          });
+        }, 1000);
 
       })
     }
@@ -146,8 +168,67 @@
 
     }
 
-    function gridify(gridArray) {
-      // use pluck
+    // run callback after gridify had created the file structure
+    function gridify(folderPath, workbookInstance, callback) {
+      // console.log('folderPath:', folderPath);
+      // console.log('workbookInstance:', workbookInstance);
+
+      var config = {};
+      config.sheetNames = {};
+
+      var sheetNames = [];
+      for (var sheetName in workbookInstance){
+        sheetNames.push(sheetName);
+      }
+
+      // make the hidden folder unless it already exists, plus make a csv/ folder
+      if (!fs.existsSync(folderPath)){
+        fs.mkdirSync(folderPath);
+        fs.mkdirSync(path.join(folderPath, 'csv/'));
+      }
+
+      async.each(sheetNames, function(sheetName, eachCallback){
+
+        var sheetFolderPath = path.join(folderPath, 'csv/' + sheetName);
+        // make the sheet folder if it doesn't already exist
+        if (!fs.existsSync(sheetFolderPath)){
+          fs.mkdirSync(sheetFolderPath);
+        }
+
+        config.sheetNames[sheetName] = workbookInstance[sheetName]['sheetName'];
+
+        var values = _.map(workbookInstance[sheetName]['data'], function(row, rowIndex){
+          return _.pluck(row, 'value');
+        });
+
+        var formulas = _.map(workbookInstance[sheetName]['data'], function(row, rowIndex){
+          return _.pluck(row, 'formula');
+        });
+
+        var styles = _.map(workbookInstance[sheetName]['data'], function(row, rowIndex){
+          return _.pluck(row, 'style');
+        });
+
+        converter.arrayToCsv(values, path.join(sheetFolderPath, 'values.csv'), function(){
+          converter.arrayToCsv(formulas, path.join(sheetFolderPath, 'formulas.csv'), function(){
+            fs.writeFileSync(path.join(sheetFolderPath, 'styles.json'), JSON.stringify(styles));
+            console.log('donezo');
+            eachCallback();
+          });
+        });
+
+      }, function(err){
+        if (err) {throw err; };
+        fs.writeFileSync(path.join(folderPath, 'config.json'), JSON.stringify(config, null, '\t'));
+        callback();
+      });
+
+
+      
+
+
+
+      callback();
     }
 
     function changeToCommit(filePath,targetHash){
