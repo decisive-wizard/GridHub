@@ -262,6 +262,9 @@
     function takeSnapshot(scope,filePath,message){
       console.log('Taking Snapshot');
       //Make a commit with the current state of the files
+      
+      console.log('This is the current status',gift.status(filePath));
+
       gift.add(filePath,'.');
       console.log('This is the file path being used in the commit',filePath);
       gift.commit(filePath,message); 
