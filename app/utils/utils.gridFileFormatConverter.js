@@ -21,7 +21,7 @@
   var Promise = require('bluebird');
   var gitStatus = Promise.promisify(gift.status,gift);
   var commit = Promise.promisify(gift.commit,gift);
-
+  var commitHistory = Promise.promisify(gift.getHistory,gift);
 
   function gridFileFormatConverter(currentWorkbook){
     var service = {
@@ -269,20 +269,23 @@
         var message = prompt('Short Description of the Snapshot you are taking:');
         gift.add(filePath,'.');
         console.log('This is the file path being used in the commit',filePath);
-        gift.commit(filePath,message);
-          // console.log('Promise Returned');
-        gift.getHistory(filePath, function(commits){
-          console.log('This is what I got back from get History',commits);
-          //Changes the commits stored in the currentWorkbook factory
-          currentWorkbook.data.gitCommits = commits;
-          console.log('These are your commits now',currentWorkbook.data.gitCommits);
-          //Setting the current Hash to be the first item in the commits array
-          currentWorkbook.currentHash = commits[0];
-          scope.$broadcast('git-commits-change');
-          console.log(currentWorkbook.data);
+        commit(filePath,message).then(function(commitStatus){
+          console.log('This is what I get back from commmit',commitStatus);
+          gift.getHistory(filePath,function(commits,err){
+            console.log('This is what I got back from get History',commits,err);
+            //Changes the commits stored in the currentWorkbook factory
+            currentWorkbook.data.gitCommits = commits;
+            console.log('These are your commits now',currentWorkbook.data.gitCommits);
+            //Setting the current Hash to be the first item in the commits array
+            currentWorkbook.currentHash = commits[0];
+            scope.$broadcast('git-commits-change');
+            console.log(currentWorkbook.data);
 
+          });          
+        }).catch(function(e){
+          console.log('error on hist',e);
         });
-
+          // console.log('Promise Returned');
 
         }
       }).catch(function(e){
