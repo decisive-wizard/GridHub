@@ -80,17 +80,16 @@ function _init(rootFilePath, callback) {
   });
 }
 
-function _status(rootFilePath) {
+function _status(rootFilePath,callback) {
 
   var repo = gift(rootFilePath);
 
   repo.status(function(err, status) {
-    if (err) {console.log(err);};
-    console.log(status);
-    return status;
+    callback(err,status) ;
   });
-
 }
+
+
 
 
 

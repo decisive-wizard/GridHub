@@ -260,8 +260,10 @@
 
     //Make a commit with the current state of the files
     function takeSnapshot(scope,filePath){
-      // console.log('Taking Snapshot');
+      console.log('Taking Snapshot');
       gitStatus(filePath).then(function(status,blag){
+        console.log('Inside the status promise');
+        console.log(status,blag);
         // This checks if there is anything to be committed
         if(status.clean){
           alert('Nothing to be committed');
