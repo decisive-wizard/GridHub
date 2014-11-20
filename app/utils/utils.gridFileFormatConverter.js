@@ -18,20 +18,16 @@
   var converter = require('./app/arrayToCsv');
   var async = require('async');
   var parsexcel = require('parsexcel.js');
-
-
+  var Promise = require('bluebird');
+  var gitStatus = Promise.promisify(gift.status);
   function gridFileFormatConverter(currentWorkbook){
     var service = {
       parseGrid : parseGrid,
       gridify   : gridify,
       openGridFile: openGridFile,
-<<<<<<< HEAD
       xlsxToGrid: xlsxToGrid,
-      changeToCommit:changeToCommit
-=======
       changeToCommit:changeToCommit,
       takeSnapshot:takeSnapshot
->>>>>>> Implementation of the takeSnapshot function
     };
 
     return service;
@@ -262,8 +258,12 @@
     function takeSnapshot(scope,filePath,message){
       console.log('Taking Snapshot');
       //Make a commit with the current state of the files
+      gitStatus(filePath).then(function(status){
+        console.log('Back from promise');
+        console.log('Status inside the promise',status);
+      });
+
       
-      console.log('This is the current status',gift.status(filePath));
 
       gift.add(filePath,'.');
       console.log('This is the file path being used in the commit',filePath);
@@ -272,7 +272,6 @@
       gift.getHistory(filePath, function(commits){
         console.log('This is what I got back from get History',commits);
         //Changes the commits stored in the currentWorkbook factory
-
         currentWorkbook.data.gitCommits = commits;
         console.log('These are your commits now',currentWorkbook.data.gitCommits);
         //Setting the current Hash to be the first item in the commits array
