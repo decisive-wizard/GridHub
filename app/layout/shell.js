@@ -12,11 +12,15 @@
   ];
 
   var gridRegex = /\.grid$/;
+  var xlsxRegex = /\.xlsx$/;
 
   function ShellController ($scope, currentWorkbook, gridFileFormatConverter){
 
     $scope.currentWorkbook = currentWorkbook;
+
+    // Funtions: 
     $scope.openRepository = openRepository;
+    $scope.importXLSX = importXLSX;
 
     function openRepository() {
       chooseFile('#fileDialog', function(filePath){
@@ -42,6 +46,25 @@
       });
     }
 
+
+    function importXLSX() {
+      chooseFile('#fileDialog', function(filePath) {
+
+        if (filePath.match(xlsxRegex)) {
+
+          console.log(filePath);
+          
+          gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
+
+          });
+
+        } else {
+          console.log('this is not a .xlsx file');
+        }
+
+      });
+    }
+
     function chooseFile(name, cb) {
       var chooser = $(name);
       chooser.change(function(evt) {
@@ -50,7 +73,6 @@
 
       chooser.trigger('click');
     }
-
   }
 
 })();

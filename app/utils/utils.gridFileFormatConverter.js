@@ -17,12 +17,15 @@
   var rimraf = require('rimraf');
   var converter = require('./app/arrayToCsv');
   var async = require('async');
+  var parsexcel = require('parsexcel.js');
+
 
   function gridFileFormatConverter(currentWorkbook){
     var service = {
       parseGrid : parseGrid,
       gridify   : gridify,
       openGridFile: openGridFile,
+      xlsxToGrid: xlsxToGrid,
       changeToCommit:changeToCommit
     };
 
@@ -74,6 +77,20 @@
 
         });
       });
+    }
+
+    function xlsxToGrid(scope, filePath, cb) {
+
+      console.log('xlsxToGrid');
+      parsexcel(filePath, function(err, data) {
+        if (err) {console.log(err); };
+        // console.log(data);
+        chooseFile('#folderDialog', function(directoryPath) {
+          console.log('chooseFile:', directoryPath);
+
+        });
+
+      })
     }
 
     function parseGrid(folderPath, cb) {
@@ -144,8 +161,15 @@
 
         });
 
+    }
 
+    function chooseFile(name, cb) {
+      var chooser = $(name);
+      chooser.change(function(evt) {
+        cb($(this).val());
+      });
 
+      chooser.trigger('click');
     }
   }
 })();

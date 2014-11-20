@@ -2,18 +2,109 @@ var gift = require('gift');
 var path = require('path');
 var fs = require('fs');
 
-var _init = require('./functions/git.init.js');
-var _status = require('./functions/git.status.js');
-var _add = require('./functions/git.add.js');
-var _commit = require('./functions/git.commit.js');
-var _hist = require('./functions/git.hist.js');
-var _checkout = require('./functions/git.checkout.js');
-
 module.exports = {
-	init: _init,
-  getHistory: _hist,
-	status: _status,
 	add: _add,
-	commit: _commit,
-  checkout: _checkout
+  checkout: _checkout,
+  commit: _commit,
+  getHistory: _hist,
+  init: _init,
+  status: _status
 }
+
+////////////
+
+function _add(rootFilePath, fileName) {
+
+  var repo = gift(rootFilePath);
+
+  repo.add(fileName, function(err) {
+    console.log(err);
+  });
+}
+
+function _checkout(rootFilePath, targetHash, callback) {
+
+  var resolvedPath = path.resolve(rootFilePath);
+  var repo = gift(resolvedPath);
+
+  repo.checkout(targetHash, function(err) {
+    if (err) {
+      console.log(err);
+    }
+  })
+
+}
+
+function _commit(rootFilePath, message) {
+  var resolvedPath = path.resolve(rootFilePath);
+
+  var repo = gift(resolvedPath);
+
+  repo.commit(message, {all: true, amend: false, author: 'greg fedirko'}, function(err) {
+    if (err) {
+      console.log(err);
+    }
+  })
+
+};
+
+function _hist(rootFilePath, callback) {
+  var resolvedPath = path.resolve(rootFilePath);
+  var repo = gift(resolvedPath);
+  // console.log(repo);
+
+  repo.commits(function(err, commits) {
+    if (err) {
+      console.log(err);
+    }
+    // console.log(commits);
+    if (callback) {
+      callback(commits);
+    }
+  });
+
+}
+
+function _init(rootFilePath, callback) {
+  var resolvedPath = path.resolve(rootFilePath);
+
+  fs.exists(resolvedPath + '/.git', function(exists) {
+    if (!exists) {
+      gift.init(resolvedPath, function(err, repo) {
+        if (err) {console.log(err);}
+        console.log('Initialized empty git repository in', resolvedPath);
+      });
+    } else {
+      console.log('Git repository already exists in', resolvedPath);
+    }
+  });
+}
+
+function _status(rootFilePath) {
+
+  var repo = gift(rootFilePath);
+
+  repo.status(function(err, status) {
+    if (err) {console.log(err);};
+    console.log(status);
+    return status;
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
