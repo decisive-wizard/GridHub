@@ -17,7 +17,6 @@
     $scope.changeCommit = function(commitIndex){
       currentWorkbook.currentHash = $scope.commits[commitIndex];
       //Does Git Checkout to the current workbook file detaching from the head to the clicked commit
-      console.log('a;oweigha;oiwhgr;oiahgrv;oiahbiovaoi;hbv',currentWorkbook.currentHash);
       gridFileFormatConverter.changeToCommit(currentWorkbook.data.tempFolderPath,currentWorkbook.currentHash.id);
     };
 
@@ -34,7 +33,6 @@
     // });
 
     $scope.$on('git-commits-change', function(){
-      console.log('WTF');
       $scope.$digest();
     });
 
