@@ -255,27 +255,27 @@
         if(status.clean){
           alert('Nothing to be committed');
         }else{
-        //Prompts the user for a commit message
-        var message = prompt('Short Description of the Snapshot you are taking:');
-        //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
-        gift.add(filePath, '.', function(){
-          commit(filePath,message).then(function(commitStatus){
-            gift.getHistory(filePath,function(commits,err){
-              //Changes the commits stored in the currentWorkbook factory
-              currentWorkbook.data.gitCommits = commits;
-              //Setting the current Hash to be the first item in the commits array
-              currentWorkbook.currentHash = commits[0];
-              //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
-              scope.$apply(function(){
-                scope.$broadcast('git-commits-change');
+          //Prompts the user for a commit message
+          var message = prompt('Short Description of the Snapshot you are taking:');
+          //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
+          if(message !== null){
+            gift.add(filePath, '.', function(){
+              commit(filePath,message).then(function(commitStatus){
+                gift.getHistory(filePath,function(commits,err){
+                  //Changes the commits stored in the currentWorkbook factory
+                  currentWorkbook.data.gitCommits = commits;
+                  //Setting the current Hash to be the first item in the commits array
+                  currentWorkbook.currentHash = commits[0];
+                  //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+                  scope.$apply(function(){
+                    scope.$broadcast('git-commits-change');
+                  });
+                });
+              }).catch(function(e){
+                console.log('error on hist',e);
               });
             });
-          }).catch(function(e){
-            console.log('error on hist',e);
-          });
-        });
-        // Promisified version of Gift.commit()
-          // console.log('Promise Returned');
+          }
         }
       }).catch(function(e){
         console.log('Inside Catch',e);

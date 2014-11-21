@@ -136,6 +136,8 @@ a {
   height: 100%;
   z-index: 1000;
   transition: all 0.4s ease 0s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
 }
 .page-content-wrapper {
   width: 100%;
