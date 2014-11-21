@@ -51,13 +51,17 @@
     function importXLSX() {
       chooseFile('#fileDialog', function(filePath) {
 
-        if (filePath.match(xlsxRegex)) {
-
-          gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
-            
-          });
-
-        }
+        bootbox.dialog({
+          title: 'File Import',
+          message: '<p id="modal-text">We are currently importing your .xlsx file...</p><div class="spinner"></div>'
+        });
+        setTimeout(function(){
+          if (filePath.match(xlsxRegex)) {
+            gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
+              bootbox.hideAll();
+            });
+          }
+        }, 1000);
 
       });
     }

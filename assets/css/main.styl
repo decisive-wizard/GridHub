@@ -22,10 +22,32 @@ body
 	padding 0
 	background: -webkit-linear-gradient(right, #121B32 , #1A2E50); /* For Safari 5.1 to 6.0 */
 
+#loading-overlay
+  position fixed
+  z-index 100
+  top 0px
+  left 0px
+  height 200px
+  width 400px
+  border 1px solid light-grey
+  background #EDF0F7
+  border-radius 5px
+  display none
+
+.spinner
+  background-position center center
+  background-repeat no-repeat
+  background url('../img/spiffygif_90x90.gif')
+  width 90px
+  height 90px
+  margin 0 auto
+  margin-top 40px
+
 .page-content-wrapper
   position relative
-  
-.btn-outline 
+
+
+.btn-outline
   background-color transparent
   color inherit
   transition: all .5s
@@ -57,7 +79,12 @@ body
 .btn-danger.btn-outline:hover
   color #fff
 
-
 @import 'navigation.styl'
 @import 'sidebar.styl'
 @import 'table.styl'
+
+
+#modal-text
+  font-family Arial
+  color black
+  font-size 18px

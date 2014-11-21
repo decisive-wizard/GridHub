@@ -13,6 +13,27 @@ body {
   padding: 0;
   background: -webkit-linear-gradient(right, #121b32, #1a2e50); /* For Safari 5.1 to 6.0 */
 }
+#loading-overlay {
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: 0px;
+  height: 200px;
+  width: 400px;
+  border: 1px solid #99aeb6;
+  background: #edf0f7;
+  border-radius: 5px;
+  display: none;
+}
+.spinner {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background: url("../img/spiffygif_90x90.gif");
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
 .page-content-wrapper {
   position: relative;
 }
@@ -375,4 +396,9 @@ h2 {
   border: none;
   background-color: #294c71;
   color: #fff;
+}
+#modal-text {
+  font-family: Arial;
+  color: #000;
+  font-size: 18px;
 }
