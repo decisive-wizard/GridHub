@@ -203,7 +203,6 @@
         converter.arrayToCsv(values, path.join(sheetFolderPath, 'values.csv'), function(){
           converter.arrayToCsv(formulas, path.join(sheetFolderPath, 'formulas.csv'), function(){
             fs.writeFileSync(path.join(sheetFolderPath, 'styles.json'), JSON.stringify(styles));
-            console.log('donezo');
             eachCallback();
           });
         });
@@ -234,10 +233,7 @@
 
     //Make a commit with the current state of the files
     function takeSnapshot(scope,filePath){
-      console.log('Taking Snapshot');
       gitStatus(filePath).then(function(status,blag){
-        console.log('Inside the status promise');
-        console.log(status,blag);
         // This checks if there is anything to be committed
         if(status.clean){
           alert('Nothing to be committed');
