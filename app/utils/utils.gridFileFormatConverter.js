@@ -94,25 +94,26 @@
 
             gridify(hiddenFolderPath, importedWorkbook, function() {
               gift.init(hiddenFolderPath, function(err, _repo){
-                gift.add(hiddenFolderPath, '.');
-                commit(hiddenFolderPath, 'Initial commit')
-                  .then(function(commitStatus){
-                  gift.getHistory(hiddenFolderPath,function(commits,err){
-                    currentWorkbook.data.gitCommits = commits;
-                    currentWorkbook.currentHash = commits[0];
-                    renderSheet(importedWorkbook, 1);
+                gift.add(hiddenFolderPath, '.', function(){
+                  commit(hiddenFolderPath, 'Initial commit')
+                    .then(function(commitStatus){
+                    gift.getHistory(hiddenFolderPath,function(commits,err){
+                      currentWorkbook.data.gitCommits = commits;
+                      currentWorkbook.currentHash = commits[0];
+                      renderSheet(importedWorkbook, 1);
 
-                    // zip up to .grid using archiver
-                    var output = fs.createWriteStream(path.join(directoryPath, hiddenFolderName + '.grid'));
-                    var archive = archiver('zip');
-                    output.on('close', function() { /* done zipping */ });
-                    archive.on('error', function(err) { throw err });
-                    archive.pipe(output);
-                    archive.bulk([
-                      { expand: true, cwd: hiddenFolderPath, src: ['**/*'] }
-                    ]).finalize();
+                      // zip up to .grid using archiver
+                      var output = fs.createWriteStream(path.join(directoryPath, hiddenFolderName + '.grid'));
+                      var archive = archiver('zip');
+                      output.on('close', function() { /* done zipping */ });
+                      archive.on('error', function(err) { throw err });
+                      archive.pipe(output);
+                      archive.bulk([
+                        { expand: true, cwd: hiddenFolderPath, src: ['**/*'] }
+                      ]).finalize();
+                    });
                   });
-                })
+                });
               });
             });
           });
@@ -241,23 +242,23 @@
         //Prompts the user for a commit message
         var message = prompt('Short Description of the Snapshot you are taking:');
         //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
-        gift.add(filePath,'.');
-        // Promisified version of Gift.commit()
-        commit(filePath,message).then(function(commitStatus){
-          gift.getHistory(filePath,function(commits,err){
-            //Changes the commits stored in the currentWorkbook factory
-            currentWorkbook.data.gitCommits = commits;
-            //Setting the current Hash to be the first item in the commits array
-            currentWorkbook.currentHash = commits[0];
-            //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
-            scope.$apply(function(){
-              scope.$broadcast('git-commits-change');
-            })
-
+        gift.add(filePath, '.', function(){
+          commit(filePath,message).then(function(commitStatus){
+            gift.getHistory(filePath,function(commits,err){
+              //Changes the commits stored in the currentWorkbook factory
+              currentWorkbook.data.gitCommits = commits;
+              //Setting the current Hash to be the first item in the commits array
+              currentWorkbook.currentHash = commits[0];
+              //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+              scope.$apply(function(){
+                scope.$broadcast('git-commits-change');
+              });
+            });
+          }).catch(function(e){
+            console.log('error on hist',e);
           });
-        }).catch(function(e){
-          console.log('error on hist',e);
         });
+        // Promisified version of Gift.commit()
           // console.log('Promise Returned');
         }
       }).catch(function(e){
