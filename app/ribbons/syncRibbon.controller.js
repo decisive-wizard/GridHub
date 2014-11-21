@@ -13,12 +13,10 @@
          $scope.takeSnapshot = takeSnapshot;
          
          function takeSnapshot(){ 	
-        	console.log('this is the temp path',currentWorkbook.data.tempFolderPath);
         	gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
         }
         
         $scope.$on('git-commits-change', function(){
-          console.log('WTF');
           $scope.$digest();
         });
 
