@@ -107,6 +107,9 @@ a {
 .formula-entry input {
   border-radius: 0;
 }
+.no-scroll {
+  overflow-x: hidden;
+}
 .title {
   font-weight: bold;
   font-size: 24px;
