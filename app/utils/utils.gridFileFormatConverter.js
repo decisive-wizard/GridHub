@@ -101,13 +101,39 @@
             var hiddenFolderName = filePath.split('/').pop().replace('.xlsx', '');
             var hiddenFolderPath = path.join(directoryPath, '.' + hiddenFolderName);
 
+            console.log(hiddenFolderPath);
             gridify(hiddenFolderPath, importedWorkbook, function() {
-            // initialize git repo
-            // add all files
-            // commit -m "initial commit"
-            // scope.$broadcast('git-commits-change');
-            // and render spreadsheet
-      
+              // initialize git repo
+              console.log('initializing the repo.');
+              gift.init(hiddenFolderPath, function(err, _repo){
+                // add all files
+                console.log('adding all teh files');
+                gift.add(hiddenFolderPath, '.');
+
+
+                // commit -m "initial commit"
+                commit(hiddenFolderPath, 'Initial commit')
+                  .then(function(commitStatus){
+                  gift.getHistory(hiddenFolderPath,function(commits,err){
+                    //Changes the commits stored in the currentWorkbook factory
+                    currentWorkbook.data.gitCommits = commits;
+                    //Setting the current Hash to be the first item in the commits array
+                    currentWorkbook.currentHash = commits[0];
+                    //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+                    scope.$apply(function(){
+                      scope.$broadcast('git-commits-change');
+                    })
+                    renderSheet(importedWorkbook, 1);
+
+                  });
+                })
+                // gift.commit(hiddenFolderPath, 'Initial commit', function(err){
+                //   scope.$broadcast('git-commits-change');
+                //   // zip it
+                //   // and render spreadsheet
+                // })
+              });
+
               console.log('complete');
             })
 
@@ -164,7 +190,7 @@
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
             dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
             cb(dataObj);
-          }); 
+          });
         });
 
       });
@@ -226,13 +252,6 @@
         fs.writeFileSync(path.join(folderPath, 'config.json'), JSON.stringify(config, null, '\t'));
         callback();
       });
-
-
-      
-
-
-
-      callback();
     }
 
     function changeToCommit(filePath,targetHash){
@@ -268,7 +287,7 @@
         if(status.clean){
           alert('Nothing to be committed');
         }else{
-        //Prompts the user for a commit message   
+        //Prompts the user for a commit message
         var message = prompt('Short Description of the Snapshot you are taking:');
         //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
         gift.add(filePath,'.');
@@ -284,7 +303,7 @@
               scope.$broadcast('git-commits-change');
             })
 
-          });          
+          });
         }).catch(function(e){
           console.log('error on hist',e);
         });

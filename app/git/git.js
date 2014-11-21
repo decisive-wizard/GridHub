@@ -44,7 +44,7 @@ function _commit(rootFilePath, message,callback) {
 
  console.log('this is the repo',repo);
 
- repo.commit(message, {all: true, amend: false, author: 'John Heroy'}, function(err) {
+ repo.commit(message, {all: true, amend: false, author: 'John Heroy <johnheroy@gmail.com>'}, function(err) {
    callback(err,'OK');
  });
 };
@@ -74,9 +74,11 @@ function _init(rootFilePath, callback) {
       gift.init(resolvedPath, function(err, repo) {
         if (err) {console.log(err);}
         console.log('Initialized empty git repository in', resolvedPath);
+				callback(err, repo);
       });
     } else {
       console.log('Git repository already exists in', resolvedPath);
+			callback();
     }
   });
 }
@@ -89,22 +91,3 @@ function _status(rootFilePath,callback) {
     callback(err,status) ;
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
