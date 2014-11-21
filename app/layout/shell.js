@@ -18,7 +18,7 @@
 
     $scope.currentWorkbook = currentWorkbook;
 
-    // Funtions: 
+    // Funtions:
     $scope.openRepository = openRepository;
     $scope.importXLSX = importXLSX;
 
@@ -27,17 +27,11 @@
         if (filePath.match(gridRegex)) {
           currentWorkbook.data.win.title = 'GridHub - ' + filePath;
           gridFileFormatConverter.openGridFile($scope, filePath, function(){
-            // now let's parse the grid
             gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-              // console.log('successfully in the parseGrid callback', dataObj);
-              console.log('IN THE PARSE GRID CALLBACK');
-              console.log(dataObj, 'data obj in open repo');
-              console.log(dataObj['1'].values);
               setTimeout(function(){
                 var workbook = new Workbook(dataObj, {grid: true});
                 renderSheet(workbook, 1);
               }, 100)
-              // console.log($('#spreadsheet').handsontable('getData'));
             });
           });
         } else {
@@ -52,10 +46,9 @@
 
         if (filePath.match(xlsxRegex)) {
 
-          console.log(filePath);
-          
           gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
-
+            
+            console.log('yoloswag');
           });
 
         } else {
