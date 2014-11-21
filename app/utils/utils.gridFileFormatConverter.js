@@ -22,6 +22,7 @@
   var gitStatus = Promise.promisify(gift.status,gift);
   var commit = Promise.promisify(gift.commit,gift);
   var commitHistory = Promise.promisify(gift.getHistory,gift);
+  var checkOut = Promise.promisify(gift.checkout,gift);
 
   function gridFileFormatConverter(currentWorkbook){
     var service = {
@@ -256,14 +257,12 @@
 
     function changeToCommit(filePath,targetHash){
 
-        gift.checkout(filePath,targetHash, function(commits){
+        checkOut(filePath,targetHash).then(function(){
           //Setting the current Hash to be the first item in the commits array
-          console.log('error checking out',err);
           currentWorkbook.currentHash = targetHash;
-          scope.$broadcast('git-commits-change');
-        });
-
-
+        }).catch(function(e){
+          console.log(e);
+        })
     }
 
     function chooseFile(name, cb) {
