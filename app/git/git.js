@@ -9,7 +9,7 @@ module.exports = {
   getHistory: _hist,
   init: _init,
   status: _status
-}
+} 
 
 ////////////
 
@@ -28,9 +28,8 @@ function _checkout(rootFilePath, targetHash, callback) {
   var repo = gift(resolvedPath);
 
   repo.checkout(targetHash, function(err) {
-    if (err) {
-      console.log(err);
-    }
+    callback(err,'OK');
+
   })
 
 }

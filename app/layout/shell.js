@@ -22,11 +22,25 @@
     $scope.openRepository = openRepository;
     $scope.importXLSX = importXLSX;
 
+   $scope.$watchCollection(function(){
+      return currentWorkbook.currentHash;
+    }, function(newVal, oldVal, scope){
+      if (typeof newVal !== 'undefined'){
+        gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
+          setTimeout(function(){
+            var workbook = new Workbook(dataObj, {grid: true});
+            renderSheet(workbook, 1);
+          }, 100)
+        });
+      }
+    },true);
+
     function openRepository() {
       chooseFile('#fileDialog', function(filePath){
         if (filePath.match(gridRegex)) {
           currentWorkbook.data.win.title = 'GridHub - ' + filePath;
           gridFileFormatConverter.openGridFile($scope, filePath, function(){
+            console.log('this is how I did it before',$scope.currentWorkbook.data.tempFolderPath);
             gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
               setTimeout(function(){
                 var workbook = new Workbook(dataObj, {grid: true});
