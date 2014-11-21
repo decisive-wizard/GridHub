@@ -60,14 +60,12 @@
           currentWorkbook.data.gitCommits = commits;
           currentWorkbook.currentHash = commits[0];
           scope.$broadcast('git-commits-change');
-          console.log(currentWorkbook.data);
 
           // cleanup temp files
           ncp(unzippedFolderPath, hiddenFolderPath, function(err){
             if (err) {
               return console.error(err);
             }
-            console.log('done!');
 
             rimraf(unzippedFolderPath, function(err){
               cb();
@@ -81,7 +79,6 @@
 
     function xlsxToGrid(scope, filePath, cb) {
 
-      console.log('xlsxToGrid');
       parsexcel(filePath, function(err, parsexcelOutput) {
         if (err) {console.log(err); };
 
