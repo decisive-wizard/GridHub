@@ -19,6 +19,7 @@
   var async = require('async');
   var parsexcel = require('parsexcel.js');
   var Promise = require('bluebird');
+  var archiver = require('archiver');
   var gitStatus = Promise.promisify(gift.status,gift);
   var commit = Promise.promisify(gift.commit,gift);
   var commitHistory = Promise.promisify(gift.getHistory,gift);
@@ -39,9 +40,6 @@
     ///////////////////////////////////
 
     function openGridFile(scope, filePath, cb) {
-      // console.log('opening grid file from the converter', filePath);
-      // console.log(currentWorkbook.data);
-
       currentWorkbook.data.gridFilePath = filePath;
       currentWorkbook.data.currentSheet = '1';
 
@@ -60,20 +58,17 @@
       extract(filePath, { dir: parentDirectory }, function(err){
         gift.getHistory(gitFolderPath, function(commits){
           currentWorkbook.data.gitCommits = commits;
-          //Setting the current Hash to be the first item in the commits array
           currentWorkbook.currentHash = commits[0];
           scope.$broadcast('git-commits-change');
           console.log(currentWorkbook.data);
 
-          // cleanup
-          // move contents to hidden folder
+          // cleanup temp files
           ncp(unzippedFolderPath, hiddenFolderPath, function(err){
             if (err) {
               return console.error(err);
             }
             console.log('done!');
 
-            // delete the visible unzipped folder
             rimraf(unzippedFolderPath, function(err){
               cb();
               if (err) throw err;
@@ -89,70 +84,47 @@
       console.log('xlsxToGrid');
       parsexcel(filePath, function(err, parsexcelOutput) {
         if (err) {console.log(err); };
-        console.log(parsexcelOutput);
 
         setTimeout(function() {
           chooseFile('#folderDialog', function(directoryPath) {
-            // console.log('chooseFile:', directoryPath);
 
             var importedWorkbook = new Workbook(parsexcelOutput, {xlsx: true});
-
-
-            // get filepath for hidden folder
             var hiddenFolderName = filePath.split('/').pop().replace('.xlsx', '');
             var hiddenFolderPath = path.join(directoryPath, '.' + hiddenFolderName);
 
-            console.log(hiddenFolderPath);
             gridify(hiddenFolderPath, importedWorkbook, function() {
-              // initialize git repo
-              console.log('initializing the repo.');
               gift.init(hiddenFolderPath, function(err, _repo){
-                // add all files
-                console.log('adding all teh files');
                 gift.add(hiddenFolderPath, '.');
-
-
-                // commit -m "initial commit"
                 commit(hiddenFolderPath, 'Initial commit')
                   .then(function(commitStatus){
                   gift.getHistory(hiddenFolderPath,function(commits,err){
-                    //Changes the commits stored in the currentWorkbook factory
                     currentWorkbook.data.gitCommits = commits;
-                    //Setting the current Hash to be the first item in the commits array
                     currentWorkbook.currentHash = commits[0];
-                    //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
-                    scope.$apply(function(){
-                      scope.$broadcast('git-commits-change');
-                    })
                     renderSheet(importedWorkbook, 1);
 
+                    // zip up to .grid using archiver
+                    var output = fs.createWriteStream(path.join(directoryPath, hiddenFolderName + '.grid'));
+                    var archive = archiver('zip');
+                    output.on('close', function() { /* done zipping */ });
+                    archive.on('error', function(err) { throw err });
+                    archive.pipe(output);
+                    archive.bulk([
+                      { expand: true, cwd: hiddenFolderPath, src: ['**/*'] }
+                    ]).finalize();
                   });
                 })
-                // gift.commit(hiddenFolderPath, 'Initial commit', function(err){
-                //   scope.$broadcast('git-commits-change');
-                //   // zip it
-                //   // and render spreadsheet
-                // })
               });
-
-              console.log('complete');
-            })
-
-
-
+            });
           });
         }, 1000);
-
-      })
+      });
     }
 
     function parseGrid(folderPath, cb) {
       var dataObj = {};
-      // first get all of sheets in the csv folder
       fs.readdir(path.join(folderPath, '/csv'), function(err, files){
         if (err) throw err;
 
-        // iterate through each folder, ignore hidden stuff
         async.each(files, function(folderOrFileName, eachCallback){
           if (folderOrFileName[0] === '.'){
             eachCallback('not a valid folder');
@@ -165,16 +137,13 @@
           dataObj[folderOrFileName]['formulas'] = [];
           dataObj[folderOrFileName]['styles'] = [];
 
-          // process contents of each sheet folder in parallel
           async.parallel([
-            // values
             function(parallelCallback){
               converter.csvToArray(path.join(sheetFolderPath, 'values.csv'), function(values){
                 dataObj[folderOrFileName]['values'] = values;
                 parallelCallback();
               });
             },
-            // formulas
             function(parallelCallback){
               converter.csvToArray(path.join(sheetFolderPath, 'formulas.csv'), function(formulas){
                 dataObj[folderOrFileName]['formulas'] = formulas;
@@ -182,27 +151,20 @@
               });
             }
           ], function(){
-            // will execute when all the other functions finished
             eachCallback('all folders have been processed');
           });
 
         }, function(err){
-          // process metadata before invoking callback
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
             dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
             cb(dataObj);
           });
         });
-
       });
-
-
     }
 
     // run callback after gridify had created the file structure
     function gridify(folderPath, workbookInstance, callback) {
-      // console.log('folderPath:', folderPath);
-      // console.log('workbookInstance:', workbookInstance);
 
       var config = {};
       config.sheetNames = {};
@@ -212,7 +174,6 @@
         sheetNames.push(sheetName);
       }
 
-      // make the hidden folder unless it already exists, plus make a csv/ folder
       if (!fs.existsSync(folderPath)){
         fs.mkdirSync(folderPath);
         fs.mkdirSync(path.join(folderPath, 'csv/'));
@@ -221,7 +182,6 @@
       async.each(sheetNames, function(sheetName, eachCallback){
 
         var sheetFolderPath = path.join(folderPath, 'csv/' + sheetName);
-        // make the sheet folder if it doesn't already exist
         if (!fs.existsSync(sheetFolderPath)){
           fs.mkdirSync(sheetFolderPath);
         }
@@ -256,13 +216,11 @@
     }
 
     function changeToCommit(filePath,targetHash){
-
-        checkOut(filePath,targetHash).then(function(){
-          //Setting the current Hash to be the first item in the commits array
-          currentWorkbook.currentHash = targetHash;
-        }).catch(function(e){
-          console.log(e);
-        })
+      checkOut(filePath,targetHash).then(function(){
+        currentWorkbook.currentHash = targetHash;
+      }).catch(function(e){
+        console.log(e);
+      });
     }
 
     function chooseFile(name, cb) {
@@ -272,8 +230,6 @@
       });
 
       chooser.trigger('click');
-
-
     }
 
     //Make a commit with the current state of the files
