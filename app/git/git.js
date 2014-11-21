@@ -9,15 +9,16 @@ module.exports = {
   getHistory: _hist,
   init: _init,
   status: _status
-} 
+}
 
 ////////////
 
-function _add(rootFilePath, fileName) {
+function _add(rootFilePath, fileName, callback) {
 
   var repo = gift(rootFilePath);
 
   repo.add(fileName, function(err) {
+		callback();
     console.log(err);
   });
 }
