@@ -47,7 +47,7 @@ In this case `.git` would just be the normal git directory structure as you woul
 
 ## Programmatic Git Workflow
 
-GridHub uses a single-branch git versioning strategy applied to the `csv` folder. TODO: breakdown of user buttons as they relate to specific git commands.
+GridHub uses an opinionated git versioning strategy applied to the unzipped folder after opening a `.grid` file.
 
 ## Workbook Class API
 `new Workbook(<dataObj>,<options>);`

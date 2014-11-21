@@ -78,9 +78,16 @@
     }
 
     function xlsxToGrid(scope, filePath, cb) {
+      // $("#activate-modal").leanModal();
 
       parsexcel(filePath, function(err, parsexcelOutput) {
         if (err) {console.log(err); };
+
+        bootbox.hideAll();
+        bootbox.dialog({
+          title: 'Folder Select',
+          message: 'Please select the folder where you want to save the .grid file'
+        });
 
         setTimeout(function() {
           chooseFile('#folderDialog', function(directoryPath) {
@@ -114,7 +121,7 @@
               });
             });
           });
-        }, 1000);
+        }, 3000);
       });
     }
 
@@ -133,8 +140,8 @@
       // first get all of sheets in the csv folder
       readDirPromised(path.join(folderPath, '/csv'))
         // iterate through each folder, ignore hidden stuff
-        .filter(function(folderOrFileName){ 
-          return folderOrFileName[0] !== '.' 
+        .filter(function(folderOrFileName){
+          return folderOrFileName[0] !== '.'
         })
         // transform each file into grid data
         .map(function(folderOrFileName){
@@ -144,7 +151,7 @@
           dataObj[folderOrFileName]['values'] = [];
           dataObj[folderOrFileName]['formulas'] = [];
           dataObj[folderOrFileName]['styles'] = [];
-          
+
           return valuesPromised().then(function(){
             return formulasPromised().then(function(){
               return;
