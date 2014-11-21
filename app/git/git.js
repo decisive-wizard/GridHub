@@ -38,11 +38,7 @@ function _checkout(rootFilePath, targetHash, callback) {
 function _commit(rootFilePath, message,callback) {
  var resolvedPath = path.resolve(rootFilePath);
 
- console.log('This is the resolved path',resolvedPath);
-
  var repo = gift(resolvedPath);
-
- console.log('this is the repo',repo);
 
  repo.commit(message, {all: true, amend: false, author: 'John Heroy <johnheroy@gmail.com>'}, function(err) {
    callback(err,'OK');
@@ -73,11 +69,9 @@ function _init(rootFilePath, callback) {
     if (!exists) {
       gift.init(resolvedPath, function(err, repo) {
         if (err) {console.log(err);}
-        console.log('Initialized empty git repository in', resolvedPath);
 				callback(err, repo);
       });
     } else {
-      console.log('Git repository already exists in', resolvedPath);
 			callback();
     }
   });

@@ -27,10 +27,8 @@
     }, function(newVal, oldVal, scope){
       if (typeof newVal !== 'undefined'){
         gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-          setTimeout(function(){
-            var workbook = new Workbook(dataObj, {grid: true});
-            renderSheet(workbook, 1);
-          }, 100)
+          var workbook = new Workbook(dataObj, {grid: true});
+          renderSheet(workbook, 1);
         });
       }
     },true);
@@ -40,16 +38,11 @@
         if (filePath.match(gridRegex)) {
           currentWorkbook.data.win.title = 'GridHub - ' + filePath;
           gridFileFormatConverter.openGridFile($scope, filePath, function(){
-            console.log('this is how I did it before',$scope.currentWorkbook.data.tempFolderPath);
             gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-              setTimeout(function(){
-                var workbook = new Workbook(dataObj, {grid: true});
-                renderSheet(workbook, 1);
-              }, 100)
+              var workbook = new Workbook(dataObj, {grid: true});
+              renderSheet(workbook, 1);
             });
           });
-        } else {
-          console.error('is not a .grid file');
         }
       });
     }
@@ -62,11 +55,8 @@
 
           gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
             
-            console.log('yoloswag');
           });
 
-        } else {
-          console.log('this is not a .xlsx file');
         }
 
       });

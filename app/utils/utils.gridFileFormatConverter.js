@@ -60,14 +60,12 @@
           currentWorkbook.data.gitCommits = commits;
           currentWorkbook.currentHash = commits[0];
           scope.$broadcast('git-commits-change');
-          console.log(currentWorkbook.data);
 
           // cleanup temp files
           ncp(unzippedFolderPath, hiddenFolderPath, function(err){
             if (err) {
               return console.error(err);
             }
-            console.log('done!');
 
             rimraf(unzippedFolderPath, function(err){
               cb();
@@ -81,7 +79,6 @@
 
     function xlsxToGrid(scope, filePath, cb) {
 
-      console.log('xlsxToGrid');
       parsexcel(filePath, function(err, parsexcelOutput) {
         if (err) {console.log(err); };
 
@@ -123,46 +120,65 @@
 
     function parseGrid(folderPath, cb) {
       var dataObj = {};
-      fs.readdir(path.join(folderPath, '/csv'), function(err, files){
-        if (err) throw err;
 
-        async.each(files, function(folderOrFileName, eachCallback){
-          if (folderOrFileName[0] === '.'){
-            eachCallback('not a valid folder');
-            return;
-          }
+      var readDirPromised = function(directoryPath){
+        return new Promise(function(resolve,reject){
+          fs.readdir(directoryPath,function(err,files){
+            if (err) reject(err);
+            resolve(files);
+          });
+        })
+      };
+
+      // first get all of sheets in the csv folder
+      readDirPromised(path.join(folderPath, '/csv'))
+        // iterate through each folder, ignore hidden stuff
+        .filter(function(folderOrFileName){ 
+          return folderOrFileName[0] !== '.' 
+        })
+        // transform each file into grid data
+        .map(function(folderOrFileName){
 
           var sheetFolderPath = path.join(folderPath, 'csv/' + folderOrFileName);
           dataObj[folderOrFileName] = {};
           dataObj[folderOrFileName]['values'] = [];
           dataObj[folderOrFileName]['formulas'] = [];
           dataObj[folderOrFileName]['styles'] = [];
-
-          async.parallel([
-            function(parallelCallback){
-              converter.csvToArray(path.join(sheetFolderPath, 'values.csv'), function(values){
-                dataObj[folderOrFileName]['values'] = values;
-                parallelCallback();
-              });
-            },
-            function(parallelCallback){
-              converter.csvToArray(path.join(sheetFolderPath, 'formulas.csv'), function(formulas){
-                dataObj[folderOrFileName]['formulas'] = formulas;
-                parallelCallback();
-              });
-            }
-          ], function(){
-            eachCallback('all folders have been processed');
+          
+          return valuesPromised().then(function(){
+            return formulasPromised().then(function(){
+              return;
+            });
           });
 
-        }, function(err){
+          // values
+          function valuesPromised(){
+            return new Promise(function(resolve,reject){
+              converter.csvToArray(path.join(sheetFolderPath, 'values.csv'), function(values){
+                dataObj[folderOrFileName]['values'] = values;
+                resolve();
+              });
+            });
+          }
+
+          // formulas
+          function formulasPromised(){
+            return new Promise(function(resolve,reject){
+              converter.csvToArray(path.join(sheetFolderPath, 'formulas.csv'), function(formulas){
+                dataObj[folderOrFileName]['formulas'] = formulas;
+                resolve();
+              });
+            });
+          }
+
+        })
+        .then(function(){
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
             dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
             cb(dataObj);
           });
         });
-      });
-    }
+      }
 
     // run callback after gridify had created the file structure
     function gridify(folderPath, workbookInstance, callback) {
