@@ -260,30 +260,36 @@
       gitStatus(filePath).then(function(status,blag){
         // This checks if there is anything to be committed
         if(status.clean){
-          alert('Nothing to be committed');
+          bootbox.dialog({
+            title: 'Snapshot',
+            message: '<p id="modal-text">There is nothing to be committed!</p>'
+          });
+          
         }else{
           //Prompts the user for a commit message
-          var message = prompt('Short Description of the Snapshot you are taking:');
-          //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
-          if(message !== null){
-            gift.add(filePath, '.', function(){
-              commit(filePath,message).then(function(commitStatus){
-                gift.getHistory(filePath,function(commits,err){
-                  //Changes the commits stored in the currentWorkbook factory
-                  currentWorkbook.data.gitCommits = commits;
-                  //Setting the current Hash to be the first item in the commits array
-                  currentWorkbook.currentHash = commits[0];
-                  //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
-                  scope.$apply(function(){
-                    scope.$broadcast('git-commits-change');
+          bootbox.prompt("Insert a description for your Snapshot", function(message) {                
+            if(message !== null){
+              gift.add(filePath, '.', function(){
+                commit(filePath,message).then(function(commitStatus){
+                  gift.getHistory(filePath,function(commits,err){
+                    //Changes the commits stored in the currentWorkbook factory
+                    currentWorkbook.data.gitCommits = commits;
+                    //Setting the current Hash to be the first item in the commits array
+                    currentWorkbook.currentHash = commits[0];
+                    //A (less) hacky way to update the sidebar - Got the idea from the Angula Ng-click Native Implementation
+                    scope.$apply(function(){
+                      scope.$broadcast('git-commits-change');
+                    });
                   });
+                }).catch(function(e){
+                  console.log('error on hist',e);
                 });
-              }).catch(function(e){
-                console.log('error on hist',e);
               });
-            });
-          }
-        }
+            }
+            
+          });
+         }
+          //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)
       }).catch(function(e){
         console.log('Inside Catch',e);
       });
