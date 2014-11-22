@@ -105,6 +105,9 @@
                       currentWorkbook.data.gitCommits = commits;
                       currentWorkbook.currentHash = commits[0];
                       renderSheet(importedWorkbook, 1);
+                      scope.$apply(function(){
+                          scope.$broadcast('git-commits-change');
+                      });
 
                       // zip up to .grid using archiver
                       var output = fs.createWriteStream(path.join(directoryPath, hiddenFolderName + '.grid'));
@@ -123,6 +126,7 @@
           });
         }, 3000);
       });
+    
     }
 
     function parseGrid(folderPath, cb) {
