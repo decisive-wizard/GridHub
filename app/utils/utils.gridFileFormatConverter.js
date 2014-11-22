@@ -104,7 +104,6 @@
                     gift.getHistory(hiddenFolderPath,function(commits,err){
                       currentWorkbook.data.gitCommits = commits;
                       currentWorkbook.currentHash = commits[0];
-                      renderSheet(importedWorkbook, 1);
                       scope.$apply(function(){
                           scope.$broadcast('git-commits-change');
                       });
@@ -118,15 +117,17 @@
                       archive.bulk([
                         { expand: true, cwd: hiddenFolderPath, src: ['**/*'] }
                       ]).finalize();
+
+                      cb(importedWorkbook);
                     });
                   });
                 });
               });
             });
           });
-        }, 3000);
+        }, 2000);
       });
-    
+
     }
 
     function parseGrid(folderPath, cb) {
@@ -268,10 +269,10 @@
             title: 'Snapshot',
             message: '<p id="modal-text">There is nothing to be committed!</p>'
           });
-          
+
         }else{
           //Prompts the user for a commit message
-          bootbox.prompt("Insert a description for your Snapshot", function(message) {                
+          bootbox.prompt("Insert a description for your Snapshot", function(message) {
             if(message !== null){
               gift.add(filePath, '.', function(){
                 commit(filePath,message).then(function(commitStatus){
@@ -290,7 +291,7 @@
                 });
               });
             }
-            
+
           });
          }
           //Stage every files for the commit - Might change this to only add the fomulas.csv, values (...)

@@ -27,8 +27,8 @@
     }, function(newVal, oldVal, scope){
       if (typeof newVal !== 'undefined'){
         gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-          var workbook = new Workbook(dataObj, {grid: true});
-          renderSheet(workbook, 1);
+          currentWorkbook.currentInstance = new Workbook(dataObj, {grid: true});
+          renderSheet(currentWorkbook.currentInstance, 1);
         });
       }
     },true);
@@ -39,8 +39,8 @@
           currentWorkbook.data.win.title = 'GridHub - ' + filePath;
           gridFileFormatConverter.openGridFile($scope, filePath, function(){
             gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-              var workbook = new Workbook(dataObj, {grid: true});
-              renderSheet(workbook, 1);
+              currentWorkbook.currentInstance = new Workbook(dataObj, {grid: true});
+              renderSheet(currentWorkbook.currentInstance, 1);
             });
           });
         }
@@ -57,8 +57,10 @@
         });
         setTimeout(function(){
           if (filePath.match(xlsxRegex)) {
-            gridFileFormatConverter.xlsxToGrid($scope, filePath, function() {
+            gridFileFormatConverter.xlsxToGrid($scope, filePath, function(workbook) {
               bootbox.hideAll();
+              currentWorkbook.currentInstance = workbook;
+              renderSheet(currentWorkbook.currentInstance, 1);
             });
           }
         }, 1000);
