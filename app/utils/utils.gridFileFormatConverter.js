@@ -260,12 +260,11 @@
       gitStatus(filePath).then(function(status,blag){
         // This checks if there is anything to be committed
         if(status.clean){
-
           bootbox.dialog({
             title: 'Snapshot',
             message: '<p id="modal-text">There is nothing to be committed!</p>'
           });
-          // alert('Nothing to be committed');
+          
         }else{
           //Prompts the user for a commit message
           bootbox.prompt("Insert a description for your Snapshot", function(message) {                
