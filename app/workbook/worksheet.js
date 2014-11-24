@@ -105,19 +105,9 @@ function gridToGridFormat(dataObj){
 }
 
 
-
-function writeFileCallback() {
-  // console.log('file successfully saved');
-}
-
 Worksheet.prototype.afterChange = function(changes, source){
   // cell value has changed
-  // continually save files
-  // var currentDir = process.env.PWD;
-  // var data = this.getData();
-  // if (metaData.filePath !== undefined){
-  //   converter.arrayToCsv(data, metaData.filePath, writeFileCallback);
-  // }
+
 };
 
 Worksheet.prototype.afterSelection = function(r, c, r2, c2){

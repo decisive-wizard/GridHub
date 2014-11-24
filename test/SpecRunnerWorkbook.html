@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GridHub Test Suite</title>
+  <link rel="stylesheet" media="all" href="../node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="../bower_components/handsontable/dist/jquery.handsontable.full.css"></link>
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/handsontable/dist/jquery.handsontable.full.js"></script>
+
+  <!-- workbook -->
+  <script src="../app/workbook/blankcell.js"></script>
+  <script src="../app/workbook/formulaJsCompatabilityCheck.js"></script>
+  <script src="../app/workbook/cellRenderer.js"></script>
+  <script src="../app/workbook/cellEditor.js"></script>
+
+  <!-- Rule Js Implementation  -->
+  <script src="../node_modules/lodash/dist/lodash.js"></script>
+  <script src="../lib/RuleJS/lib/underscore.string/underscore.string.js"></script>
+  <script src="../lib/RuleJS/lib/moment/moment.js"></script>
+  <script src="../lib/RuleJS/lib/numeral/numeral.js"></script>
+  <script src="../lib/RuleJS/lib/numericjs/numeric.js"></script>
+  <script src="../lib/RuleJS/lib/js-md5/md5.js"></script>
+  <script src="../lib/RuleJS/lib/jstat/jstat.js"></script>
+  <script src="../lib/RuleJS/lib/formulajs/formula.js"></script>
+  <script src="../lib/RuleJS/js/parser.js"></script>
+  <script src="../lib/RuleJS/js/ruleJS.js"></script>
+  <script src="../lib/RuleJS/js/handsontable.formula.js"></script>
+
+  <!-- workbook continued -->
+  <script src="../app/workbook/style.js"></script>
+  <script src="../app/workbook/worksheet.js"></script>
+  <script src="../app/workbook/workbook.js"></script>
+  <script src="../app/workbook/formulaBar.js"></script>
+  <script src="../app/sheetRender.js"></script>
+
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>
+    mocha.setup('bdd');
+    mocha.reporter('html');
+  </script>
+  <!-- Required src files here -->
+  <script src="testWorkbook.js"></script>
+</head>
+
+<body>
+  <script>
+  $(function(){
+    mocha.run()
+  });
+  </script>
+
+  <div id="mocha"></div>
+  <div id="spreadsheet"></div>
+
+
+</body>
+</html>
