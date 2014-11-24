@@ -96,6 +96,8 @@
             var hiddenFolderName = filePath.split('/').pop().replace('.xlsx', '');
             var hiddenFolderPath = path.join(directoryPath, '.' + hiddenFolderName);
 
+            currentWorkbook.data.tempFolderPath = hiddenFolderPath;
+
             gridify(hiddenFolderPath, importedWorkbook, function() {
               gift.init(hiddenFolderPath, function(err, _repo){
                 gift.add(hiddenFolderPath, '.', function(){
