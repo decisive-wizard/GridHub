@@ -96,6 +96,8 @@
             var hiddenFolderName = filePath.split('/').pop().replace('.xlsx', '');
             var hiddenFolderPath = path.join(directoryPath, '.' + hiddenFolderName);
 
+            currentWorkbook.data.tempFolderPath = hiddenFolderPath;
+
             gridify(hiddenFolderPath, importedWorkbook, function() {
               gift.init(hiddenFolderPath, function(err, _repo){
                 gift.add(hiddenFolderPath, '.', function(){
@@ -131,6 +133,7 @@
     }
 
     function parseGrid(folderPath, cb) {
+      console.log('INVOKING PARSE GRID');
       var dataObj = {};
 
       var readDirPromised = function(directoryPath){
@@ -186,7 +189,7 @@
         })
         .then(function(){
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
-            dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
+            dataObj['meta'] = JSON.parse(config.toString()).sheetNames;
             cb(dataObj);
           });
         });

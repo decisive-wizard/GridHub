@@ -1,23 +1,25 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.utils')
-        .controller('syncRibbonController', Ctrl);
+  angular
+    .module('app.utils')
+    .controller('syncRibbonController', Ctrl);
 
 	Ctrl.$inject = ['$scope', 'currentWorkbook','gridFileFormatConverter'];
 
-  /* @ngInject */
   function Ctrl($scope, currentWorkbook,gridFileFormatConverter) {
-        /*jshint validthis: true */
-         $scope.takeSnapshot = takeSnapshot;
+    $scope.takeSnapshot = takeSnapshot;
 
-         function takeSnapshot(){
-        	gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
-        }
-
-        $scope.$on('git-commits-change', function(){
-          $scope.$digest();
-        });
+    function takeSnapshot(){
+      console.log(currentWorkbook);
+      console.log(currentWorkbook.data.tempFolderPath, 'temp folder path');
+      gridFileFormatConverter.gridify(currentWorkbook.data.tempFolderPath, currentWorkbook.currentInstance, function(){
+      	gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
+      });
     }
+
+    $scope.$on('git-commits-change', function(){
+      $scope.$digest();
+    });
+  }
 })();
