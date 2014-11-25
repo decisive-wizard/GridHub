@@ -22,16 +22,21 @@
     $scope.openRepository = openRepository;
     $scope.importXLSX = importXLSX;
 
-   $scope.$watchCollection(function(){
+   $scope.$watch(function(){
       return currentWorkbook.currentHash;
     }, function(newVal, oldVal, scope){
-      if (typeof newVal !== 'undefined'){
+      if (typeof newVal !== 'undefined' && typeof oldVal !== 'undefined'){
+        console.log('WATCHED THE COLLECTION');
         gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
+          console.log('DATA OBJ IN SHELL JS', dataObj);
           currentWorkbook.currentInstance = new Workbook(dataObj, {grid: true});
+          console.log('WORKBOOK INSTANCE IN SHELL JS', JSON.stringify(currentWorkbook.currentInstance));
+          console.log('CURRENT WORKBOOK INSTANCE IN SHELL JS');
+          console.log(currentWorkbook.currentInstance);
           renderSheet(currentWorkbook.currentInstance, 1);
         });
       }
-    },true);
+    });
 
     function openRepository() {
       chooseFile('#fileDialog', function(filePath){
@@ -58,6 +63,7 @@
         setTimeout(function(){
           if (filePath.match(xlsxRegex)) {
             gridFileFormatConverter.xlsxToGrid($scope, filePath, function(workbook) {
+              console.log('WORKBOOK IN IMPORT XLSX', JSON.stringify(Workbook));
               console.log('im back after the callback', workbook);
               bootbox.hideAll();
               currentWorkbook.currentInstance = workbook;

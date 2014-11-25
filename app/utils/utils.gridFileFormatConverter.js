@@ -133,6 +133,7 @@
     }
 
     function parseGrid(folderPath, cb) {
+      console.log('INVOKING PARSE GRID');
       var dataObj = {};
 
       var readDirPromised = function(directoryPath){
@@ -188,7 +189,7 @@
         })
         .then(function(){
           fs.readFile(path.join(folderPath, 'config.json'), function(err, config){
-            dataObj['meta'] = JSON.parse(config.toString()).worksheetNames;
+            dataObj['meta'] = JSON.parse(config.toString()).sheetNames;
             cb(dataObj);
           });
         });
