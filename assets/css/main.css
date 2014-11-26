@@ -426,43 +426,48 @@ h2 {
   height: calc(100vh - 114px);
   width: calc(100vw);
 }
-.table-container .sheet-select li a {
+.table-container .sheet-select {
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dbdbdb), color-stop(1, #fcfcfc));
+  background-image: -o-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: -moz-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: -webkit-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: -ms-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: linear-gradient(to top, #dbdbdb 0%, #fcfcfc 100%);
+}
+.table-container li a {
   color: #000;
   background-color: #808080;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0;
   height: 30px;
   padding-top: 4px;
 }
-.table-container .sheet-select li a:hover {
+.table-container li a:hover {
   background-color: #808080;
   border: none;
 }
-.table-container .sheet-select li.active a {
-  color: #000;
-  background-color: #fff;
-  border-radius: 0 0 10px 10px;
+.table-container li.active a {
   height: 30px;
   padding-top: 4px;
 }
-.table-container .sheet-select li.active a:hover {
+.table-container li.active a:hover {
   background-color: #fff;
   color: #000;
 }
-.table-container li {
-  font-weight: bold;
+li {
+  font-weight: normal;
 }
-.table-container li a:hover {
+li a:hover {
   color: #000;
 }
-.table-container li.active {
+li.active {
   border-bottom: 1px solid #294c71;
 }
-.table-container li.active a {
+li.active a {
   border: none;
   color: #fff;
   background-color: #294c71;
 }
-.table-container li.active a:hover {
+li.active a:hover {
   border: none;
   background-color: #294c71;
   color: #fff;

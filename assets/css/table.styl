@@ -7,11 +7,24 @@
     width calc(100vw)
     
   .sheet-select
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, #DBDBDB),
+      color-stop(1, #FCFCFC)
+    );
+      background-image: -o-linear-gradient(top, #DBDBDB 0%, #FCFCFC 100%);
+      background-image: -moz-linear-gradient(top, #DBDBDB 0%, #FCFCFC 100%);
+      background-image: -webkit-linear-gradient(top, #DBDBDB 0%, #FCFCFC 100%);
+      background-image: -ms-linear-gradient(top, #DBDBDB 0%, #FCFCFC 100%);
+      background-image: linear-gradient(to top, #DBDBDB 0%, #FCFCFC 100%);
+
     li
       a
         color black
         background-color grey
-        border-radius 0 0 10px 10px
+        border-radius 0 
         height 30px
         padding-top 4px
         &:hover
@@ -19,16 +32,13 @@
           border none
     li.active
       a
-        color black
-        background-color white
-        border-radius 0 0 10px 10px
         height 30px
         padding-top 4px
         &:hover
           background-color white
           color black
   li
-    font-weight bold
+    font-weight normal
     a:hover
       color black
   li.active
