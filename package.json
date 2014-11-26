@@ -8,6 +8,7 @@
     "width": 1000,
     "height": 650
   },
+  "chromium-args" : "--ignore-certificate-errors",
   "scripts": {
     "test": "mocha"
   },
@@ -44,7 +45,8 @@
     "lodash": "^2.4.1",
     "ncp": "^1.0.1",
     "parsexcel.js": "https://github.com/decisive-wizard/parsexcel.js/tarball/master",
-    "rimraf": "^2.2.8"
+    "rimraf": "^2.2.8",
+    "socket.io-client": "^1.2.1"
   },
   "devDependencies": {
     "chai": "^1.9.2",
@@ -52,4 +54,5 @@
     "gulp-stylus": "^1.3.4",
     "mocha": "^2.0.1"
   }
+  
 }
