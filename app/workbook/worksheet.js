@@ -71,7 +71,7 @@ function xlsxToGridFormat(dataArrOfArrOfObj){
         if (typeof cell !== 'string' && cell !== null){
           gridCell.style = new XlsxStyleImport(cell.style);
           gridCell.value = (cell.formula === "") ? cell.value : "";
-          gridCell.formula = '=' + cell.formula;
+          gridCell.formula = cell.formula ? '=' + cell.formula : "";
         } else {
           gridCell.style = new BaseStyle();
           gridCell.value = "";
