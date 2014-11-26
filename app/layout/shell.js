@@ -16,6 +16,16 @@
 
   function ShellController ($scope, currentWorkbook, gridFileFormatConverter){
 
+    $scope.takeSnapshot = takeSnapshot;
+
+    function takeSnapshot(){
+      console.log(currentWorkbook);
+      console.log(currentWorkbook.data.tempFolderPath, 'temp folder path');
+      gridFileFormatConverter.gridify(currentWorkbook.data.tempFolderPath, currentWorkbook.currentInstance, function(){
+        gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
+      });
+    }
+
     $scope.currentWorkbook = currentWorkbook;
 
     // Funtions:

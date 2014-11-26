@@ -7,7 +7,7 @@
 
 	Ctrl.$inject = ['$scope', 'currentWorkbook','gridFileFormatConverter'];
 
-  function Ctrl($scope, currentWorkbook,gridFileFormatConverter) {
+  function Ctrl($scope, currentWorkbook, gridFileFormatConverter) {
     $scope.takeSnapshot = takeSnapshot;
 
     function takeSnapshot(){
