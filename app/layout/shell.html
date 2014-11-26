@@ -1,60 +1,74 @@
+<div class='wrapper'>
 
-   <div class='wrapper'>
-    <div class="sidebar-wrapper">
-        <nav class="spy">
-            <ul class="sidebar-nav nav">
-              <li>
-                  <div class="share">
-                    <button type="button" class="btn btn-success btn-outline new-project-btn" >
-                        New
-                    </button>
-                    <button type="button" ng-click="openRepository()" class="btn btn-primary btn-outline open-project-btn" >
-                        Open
-                    </button>
-                    <button type="button" ng-click="importXLSX()" class="btn btn-primary btn-outline import-file-btn" >
-                      <i class="fa fa-file-excel-o"></i> Import
-                    </button>
-                    <button class="btn btn-tabs" ng-click='takeSnapshot()'><i class="fa fa-camera"></i> Take a Snapshot</button>
-                  </div>
-              </li>
+  <div class="my-spreadsheet-ribon">
+  </div>
 
-                  <!-- End of the Project Wrapper -->
-                    <li>
-                      <a href="#anch1" data-scroll class='sectionHeader feed'>
-                        <div>
-                          <i class="fa fa-camera"></i>
-                          <span class="fa solo">Snapshot History</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li >
-                <!-- Wrapper for the update feed - Yes, a Ul inside a Li, with its own happy li`s -->
+
+
+
+
+
+
+
+
+
+
+<div class="sidebar-wrapper">
+    <nav class="spy">
+        <ul class="sidebar-nav nav">
+
+          <li>
+              <div class="share">
+                <button type="button" class="btn btn-success btn-outline new-project-btn" >
+                    New
+                </button>
+                <button type="button" ng-click="openRepository()" class="btn btn-primary btn-outline open-project-btn" >
+                    Open
+                </button>
+                <button type="button" ng-click="importXLSX()" class="btn btn-primary btn-outline import-file-btn" >
+                  <i class="fa fa-file-excel-o"></i> Import
+                </button>
+                <button class="btn btn-tabs" ng-click='takeSnapshot()'><i class="fa fa-camera"></i> Take a Snapshot</button>
+              </div>
+          </li>
+
+              <!-- End of the Project Wrapper -->
+                <li>
+                  <a href="#anch1" data-scroll class='sectionHeader feed'>
+                    <div>
+                      <i class="fa fa-camera"></i>
+                      <span class="fa solo">Snapshot History</span>
+                    </div>
+                  </a>
+                </li>
+                <li >
+            <!-- Wrapper for the update feed - Yes, a Ul inside a Li, with its own happy li`s -->
 <!--
-                    <ul class='feedWrapper'>
+                <ul class='feedWrapper'>
 
-                    </ul> -->
-                    <snap-shots></snap-shots>
-                      <!-- End of the Feed Wrapper -->
-                  </li>
-                  <li >
-                    <a class='sectionFooter feed'>
-                      Powered by D. Wizards
-                    </a>
-                  </li>
-             </ul>
-        </nav>
-    </div>
-    <div class='page-content-wrapper no-scroll'>
-      <div class='row'>
+                </ul> -->
+                <snap-shots></snap-shots>
+                  <!-- End of the Feed Wrapper -->
+              </li>
+              <li >
+                <a class='sectionFooter feed'>
+                  Powered by D. Wizards
+                </a>
+              </li>
+         </ul>
+    </nav>
+</div>
+<div class='page-content-wrapper no-scroll'>
+  <div class='row'>
 
-        <div class="col-md-12">
+    <div class="col-md-12">
 
-          <spread-sheet></spread-sheet>
-          
-
-          </div>
-        </div>
+      <spread-sheet></spread-sheet>
+      
 
       </div>
     </div>
+
   </div>
+</div>
+</div>

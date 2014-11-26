@@ -11,7 +11,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: -webkit-linear-gradient(right, #121b32, #1a2e50); /* For Safari 5.1 to 6.0 */
+  background-color: #9c9c9c;
 }
 #loading-overlay {
   position: fixed;
@@ -130,6 +130,14 @@ a {
 }
 .no-scroll {
   overflow-x: hidden;
+}
+.my-spreadsheet-ribon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #d2d2d2;
 }
 .wrapper {
   margin-top: 100px;
