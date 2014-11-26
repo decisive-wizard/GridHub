@@ -6,7 +6,9 @@
       'app.widgets',
       'app.utils',
       'ui.router'
-    ]).run(function($state) {
+    ])
+
+    .run(function($state) {
       $state.go('main');
     });
 })();

@@ -3,14 +3,16 @@
   <div class="my-spreadsheet-ribon">
   </div>
 
+  <div class="my-sidebar-toggle-button">
+    <button class="btn btn-primary" ng-click="toggleSidebar()" ng-class="{'slide-out':boolChangeClass}">TOGGLE SIDEBAR</button>
+  </div>
 
-
-
-
-
-
-
-
+  <div class="sidebar" ng-class="{'slide-out':boolChangeClass}">
+    <button class="btn" ng-click="openRepository()">OPEN</button>
+    <button class="btn" ng-click="importXLSX()">IMPORT</button>
+    <button class="btn" ng-click="takeSnapshot()">SNAPSHOT</button>
+    <snap-shots></snap-shots>
+  </div>
 
 
 <div class="sidebar-wrapper">
@@ -47,7 +49,7 @@
                 <ul class='feedWrapper'>
 
                 </ul> -->
-                <snap-shots></snap-shots>
+                <!-- <snap-shots></snap-shots> -->
                   <!-- End of the Feed Wrapper -->
               </li>
               <li >
