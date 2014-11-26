@@ -5,21 +5,16 @@
     .module('app.utils')
     .controller('syncRibbonController', Ctrl);
 
-	Ctrl.$inject = ['$scope', 'currentWorkbook','gridFileFormatConverter','socket','$http'];
+	Ctrl.$inject = ['$scope', 'currentWorkbook','gridFileFormatConverter','$http'];
 
   function Ctrl($scope, currentWorkbook,gridFileFormatConverter,socket,$http) {
     $scope.takeSnapshot = takeSnapshot;
     $scope.upload = upload;
     $scope.mytime = 'Still waiting';
+    $scope.getLink = function(){
+      return currentWorkbook.data.tempFolderPath;
+    };
 
-    socket.on('send:time', function (data) {
-      console.log(data);
-      $scope.mytime = data.time;
-    });
-    socket.on('send:name', function (data) {
-      console.log(data);
-      $scope.mytime = data.time;
-    });
 
     function takeSnapshot(){
       console.log(currentWorkbook);
@@ -29,18 +24,23 @@
       });
     }
 
-    function upload(){
-      console.log('blah');
-      $http.get('http://10.8.32.239:3000/').success(function(data){
+    function upload(repoPath){
+
+      var formData = new FormData();
+      formData.append('file',repoPath);
+
+      $http.post({
+        method:'POST',
+        url:'http://10.8.32.239:3000/upload',
+        'Content-Type': 'multipart/form-data',
+        data:formData,
+        transformRequest: formDataObject
+
+      }).success(function(data){
         console.log(JSON.stringify(data));
       });
-      console.log('end');
-      // $scope.mytime  = 'Now';
-      // console.log('Uploading');
-      // socket.emit('init',function(data){
-      //   console.log(data);
-      //   alert(data);
-      // })
+      
+     
     }
 
     $scope.$on('git-commits-change', function(){

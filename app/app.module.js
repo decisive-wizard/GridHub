@@ -5,8 +5,8 @@
       'app.layout',
       'app.widgets',
       'app.utils',
-      'ui.router',
-      'btford.socket-io'
+      'ui.router'
+      
     ]).
     config(['$httpProvider', function($httpProvider) {
       
