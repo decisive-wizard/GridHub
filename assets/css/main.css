@@ -117,13 +117,13 @@ a {
 }
 .formula-entry {
   position: fixed;
-  top: 100px;
+  top: 50px;
   left: 250px;
 }
 .formula-entry span.input-group-addon {
   border-radius: 0;
-  padding-left: 14px;
-  padding-right: 15px;
+  padding-left: 19px;
+  padding-right: 16px;
 }
 .formula-entry input {
   border-radius: 0;
@@ -349,8 +349,8 @@ h2 {
 }
 .table-container {
   position: fixed;
-  top: 134px;
-  left: 245px;
+  top: 84px;
+  left: 250px;
 }
 .table-container #spreadsheet {
   height: calc(100vh - 164px);
