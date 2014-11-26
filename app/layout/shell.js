@@ -28,7 +28,6 @@
 
     $scope.toggleSidebar = function() {
       $scope.boolChangeClass = !$scope.boolChangeClass;
-      // $scope.$apply();
     }
 
     $scope.currentWorkbook = currentWorkbook;

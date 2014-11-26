@@ -118,7 +118,7 @@ a {
 .formula-entry {
   position: fixed;
   top: 50px;
-  left: 250px;
+  left: 0px;
 }
 .formula-entry span.input-group-addon {
   border-radius: 0;
@@ -156,6 +156,7 @@ a {
   bottom: 0px;
   left: -246px;
   padding: 10px;
+  z-index: 1000;
 }
 sidebar button {
   margin: 10px;
@@ -378,11 +379,11 @@ h2 {
 .table-container {
   position: fixed;
   top: 84px;
-  left: 250px;
+  left: 0px;
 }
 .table-container #spreadsheet {
   height: calc(100vh - 114px);
-  width: calc(100vw - 245px);
+  width: calc(100vw);
 }
 .table-container .sheet-select li a {
   color: #000;
