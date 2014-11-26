@@ -353,7 +353,7 @@ h2 {
   left: 250px;
 }
 .table-container #spreadsheet {
-  height: calc(100vh - 164px);
+  height: calc(100vh - 114px);
   width: calc(100vw - 245px);
 }
 .table-container .sheet-select li a {
