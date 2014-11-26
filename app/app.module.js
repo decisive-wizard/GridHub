@@ -5,8 +5,11 @@
       'app.layout',
       'app.widgets',
       'app.utils',
-      'ui.router'
-    ]).run(function($state) {
+      'ui.router', 
+      'ngAnimate'
+    ])
+
+    .run(function($state) {
       $state.go('main');
     });
 })();
