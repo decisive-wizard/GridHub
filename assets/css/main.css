@@ -144,6 +144,18 @@ a {
   background-image: -ms-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
   background-image: linear-gradient(to top, #dbdbdb 0%, #fcfcfc 100%);
 }
+.my-spreadsheet-ribon img {
+  height: 20px;
+}
+.my-spreadsheet-ribon ul {
+  float: left;
+}
+.my-spreadsheet-ribon ul li {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 15px;
+  float: left;
+}
 .my-sidebar-toggle-button {
   position: fixed;
   top: 10px;
