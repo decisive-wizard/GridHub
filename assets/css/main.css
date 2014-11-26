@@ -397,6 +397,12 @@ h2 {
   background-color: #294c71;
   color: #fff;
 }
+.nav-tabs > li > a {
+  margin-right: 0;
+  margin-top: 5;
+  border: none;
+  border: radius 0;
+}
 #modal-text {
   font-family: Arial;
   color: #000;
