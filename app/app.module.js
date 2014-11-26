@@ -5,7 +5,8 @@
       'app.layout',
       'app.widgets',
       'app.utils',
-      'ui.router'
+      'ui.router', 
+      'ngAnimate'
     ])
 
     .run(function($state) {

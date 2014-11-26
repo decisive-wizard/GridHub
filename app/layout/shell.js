@@ -17,6 +17,7 @@
   function ShellController ($scope, currentWorkbook, gridFileFormatConverter){
 
     $scope.takeSnapshot = takeSnapshot;
+    $scope.toggle = false;
 
     function takeSnapshot(){
       console.log(currentWorkbook);

@@ -189,8 +189,8 @@ a {
   background-image: -ms-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
   background-image: linear-gradient(to top, #dbdbdb 0%, #fcfcfc 100%);
 }
-sidebar button {
-  margin: 10px;
+.sidebar button {
+  margin: 5px;
 }
 .slide-out {
   -moz-transition: left 0.2s;
@@ -198,6 +198,16 @@ sidebar button {
   -o-transition: left 0.2s;
   transition: left 0.2s;
   left: 0px;
+}
+.my-toggle-shade {
+  position: fixed;
+  top: 50px;
+  left: 0px;
+  width: 100%;
+  height: calc(100vh - 80px);
+  background-color: #000;
+  opacity: 0.3;
+  z-index: 350;
 }
 .wrapper {
   margin-top: 400px;
