@@ -152,14 +152,17 @@ a {
 }
 .my-spreadsheet-ribon ul li {
   display: inline-block;
-  margin-left: 40px;
+  margin-left: 50px;
   margin-top: 15px;
   float: left;
 }
 .my-sidebar-toggle-button {
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 5px;
+  left: 15px;
+}
+.my-sidebar-toggle-button img {
+  height: 40px;
 }
 .sidebar {
   -moz-transition: left 0.2s;
