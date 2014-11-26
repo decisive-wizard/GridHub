@@ -182,12 +182,12 @@ a {
   padding: 10px;
   z-index: 400;
   border-right: 5px solid #4e09a5;
-  background-image: -webkit-gradient(linear, left top, left top, color-stop(0, #fff), color-stop(1, #f2e3fa));
-  background-image: -o-linear-gradient(left top, #fff 0%, #f2e3fa 100%);
-  background-image: -moz-linear-gradient(left top, #fff 0%, #f2e3fa 100%);
-  background-image: -webkit-linear-gradient(left top, #fff 0%, #f2e3fa 100%);
-  background-image: -ms-linear-gradient(left top, #fff 0%, #f2e3fa 100%);
-  background-image: linear-gradient(to left top, #fff 0%, #f2e3fa 100%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dbdbdb), color-stop(1, #fcfcfc));
+  background-image: -o-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: -moz-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: -webkit-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: -ms-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
+  background-image: linear-gradient(to top, #dbdbdb 0%, #fcfcfc 100%);
 }
 sidebar button {
   margin: 10px;
