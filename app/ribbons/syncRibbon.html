@@ -1,5 +1,6 @@
 <div class="ribbon sync-ribbon" ng-controller='syncRibbonController'>
   <button class="btn btn-tabs" ng-click='takeSnapshot()'><i class="fa fa-camera"></i> Take a Snapshot</button>
-  <button class="btn btn-tabs" ><i class="fa fa-upload"></i> Upload</button>
+  <button class="btn btn-tabs" ng-click = 'upload(getLink())'><i class="fa fa-upload"></i> Upload</button>
   <button class="btn btn-tabs"><i class="fa fa-download"></i> Download</button>
+  <span> It's dinner time {{mytime}}</span>
 </div>
