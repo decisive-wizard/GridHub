@@ -2,12 +2,13 @@
 
   <div class="my-spreadsheet-ribon">
     <ul>
-      <li><span class="mega-octicon octicon-device-camera"></span></li>
-      <li><span class="mega-octicon octicon-repo-push"></span></li>
+      <li><span class="mega-octicon octicon-plus"></span></li>
+      <li><span class="mega-octicon octicon-playback-play" ng-click="openRepository()"></span></li>
+      <li><span class="mega-octicon octicon-device-camera" ng-click="takeSnapshot()"></span></li>
+      <li><span class="mega-octicon octicon-repo-push" ng-click="importXLSX()"></span></li>
       <li><span class="mega-octicon octicon-cloud-upload"></span></img></li>
       <li><span class="mega-octicon octicon-cloud-download"></span></img></li>
-      <!-- <li><img src="assets/img/icons/undo.png"></img></li>
-      <li><img src="assets/img/icons/redo.png"></img></li> -->
+      <!-- <li><img src="assets/img/icons/redo.png"></img></li> -->
 
     </ul>
   </div>
@@ -21,9 +22,9 @@
   </div>
 
   <div class="sidebar" ng-class="{'slide-out':boolChangeClass}">
-    <button class="btn" ng-click="openRepository()">OPEN</button>
+    <!-- <button class="btn" ng-click="openRepository()">OPEN</button>
     <button class="btn" ng-click="importXLSX()">IMPORT</button>
-    <button class="btn" ng-click="takeSnapshot()">SNAPSHOT</button>
+    <button class="btn" ng-click="takeSnapshot()">SNAPSHOT</button> -->
     <snap-shots></snap-shots>
   </div>
 
