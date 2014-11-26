@@ -5,16 +5,11 @@
       'app.layout',
       'app.widgets',
       'app.utils',
-      'ui.router'
-      
-    ]).
-    config(['$httpProvider', function($httpProvider) {
-      
-            $httpProvider.defaults.useXDomain = true;
-            delete $httpProvider.defaults.headers.common['X-Requested-With'];
-      }])
-    .run(function($state,$http) {
+      'ui.router', 
+      'ngAnimate'
+    ])
+
+    .run(function($state) {
       $state.go('main');
-      $http.defaults.headers.common.Authorization = 'Basic YmVlcDpib29w';
     });
 })();

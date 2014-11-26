@@ -7,7 +7,8 @@
 
 	Ctrl.$inject = ['$scope', 'currentWorkbook','gridFileFormatConverter','$http'];
 
-  function Ctrl($scope, currentWorkbook,gridFileFormatConverter,socket,$http) {
+  function Ctrl($scope, currentWorkbook, gridFileFormatConverter) {
+
     $scope.takeSnapshot = takeSnapshot;
     $scope.upload = upload;
     $scope.mytime = 'Still waiting';
