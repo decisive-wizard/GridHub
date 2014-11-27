@@ -63,8 +63,6 @@
         setTimeout(function(){
           if (filePath.match(xlsxRegex)) {
             gridFileFormatConverter.xlsxToGrid($scope, filePath, function(workbook) {
-              console.log('WORKBOOK IN IMPORT XLSX', JSON.stringify(Workbook));
-              console.log('im back after the callback', workbook);
               bootbox.hideAll();
               currentWorkbook.currentInstance = workbook;
               renderSheet(currentWorkbook.currentInstance, 1);
