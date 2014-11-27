@@ -209,6 +209,9 @@ a {
   opacity: 0.3;
   z-index: 350;
 }
+.mega-octicon:hover {
+  cursor: pointer;
+}
 .wrapper {
   margin-top: 400px;
   padding-left: 250px;
