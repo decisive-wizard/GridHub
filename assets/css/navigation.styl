@@ -1,38 +1,9 @@
-.btn-tabs
-  background-color soft-blue
-  border 1px solid bright-blue
 
-.tab-menu
-  padding-top 10px
-  padding-left 10px
-  border none
-  position fixed
-  top 0px
-  left 250px
-  font-family Quicksand
-  font-size 16px
-  li
-    font-weight bold
-    a:hover
-      color black
-
-.ribbon
-  height 50px
-  width 100%
-  padding-top 8px
-  padding-left 10px
-  background-color light-green
-  position fixed
-  top 50px
-  left 250px
-  .btn-tabs
-    -webkit-box-shadow 2px 2px 2px 0px rgba(0,0,0,0.75)
-    font-family Quicksand-Bold
 
 .formula-entry
-  position fixed
-  top 50px
-  left 5px
+  position absolute
+  top -34px
+  left 0px
   span.input-group-addon
     border-radius 0
     padding-left 19px
@@ -42,15 +13,6 @@
 
  .no-scroll
    overflow-x hidden
-
-
-
-
-
-
-
-
-
 
 .my-spreadsheet-ribon
   position fixed
@@ -95,17 +57,12 @@
   z-index 600
 
 .my-sidebar-toggle-button img
-
   height 40px
 
 
 .sidebar
-    -moz-transition left .2s
-    -webkit-transition left .2s
-    -o-transition left .2s
-    transition left .2s
     width 250px
-    height calc(100vh - 80px)
+    height calc(100vh - 50px)
     position absolute
     top 50px
     left -246px
@@ -125,24 +82,21 @@
     background-image: -ms-linear-gradient(top, #DBDBDB 0%, #FCFCFC 100%);
     background-image: linear-gradient(to top, #DBDBDB 0%, #FCFCFC 100%);
 
+.slider 
+    -moz-transition left .2s
+    -webkit-transition left .2s
+    -o-transition left .2s
+    transition left .2s
 
 .slide-out
     -moz-transition left .2s
     -webkit-transition left .2s
     -o-transition left .2s
     transition left .2s
-    left 0px
+    left 0px !important
 
-
-.my-toggle-shade
-  position fixed
-  top 50px
-  left 0px
-  width 100%
-  height calc(100vh - 80px)
-  background-color #000000
-  opacity: 0.3;
-  z-index 350
+.slide-out-spreadsheet
+  left 246px !important
 
 .mega-octicon:hover
   cursor pointer

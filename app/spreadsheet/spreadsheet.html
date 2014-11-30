@@ -1,7 +1,9 @@
-  <div class="table-container" ng-controller = 'spreadSheetController'>
-    <formula-bar></formula-bar>
-    <div id="spreadsheet" style="overflow: auto" class="handsontable">
-    </div>
-    <ul class="nav nav-tabs sheet-select">
-    </ul>
-  </div>
+<div class="table-container slider" ng-controller = 'spreadSheetController' ng-class="{'slide-out-spreadsheet':boolChangeClass}">
+
+  <formula-bar></formula-bar>
+
+  <div id="spreadsheet" style="overflow: auto" class="handsontable"></div>
+
+  <ul class="nav nav-tabs sheet-select"></ul>
+
+</div>
