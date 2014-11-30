@@ -1,14 +1,10 @@
 <ul class='feedWrapper' ng-controller='snapshotsController'>
   <li class="project update" ng-repeat='snap in commits' ng-click='changeCommit($index)' >
-
-
-
-    <div class="message">
+    <div class="snapshot selected-snapshot">
         <a class ="innerUpdate">
-          <span>{{snap.author.name}}</span>
-          <span>{{snap.committed_date | date:'MM/dd/yyyy @ h:mma'}}</span><br>
-          <span>{{snap.message}}</span>
-          <hr>
+          <span class="snapshot-message">{{snap.message}}</span><br>
+          <span class="snapshot-date">{{snap.committed_date | date:'MM/dd/yyyy @ h:mma'}}</span><br>
+          <span class="snapshot-author">{{snap.author.name}}</span>
         </a>
     </div>
   </li>

@@ -162,8 +162,8 @@ body {
   position: absolute;
   top: 50px;
   left: -246px;
-  padding: 10px;
   z-index: 400;
+  overflow: scroll;
   border-right: 5px solid #4e09a5;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dbdbdb), color-stop(1, #fcfcfc));
   background-image: -o-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
@@ -171,9 +171,6 @@ body {
   background-image: -webkit-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
   background-image: -ms-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
   background-image: linear-gradient(to top, #dbdbdb 0%, #fcfcfc 100%);
-}
-.sidebar button {
-  margin: 5px;
 }
 .slide-out {
   -moz-transition: left 0.2s;
@@ -195,12 +192,20 @@ body {
 .mega-octicon:hover {
   cursor: pointer;
 }
-.message a {
+.snapshot {
+  cursor: pointer;
+  padding: 10px;
+}
+.snapshot a {
   text-decoration: none;
   color: #000;
 }
-ul {
+.feedWrapper {
   list-style-type: none;
+  padding-left: 0px;
+}
+.selected-snapshot {
+  background-color: rgba(186,150,217,0.3);
 }
 .table-container {
   position: fixed;
