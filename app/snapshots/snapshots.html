@@ -1,6 +1,7 @@
 <ul class='feedWrapper' ng-controller='snapshotsController'>
   <li class="project update" ng-repeat='snap in commits' ng-click='changeCommit($index)' >
-    <div class="snapshot selected-snapshot">
+    <!-- On line 4 below: add class selected-snapshot for a purple highlight -->
+    <div class="snapshot">
         <a class ="innerUpdate">
           <span class="snapshot-message">{{snap.message}}</span><br>
           <span class="snapshot-date">{{snap.committed_date | date:'MM/dd/yyyy @ h:mma'}}</span><br>

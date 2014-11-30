@@ -102,7 +102,8 @@ body {
   top: 50px;
   left: -246px;
   z-index: 400;
-  overflow: scroll;
+  overflow-y: scroll;
+  text-overflow: ellipsis;
   border-right: 5px solid #4e09a5;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dbdbdb), color-stop(1, #fcfcfc));
   background-image: -o-linear-gradient(top, #dbdbdb 0%, #fcfcfc 100%);
