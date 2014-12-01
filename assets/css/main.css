@@ -295,3 +295,11 @@ li.active a:hover {
 .mega-octicon:hover {
   color: #294c71;
 }
+.open-icon {
+  transform: scale(3, 3);
+  margin-top: 7px;
+  cursor: pointer;
+}
+.open-icon img:hover {
+  background-color: #294c71;
+}
