@@ -16,6 +16,19 @@
 
   function ShellController ($scope, currentWorkbook, gridFileFormatConverter){
 
+    $scope.takeSnapshot = takeSnapshot;
+    $scope.toggle = false;
+
+    function takeSnapshot(){
+      gridFileFormatConverter.gridify(currentWorkbook.data.tempFolderPath, currentWorkbook.currentInstance, function(){
+        gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
+      });
+    }
+
+    $scope.toggleSidebar = function() {
+      $scope.boolChangeClass = !$scope.boolChangeClass;
+    }
+
     $scope.currentWorkbook = currentWorkbook;
 
     // Funtions:
@@ -26,13 +39,8 @@
       return currentWorkbook.currentHash;
     }, function(newVal, oldVal, scope){
       if (typeof newVal !== 'undefined' && typeof oldVal !== 'undefined'){
-        console.log('WATCHED THE COLLECTION');
         gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-          console.log('DATA OBJ IN SHELL JS', dataObj);
           currentWorkbook.currentInstance = new Workbook(dataObj, {grid: true});
-          console.log('WORKBOOK INSTANCE IN SHELL JS', JSON.stringify(currentWorkbook.currentInstance));
-          console.log('CURRENT WORKBOOK INSTANCE IN SHELL JS');
-          console.log(currentWorkbook.currentInstance);
           renderSheet(currentWorkbook.currentInstance, 1);
         });
       }

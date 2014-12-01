@@ -133,7 +133,6 @@
     }
 
     function parseGrid(folderPath, cb) {
-      console.log('INVOKING PARSE GRID');
       var dataObj = {};
 
       var readDirPromised = function(directoryPath){
