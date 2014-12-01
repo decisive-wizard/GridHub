@@ -208,6 +208,10 @@ a {
   opacity: 0.3;
   z-index: 350;
 }
+.open-icon {
+  transform: scale(3, 3);
+  margin-top: 7px;
+}
 .snapshot {
   cursor: pointer;
   padding: 10px;
