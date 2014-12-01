@@ -36,7 +36,6 @@ gitSessionController = (function() {
         // console.log(commit.author.name);
         var author = commit.author.name;
 
-        console.log(author)
         var message = commit.message;
         var sha1 = commit.id;
 

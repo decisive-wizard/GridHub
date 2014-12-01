@@ -20,8 +20,6 @@
     $scope.toggle = false;
 
     function takeSnapshot(){
-      console.log(currentWorkbook);
-      console.log(currentWorkbook.data.tempFolderPath, 'temp folder path');
       gridFileFormatConverter.gridify(currentWorkbook.data.tempFolderPath, currentWorkbook.currentInstance, function(){
         gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
       });
@@ -41,13 +39,8 @@
       return currentWorkbook.currentHash;
     }, function(newVal, oldVal, scope){
       if (typeof newVal !== 'undefined' && typeof oldVal !== 'undefined'){
-        console.log('WATCHED THE COLLECTION');
         gridFileFormatConverter.parseGrid($scope.currentWorkbook.data.tempFolderPath, function(dataObj){
-          console.log('DATA OBJ IN SHELL JS', dataObj);
           currentWorkbook.currentInstance = new Workbook(dataObj, {grid: true});
-          console.log('WORKBOOK INSTANCE IN SHELL JS', JSON.stringify(currentWorkbook.currentInstance));
-          console.log('CURRENT WORKBOOK INSTANCE IN SHELL JS');
-          console.log(currentWorkbook.currentInstance);
           renderSheet(currentWorkbook.currentInstance, 1);
         });
       }
