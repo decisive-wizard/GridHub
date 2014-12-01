@@ -105,6 +105,7 @@
                     .then(function(commitStatus){
                     gift.getHistory(hiddenFolderPath,function(commits,err){
                       currentWorkbook.data.gitCommits = commits;
+                      currentWorkbook.data.gridFilePath = path.join(directoryPath, hiddenFolderName + '.grid');
                       currentWorkbook.currentHash = commits[0];
                       scope.$apply(function(){
                           scope.$broadcast('git-commits-change');

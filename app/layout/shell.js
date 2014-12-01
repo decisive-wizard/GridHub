@@ -73,6 +73,7 @@
             gridFileFormatConverter.xlsxToGrid($scope, filePath, function(workbook) {
               bootbox.hideAll();
               currentWorkbook.currentInstance = workbook;
+              currentWorkbook.data.win.title = 'GridHub - ' + currentWorkbook.data.gridFilePath;
               renderSheet(currentWorkbook.currentInstance, 1);
             });
           }
