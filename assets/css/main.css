@@ -208,10 +208,6 @@ a {
   opacity: 0.3;
   z-index: 350;
 }
-.open-icon {
-  transform: scale(3, 3);
-  margin-top: 7px;
-}
 .snapshot {
   cursor: pointer;
   padding: 10px;
@@ -298,4 +294,12 @@ li.active a:hover {
 }
 .mega-octicon:hover {
   color: #294c71;
+}
+.open-icon {
+  transform: scale(3, 3);
+  margin-top: 7px;
+  cursor: pointer;
+}
+.open-icon img:hover {
+  background-color: #294c71;
 }
