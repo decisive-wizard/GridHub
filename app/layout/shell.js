@@ -16,6 +16,21 @@
 
   function ShellController ($scope, currentWorkbook, gridFileFormatConverter){
 
+    $scope.takeSnapshot = takeSnapshot;
+    $scope.toggle = false;
+
+    function takeSnapshot(){
+      console.log(currentWorkbook);
+      console.log(currentWorkbook.data.tempFolderPath, 'temp folder path');
+      gridFileFormatConverter.gridify(currentWorkbook.data.tempFolderPath, currentWorkbook.currentInstance, function(){
+        gridFileFormatConverter.takeSnapshot($scope,currentWorkbook.data.tempFolderPath);
+      });
+    }
+
+    $scope.toggleSidebar = function() {
+      $scope.boolChangeClass = !$scope.boolChangeClass;
+    }
+
     $scope.currentWorkbook = currentWorkbook;
 
     // Funtions:
