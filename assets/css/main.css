@@ -179,7 +179,6 @@ a {
   position: absolute;
   top: 50px;
   left: -246px;
-  padding: 10px;
   z-index: 400;
   border-right: 5px solid #4e09a5;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dbdbdb), color-stop(1, #fcfcfc));
