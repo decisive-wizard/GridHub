@@ -1,4 +1,3 @@
-# GridHub [![Build Status](https://travis-ci.org/decisive-wizard/GridHub.svg?branch=master)](https://travis-ci.org/decisive-wizard/GridHub)
 
 > Collaborative spreadsheet editing tool for the desktop.
 
